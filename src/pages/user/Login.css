@@ -1,0 +1,79 @@
+.login-inner {
+    width: 410px;
+    margin: 0 auto;
+}
+
+.login{
+    display: flex; 
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+    background: url("../../assets/img/background_img.png") no-repeat;
+    background-size: cover;
+}
+
+.login-logo{
+    display: grid;
+    place-content: center;
+    margin-top: 40px;
+}
+
+.ciuser, .riLockPasswordLine{
+    margin-left: 2.5rem;
+}
+
+#emailLogin, #pwdLogin{
+    height: 30px;
+    width: 18rem;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+#LoginBtn{
+    background-color: #4F89E1;
+    height : 40px;
+    width: 20rem;
+    font-size: large;
+    margin-top: 50px;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+#hrLogin{
+    width: 20rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#signupBtn{
+    margin-top: 20px;
+    border: none;
+    margin-left: 19rem;
+    background-color: transparent;
+}
+
+#kakaoLoginBt, #naverLoginBt{
+    border: none;
+    background-color: transparent;
+    margin-top: 1rem;
+}
+
+#kakaoLoginBt{
+    margin-left: 5px;
+}
+
+#sLoginBt{
+    height: 3rem;
+    width: 180px;
+    flex-direction: row;
+    border: none;
+    background-color: transparent;
+    margin-left: 5px;
+    display: grid;
+    place-content: center;
+}
