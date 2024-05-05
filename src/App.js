@@ -7,6 +7,7 @@ import NaverRedirect from './pages/user/NaverRedirect';
 import SignUp from './pages/user/Signup';
 import PrivateRoute from './pages/PrivateRoute';
 import MyPage from './pages/user/MyPage';
+import MyInfo from './pages/user/MyInfo';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         {/* 로그인 후 가능 */}
         <Route element={<PrivateRoute />}>
           <Route path="/mypage" element={<MyPage />}></Route>
+          <Route path="/myinfo" element={<MyInfo />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
