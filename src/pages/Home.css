@@ -1,0 +1,89 @@
+.home{
+    padding: 2% 15% 0 15%;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+}
+.home::after{
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("../assets/img/background_img.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.home-left-upper{
+    padding-left: 30%;
+}
+
+#home-logo{
+    width: 150%;
+    height: 10vh;
+}
+
+.home-login, .home-logout{
+    background-color: #4F89E1;
+    color: white;
+    border: transparent;
+    width: 100px;
+    height: 25px;
+}
+
+.home-category{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-board, .home-myboard, .home-mylike, .home-myreview, .home-mypage, .home-myinfo{
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border-width: 1px;
+}
+
+.home-right{
+    margin-top: 2vh;
+    margin-left: 5vw;
+    width: 49vw;
+    flex-direction: row;
+}
+
+.home-search{
+    width: 100%;
+    height: 6vh;
+    background-color: white;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    display: flex;
+}
+
+.home-search-input{
+    padding-left: 3%;
+    width: 80%;
+    border: none;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+.home-search-clear-icon, .home-search-icon{
+    padding-top: 0.9vh;
+    width: 3vw;
+    height: 4vh;
+}
+
+.home-right-content{
+    height: 80vh;
+    padding-top: 10px;
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
