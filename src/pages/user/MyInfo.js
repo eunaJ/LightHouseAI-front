@@ -196,9 +196,9 @@ const MyInfo = () => {
 
     return (
         <div className='myinfo'>
-            <div className='mypage-upper'>
-                <div className='mypage-home-logo'>
-                    <img src={lighthouseaiLogo} alt="등대 로고" height={"70px"} width={"110px"} id='mypage-home-logo' onClick={gotoHome}></img>
+            <div className='myinfo-upper'>
+                <div className='myinfo-home-logo'>
+                    <img src={lighthouseaiLogo} alt="등대 로고" height={"70px"} width={"110px"} id='myinfo-home-logo' onClick={gotoHome}></img>
                 </div>
             </div>
             <div className='myinfo-inner'>
