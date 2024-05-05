@@ -1,0 +1,103 @@
+.myinfo-upper{
+    margin-left: 15%;
+}
+
+.myinfo-inner {
+    width: 410px;
+    margin: 0 auto
+}
+
+.myinfo{
+    display: flex; 
+    flex-direction: column;
+    padding-top: 2%;
+}
+.myinfo::after{
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("../../assets/img/background_img.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.myinfo-profileimg{
+    display: grid;
+    place-content: center;
+    margin-top: 1px;
+}
+
+.myinfo-update-profileimg-btn{
+    text-align: center;
+}
+
+.myinfo-profileimg-input{
+    display: none;
+}
+
+.myinfo-update-user{
+    font-size: large;
+    border: 10px;
+    padding-left: 10px;
+}
+
+#profileImgMyPage{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+}
+
+#updateProfileImgMyinfoBt{
+    border:none;
+    background-color: transparent;
+    display: inline-block;
+    font-size: medium;
+    margin-top: 10px;
+}
+
+#emailMyinfo, #nicknameMyinfo, #pwdMyinfo{
+    width: 22rem;
+    margin-left: 10px;
+    background-color: transparent;
+    border:none;
+}
+
+#birthMyinfo {
+    margin-left: 10px;
+    width: 20rem;
+    border: none;
+}
+
+.myinfo-update-user{
+    height: 80%;
+}
+
+.myinfo-email, .myinfo-pwd, .myinfo-pwdchk, .myinfo-nickname, .myinfo-birth{
+    display:flex;
+    width: 97%;
+    height: 30px;
+    background-color: white;
+    border: solid 1px rgba(0,0,0,1);
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.myinfo-email-icon, .myinfo-pwd-icon, .myinfo-pwdchk-icon, .myinfo-nickname-icon, .myinfo-birth-icon, .myinfo-profileimg-icon{
+    margin-left:1vw;
+    padding-top: 1vh;
+}
+
+#saveMyInfoBt{
+    font-size: medium;
+    float:right;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: black;
+    background-color: #8FBCF0;
+    margin-top: 30px;
+}
