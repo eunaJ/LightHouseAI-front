@@ -1,0 +1,79 @@
+.mypage-upper{
+    margin-left: 15%;
+}
+
+.mypage-inner {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.mypage{
+    display: flex; 
+    flex-direction: column;
+    padding-top: 2%;
+}
+.mypage::after{
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("../../assets/img/background_img.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.mypage-home-logo{
+    margin-left: 3%;
+}
+
+.mypage-profileimg{
+    display: grid;
+    place-content: center;
+    margin-top: 30px;
+}
+
+#profileImgMyPage{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+}
+
+.mypage-nickname{
+    display: grid;
+    place-content: center;
+    margin-top: 10px;
+}
+
+.mypage-info, .mypage-btn{
+    text-align: center;
+}
+
+#myInfoBt, #logoutMyPageBt{
+    border:none;
+    background-color: transparent;
+    display: inline-block;
+    margin-bottom: 50px;
+    font-size: medium;
+}
+
+#hrMyPage{
+    width: 30rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+#travelBt, #travelRegisterBt, #myBoardBt, #myLikeBt{
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: #8FBCF0;
+    margin-inline: 10px;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+}
