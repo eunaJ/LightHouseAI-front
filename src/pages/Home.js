@@ -4,7 +4,7 @@ import lighthouseaiLogo from "../assets/img/lighthouseai_logo.png";
 import { useEffect, useState } from "react";
 import { MdClear } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
-import TravelCard from "../components/TravelCard";
+import TravelCard from "../components/travel/TravelCard";
 import api from "../components/RefreshApi";
 
 const Home = () => {
