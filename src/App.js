@@ -8,6 +8,7 @@ import SignUp from './pages/user/Signup';
 import PrivateRoute from './pages/PrivateRoute';
 import MyPage from './pages/user/MyPage';
 import MyInfo from './pages/user/MyInfo';
+import Board from './pages/board/Board';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/api/v1/users/kakao/login/callback" element={<KakaoRedirect />}></Route>
         <Route path="/api/v1/users/naver/login/callback" element={<NaverRedirect />}></Route>
+        <Route path="/board" element={<Board />}></Route>
         {/* 로그인 후 가능 */}
         <Route element={<PrivateRoute />}>
           <Route path="/mypage" element={<MyPage />}></Route>
