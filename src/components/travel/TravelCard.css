@@ -1,0 +1,26 @@
+.travelcard {
+    margin-left: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 80%;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.travelcard img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.travelcard-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding-left: 20px
+}
+
+.travelcard-text {
+    color: #555;
+}
