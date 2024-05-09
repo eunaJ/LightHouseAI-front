@@ -59,6 +59,10 @@ const Home = () => {
         navigate('/myinfo');
     }
 
+    const gotoMyTravelContent = () => {
+        navigate('/mytravelcontent');
+    }
+
     const onChange = (e) => {
         // 영어인 경우 대소문자 구분 중
         const searchText = e.target.value;
@@ -101,10 +105,8 @@ const Home = () => {
                     <div className='home-category'>
                         <button className="home-board" onClick={gotoBoard}>자유게시판</button>
                         {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-                        {isLogin && <button className="home-mylike" onClick={gotoMyLike}>내 좋아요</button>}
-                        {isLogin && <button className="home-myreview" onClick={gotoMyReview}>내 댓글</button>}
                         {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
-                        {isLogin && <button className="home-myinfo" onClick={gotoMyInfo}>내 정보</button>}
+                        {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
                     </div>
                 </div>
             </div>
