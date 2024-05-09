@@ -37,8 +37,16 @@ const MyPage = () => {
         navigate('/myboard');
     }
 
+    const gotoMyReview = () => {
+        navigate('/myreview');
+    }
+
     const gotoMyLike = () => {
         navigate('/like');
+    }
+    
+    const gotoMyTravelContent = () => {
+        navigate('/mytravelcontent');
     }
 
     const procLogout = (e) => {
@@ -101,7 +109,9 @@ const MyPage = () => {
                     <button id="travelBt" onClick={gotoTravel}>여행지 조회</button>
                     <button id="travelRegisterBt" onClick={gotoTravelRegister}>여행지 등록</button>
                     <button id="myBoardBt" onClick={gotoMyBoard}>내 게시물</button>
+                    <button id="myReviewBt" onClick={gotoMyReview}>내 댓글</button>
                     <button id="myLikeBt" onClick={gotoMyLike}>내 좋아요</button>
+                    <button id="myTContentBt" onClick={gotoMyTravelContent}>내 방문지</button>
                 </div>
             </div>
 
