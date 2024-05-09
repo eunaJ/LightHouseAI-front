@@ -69,10 +69,10 @@ const Home = () => {
     )
 
     const getTravelList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/cafes'); // 변경 필요 travel visitor
-        console.log(res.data);
-        setTravelList(res.data);
-        console.log(travelList);
+        // const res = await axios.get('http://localhost:8080/api/v1/cafes'); // 변경 필요 travel visitor
+        // console.log(res.data);
+        // setTravelList(res.data);
+        // console.log(travelList);
     }
 
     useEffect(() => {
