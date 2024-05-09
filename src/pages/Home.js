@@ -43,20 +43,8 @@ const Home = () => {
         navigate('/myboard');
     }
 
-    const gotoMyLike = () => {
-        navigate('/mylike');
-    }
-
-    const gotoMyReview = () => {
-        navigate('/myreview');
-    }
-
     const gotoMyPage = () => {
         navigate('/mypage');
-    }
-
-    const gotoMyInfo = () => {
-        navigate('/myinfo');
     }
 
     const gotoMyTravelContent = () => {

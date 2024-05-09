@@ -59,15 +59,6 @@ const Board = () => {
     const gotoMyBoard = () => {
         navigate('/myboard');
     }
-
-    const gotoMyLike = () => {
-        navigate('/mylike');
-    }
-
-    const gotoMyReview = () => {
-        navigate('/myreview');
-    }
-
     const gotoBoardWrite = () => {
         navigate('/board/write');
     }
@@ -76,8 +67,8 @@ const Board = () => {
         navigate('/mypage');
     }
 
-    const gotoMyInfo = () => {
-        navigate('/myinfo');
+    const gotoMyTravelContent = () => {
+        navigate('/mytravelcontent');
     }
 
     const getBoardList = async () => {
@@ -124,13 +115,10 @@ const Board = () => {
                     {!isLogin && <button className="board-login" onClick={gotoLogin}>로그인</button>}
                     {isLogin && <button className="board-logout" onClick={handleLogout}>로그아웃</button>}
                     <div className='board-category'>
-                        {/* 옆 카테고리에 뭐만 보여줄 지 논의 필요 */}
                         <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-                        {isLogin && <button className="board-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-                        {/* {isLogin && <button className="board-mylike" onClick={gotoMyLike}>내 좋아요</button>} */}
-                        {/* {isLogin && <button className="board-myreview" onClick={gotoMyReview}>내 댓글</button>} */}
-                        {isLogin && <button className="board-mypage" onClick={gotoMyPage}>내 페이지</button>}
-                        {/* {isLogin && <button className="board-myinfo" onClick={gotoMyInfo}>내 정보</button>} */}
+                        {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
+                        {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
+                        {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
                     </div>
                 </div>
             </div>
