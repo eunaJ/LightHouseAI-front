@@ -30,41 +30,26 @@ const MyInfo = () => {
         e.preventDefault();
         let updatedNickname = nickname;
         if (currentNickname === nickname) {
-            console.log('current: ' + currentNickname);
-            console.log('nickname: ' + nickname);
             updatedNickname = (currentNickname === nickname) ? '' : nickname;
         }
 
-        // const formData = new FormData();
-        // const updateUserData = {
-        //     "newPassword": password,
-        //     "confirmNewPassword": pwdChk,
-        //     "nickname": updatedNickname,
-        // };
-        // formData.append("controllerRequestDto", new Blob([JSON.stringify(updateUserData)], { type: "application/json" }));
-        // formData.append("multipartFile", profileImgUrl);
-        
+        const formData = new FormData();
+        const updateUserData = {
+            "newPassword": password,
+            "confirmNewPassword": pwdChk,
+            "nickname": updatedNickname,
+            'ImageChange': isImgChange
+        };
+        formData.append("controllerRequestDto", new Blob([JSON.stringify(updateUserData)], { type: 'application/json' }));
+        formData.append("multipartFile", profileImg);
+
         e.preventDefault();
-
-        console.log(password);
-        console.log(pwdChk);
-
-        axios.put('http://localhost:8080/api/v1/users/update', {
-            newPassword: password,
-            confirmNewPassword: pwdChk,
-            nickname: updatedNickname,
-            profileImg: profileImg,
+        axios.put('http://localhost:8080/api/v1/users/update', formData, {
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "multipart/form-data;",
                 'Authorization': localStorage.getItem('accessToken')
             },
         })
-        // axios.put('http://localhost:8080/api/v1/users/update', updateUserData, {
-        //     headers: {
-        //         "Content-Type": "application/json;", //multipart/form-data
-        //         'Authorization': localStorage.getItem('accessToken')
-        //     },
-        // })
             .then((res) => {
                 if (res.status === 200) {
                     console.log('정보 업데이트 성공');
@@ -92,19 +77,20 @@ const MyInfo = () => {
                     }
                 });
                 if (response.status === 200) {
-                    // console.log('새로고침');
                     const data = response.data;
                     setEmail(data.email);
                     setCurrentNickname(data.nickname);
                     setNickname(data.nickname);
                     setCurrentNickname(data.nickname);
                     setBirth(data.birth);
+                    console.log(data);
                     if (data.profile_img_url === '' || data.profile_img_url === null || data.profile_img_url === undefined ||
-                        data.profile_img_url === '/static/media/initialProfileImg.b31adf0c9ab904bf0899.png') { // 추후 변경
+                        data.profile_img_url === '/static/media/initialProfileImg.b31adf0c9ab904bf0899.png') {
                         setProfileImg(initProfileImg);
+                        setProfileImgUrl(initProfileImg);
                     } else {
                         setProfileImg(data.profile_img_url);
-                        // console.log('사진 있음');
+                        setProfileImgUrl(data.profile_img_url);
                     }
                 }
             } catch (error) {
@@ -120,21 +106,28 @@ const MyInfo = () => {
     const [nicknameErrorMsg, setNicknameErrorMsg] = useState();
     const birthErrorMsg = "생일은 변경할 수 없어요.";
     const [isPwd, setIsPwd] = useState(true);
-    const [isPwdChk, setIsPwdChk] = useState(true);
+    const [isImgChange, setIsImgChange] = useState(false);
 
-    const onClickUpdateProfilgImg = (e) => {
-        upload.current.click();
-    }
-
-    const handleProfileImgChange = e => {
-        console.log(upload.current.files);
-        setProfileImg(URL.createObjectURL(upload.current.files[0]));
-        setProfileImgUrl(upload.current.files[0]);
+    const handleProfileImgChange = (e) => {
+        if (upload.current && upload.current.files) {
+            setIsImgChange(true);
+            const img = upload.current.files[0];
+            setProfileImg(img);
+            //이미지 미리보기 기능
+            const reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = () => {
+                setProfileImgUrl(reader.result);
+            };
+            console.log(img);
+            e.target.value = '';
+        }
     };
 
     const handleProfileImgClear = e => {
         setProfileImg(initProfileImg);
-        setProfileImgUrl(null);
+        setProfileImgUrl(initProfileImg); 
+        setIsImgChange(true);
     }
 
     function validPassword(value) {
@@ -202,19 +195,23 @@ const MyInfo = () => {
                 </div>
             </div>
             <div className='myinfo-inner'>
-                <div className='myinfo-inner-top'>
-                    <div className='myinfo-profileimg'>
-                        <img src={profileImg} alt="프로필 이미지" id='profileImgMyPage'></img>
-                    </div>
-                    <input
-                        className="myinfo-profileimg-input"
-                        type="file"
-                        accept=".png, .jpeg, .jpg"
-                        ref={upload}
-                        onChange={handleProfileImgChange}
-                    />
-                    <div className='myinfo-update-profileimg-btn'>
-                        <button id="updateProfileImgMyinfoBt" onClick={onClickUpdateProfilgImg}>사진 수정</button>
+                <div className='myinfo-profileimg'>
+                    <div className='myinfo-inner-top'>
+                        <label htmlFor="myinfo-profileimg-input">
+                            <img
+                                src={profileImgUrl}
+                                alt="이미지 업로드"
+                                id="profileImgMyInfo"
+                            />
+                        </label>
+                        <input
+                            type="file"
+                            id="myinfo-profileimg-input"
+                            name="myinfo-profileimg"
+                            accept=".png, .jpeg, .jpg"
+                            onChange={handleProfileImgChange}
+                            ref={upload}
+                        />
                     </div>
                     <div className='myinfo-update-profileimg-btn'>
                         <button id="updateProfileImgMyinfoBt" onClick={handleProfileImgClear}>사진 삭제</button>

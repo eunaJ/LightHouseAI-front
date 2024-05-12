@@ -35,7 +35,7 @@
     text-align: center;
 }
 
-.myinfo-profileimg-input{
+#myinfo-profileimg-input{
     display: none;
 }
 
@@ -45,7 +45,7 @@
     padding-left: 10px;
 }
 
-#profileImgMyPage{
+#profileImgMyInfo{
     height: 100px;
     width: 100px;
     border-radius: 100%;
