@@ -13,7 +13,7 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
     };
 
     const handleItemClick = (e) => {
-        const formData = new FormData();
+        // const formData = new FormData();
         const spotData = {
             menu: menu,
             price: price,
@@ -32,41 +32,44 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
         } else if(type === '기타서비스') {
             spotData.otherService_title = title;
         }
-        formData.append("controllerRequestDto", new Blob([JSON.stringify(spotData)], { type: "application/json" }));
-        formData.append("multipartFile", spotImg);
+        // formData.append("controllerRequestDto", new Blob([JSON.stringify(spotData)], { type: "application/json" }));
+        // formData.append("multipartFile", spotImg);
         e.preventDefault();
-        if (type === '카페') {
-            onSpotToModal(spotData, spotImg);
-            onClose();
-            // api.post('http://localhost:8080/api/v1/travelVisitorCafes/create', formData, {
-            //     headers: {
-            //         "Content-Type": "multipart/form-data;",
-            //     },
-            // }).then(res => {
-            //     if (res.status === 201) {
-            //         onSpotToModal(spotData, spotImg);
-            //         onClose();
-            //     } else {
-            //         alert('등록 실패');
-            //     }
-            // })
-        } else if (type === '음식점') {
-            api.post('http://localhost:8080/api/v1/travelVisitorRestaurants/create', formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data;",
-                },
-            }).then(res => {
-                console.log(res);
-                if (res.status === 201) {
-                    console.log(spotData);
-                    onSpotToModal(spotData, spotImg);
-                    onClose();
-                } else {
-                    alert('등록 실패');
-                }
-            })
-        }
-
+        onSpotToModal(spotData, spotImg);
+        onClose();
+        // if (type === '카페') {
+        //     onSpotToModal(spotData, spotImg);
+        //     onClose();
+        //     // api.post('http://localhost:8080/api/v1/travelVisitorCafes/create', formData, {
+        //     //     headers: {
+        //     //         "Content-Type": "multipart/form-data;",
+        //     //     },
+        //     // }).then(res => {
+        //     //     if (res.status === 201) {
+        //     //         onSpotToModal(spotData, spotImg);
+        //     //         onClose();
+        //     //     } else {
+        //     //         alert('등록 실패');
+        //     //     }
+        //     // })
+        // } else if (type === '음식점') {
+        //     onSpotToModal(spotData, spotImg);
+        //     onClose();
+        //     // api.post('http://localhost:8080/api/v1/travelVisitorRestaurants/create', formData, {
+        //     //     headers: {
+        //     //         "Content-Type": "multipart/form-data;",
+        //     //     },
+        //     // }).then(res => {
+        //     //     console.log(res);
+        //     //     if (res.status === 201) {
+        //     //         console.log(spotData);
+        //     //         onSpotToModal(spotData, spotImg);
+        //     //         onClose();
+        //     //     } else {
+        //     //         alert('등록 실패');
+        //     //     }
+        //     // })
+        // }
     };
 
     const [menu, setMenu] = useState('');

@@ -36,7 +36,6 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
             setIsSearching(true);
             if (type === '카페') {
                 const result = cafeList.filter((item) =>
-                    // 현재는 타이틀만 기준으로 검색
                     item.title.includes(searchText)
                 );
                 setSearched(result);
