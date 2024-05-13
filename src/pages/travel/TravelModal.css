@@ -1,0 +1,20 @@
+.modal-search {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    margin-bottom: 25px;
+}
+
+.modal-search-icon {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.modal-search-input {
+    border: transparent;
+    width: 95%;
+}
