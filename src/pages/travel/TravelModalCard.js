@@ -7,9 +7,15 @@ import axios from "axios";
 const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onSpotToModal, onClose }) => {
     const upload = useRef();
     const [spotImg, setSpotImg] = useState('');
+    const [spotImgUrl, setSpotImgUrl] = useState('');
     const handleSpotImgChange = (e) => {
-        console.log(upload.current.files);
-        setSpotImg(upload.current.files[0]);
+        const img = upload.current.files[0];
+        setSpotImg(img);
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = () => {
+            setSpotImgUrl(reader.result);
+        };
     };
 
     const handleItemClick = (e) => {
@@ -19,23 +25,24 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
             price: price,
             opentime: opentime,
             closetime: closetime,
-            location: region_name + ' ' + constituency_name, // 텍스트 추가 필요
+            location: region_name + ' ' + constituency_name,
+            title: title
         }
-        if (type === '카페') {
-            spotData.cafe_title = title;
-        } else if (type === '음식점') {
-            spotData.restaurant_title = title;
-        } else if(type === '쇼핑몰') {
-            spotData.shoppingMall_title = title;
-        } else if(type === '관광지') {
-            spotData.tourList_title = title;
-        } else if(type === '기타서비스') {
-            spotData.otherService_title = title;
-        }
+        // if (type === '카페') {
+        //     spotData.title = title;
+        // } else if (type === '음식점') {
+        //     spotData.restaurant_title = title;
+        // } else if(type === '쇼핑몰') {
+        //     spotData.shoppingMall_title = title;
+        // } else if(type === '관광지') {
+        //     spotData.tourList_title = title;
+        // } else if(type === '기타서비스') {
+        //     spotData.otherService_title = title;
+        // }
         // formData.append("controllerRequestDto", new Blob([JSON.stringify(spotData)], { type: "application/json" }));
         // formData.append("multipartFile", spotImg);
         e.preventDefault();
-        onSpotToModal(spotData, spotImg, review);
+        onSpotToModal(spotData, spotImg, spotImgUrl, review);
         onClose();
         // if (type === '카페') {
         //     onSpotToModal(spotData, spotImg);

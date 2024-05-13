@@ -43,6 +43,7 @@ const TravelRegister = () => {
                 location: '',
                 title: '',
                 img_url: '',
+                review: '',
             }
         }]);
         // setSpotData({
@@ -87,7 +88,7 @@ const TravelRegister = () => {
         }
     };
 
-    const handleSpotAdd = (newSpot, spotImg, review, index) => {
+    const handleSpotAdd = (newSpot, spotImg, spotImgUrl, review, index) => {
         const newContents = [...contents];
         newContents[index].spot = {
             menu: newSpot.menu,
@@ -97,6 +98,7 @@ const TravelRegister = () => {
             location: newSpot.location,
             title: newSpot.title,
             image_url: spotImg, 
+            spotImgUrl: spotImgUrl,
             review: review
         }
         setContents(newContents);
@@ -137,14 +139,14 @@ const TravelRegister = () => {
                             <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onSpotAdd={handleSpotAdd} index={index}></TravelModal>
                             {contents[index].spot.location && index >= 0 ? (
                                 <div className='spotdatacard'>
+                                    <h3>{contents[index].spot.title}</h3>
                                     {contents[index].spot.image_url && (  // 이미지 URL이 존재하는 경우에만 렌더링
-                                        <img src={contents[index].spot.image_url} alt="Spot Image" />
+                                        <img src={contents[index].spot.spotImgUrl} alt="Spot Image" />
                                     )}
                                     <p>위치: {contents[index].spot.location}</p>
                                     <p>메뉴: {contents[index].spot.menu}</p>
                                     <p>가격: {contents[index].spot.price}</p>
                                     <p>운영시간: {contents[index].spot.opentime} ~ {contents[index].spot.closetime}</p>
-                                    <p>후기</p>
                                     <p>{contents[index].spot.review}</p>
                                 </div>
                             ) : (
