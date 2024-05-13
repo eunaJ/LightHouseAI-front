@@ -131,9 +131,9 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
 
     const [spot, setSpot] = useState('');
 
-    const handleSpotAdd = (newSpot, spotImg) => {
-        setSpot(newSpot, spotImg);
-        onSpotAdd(newSpot, spotImg, index);
+    const handleSpotAdd = (newSpot, spotImg, review) => {
+        setSpot(newSpot, spotImg, review);
+        onSpotAdd(newSpot, spotImg, review, index);
     }
 
     return (

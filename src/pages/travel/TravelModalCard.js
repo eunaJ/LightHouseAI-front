@@ -35,7 +35,7 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
         // formData.append("controllerRequestDto", new Blob([JSON.stringify(spotData)], { type: "application/json" }));
         // formData.append("multipartFile", spotImg);
         e.preventDefault();
-        onSpotToModal(spotData, spotImg);
+        onSpotToModal(spotData, spotImg, review);
         onClose();
         // if (type === '카페') {
         //     onSpotToModal(spotData, spotImg);

@@ -87,7 +87,7 @@ const TravelRegister = () => {
         }
     };
 
-    const handleSpotAdd = (newSpot, spotImg, index) => {
+    const handleSpotAdd = (newSpot, spotImg, review, index) => {
         const newContents = [...contents];
         newContents[index].spot = {
             menu: newSpot.menu,
@@ -97,6 +97,7 @@ const TravelRegister = () => {
             location: newSpot.location,
             title: newSpot.title,
             image_url: spotImg, 
+            review: review
         }
         setContents(newContents);
         console.log(newContents[index].spot);
@@ -143,6 +144,8 @@ const TravelRegister = () => {
                                     <p>메뉴: {contents[index].spot.menu}</p>
                                     <p>가격: {contents[index].spot.price}</p>
                                     <p>운영시간: {contents[index].spot.opentime} ~ {contents[index].spot.closetime}</p>
+                                    <p>후기</p>
+                                    <p>{contents[index].spot.review}</p>
                                 </div>
                             ) : (
                                 <div>
