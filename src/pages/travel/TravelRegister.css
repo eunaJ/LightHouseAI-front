@@ -1,0 +1,50 @@
+.travelregi-main-inner {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.travelregi-top {
+    text-align: center;
+}
+
+.travelregi-traveltitle-input{
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.travelregi-img{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* text-align: center; */
+}
+
+.spotdatacard {
+    border: 1px solid;
+    padding: 10px;
+    /* width: 50%; */
+    margin-left: auto;
+    margin-right: auto;
+    /* text-align: center; */
+}
+
+.travelregi-textarea-input{
+    width: 100%;
+    height: 200px;
+    overflow-y:scroll; 
+    overflow-x:hidden; 
+    resize: none
+}
+
+.travelregi-bottom{
+    text-align: right;
+    margin-right: 25%;
+}
+
+.travelregi-main-delbtn, .travelregi-main-addbtn, .travelregi-bottom-submit{
+    background-color: #4F89E1;
+    color: white;
+    border: transparent;
+    height: 25px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
