@@ -26,7 +26,8 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
             opentime: opentime,
             closetime: closetime,
             location: region_name + ' ' + constituency_name,
-            title: title
+            title: title,
+            type: type
         }
         // if (type === '카페') {
         //     spotData.title = title;
@@ -95,7 +96,7 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
                             <input type="text" placeholder="메뉴" value={menu} name="menu" id="menuTModal" onChange={(e) => setMenu(e.target.value)}></input>
                         ) : null}
 
-                        <input type="text" placeholder="지불한 가격" value={price} name="price" id="priceTModal" onChange={(e) => setPrice(e.target.value)}></input>
+                        <input type="number" placeholder="지불한 가격" value={price} name="price" id="priceTModal" onChange={(e) => setPrice(e.target.value)}></input>
                         <label className="travelmodalcard-spotimg-btn">
                             <input
                                 className="travelmodalcard-spotimg-input"
