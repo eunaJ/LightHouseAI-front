@@ -136,7 +136,7 @@ const TravelRegister = () => {
                 if (content.spot.image_url) {
                     if (content.spot.type === "카페") {
                         imgList = [...imgList, content.spot.image_url];
-                        // formData.append('travelVisitorCafeImage', content.spot.image_url);
+                        formData.append('travelVisitorCafeImage', content.spot.image_url);
                         console.log(formData.get('travelVisitorCafeImage'));
                     }
                     // else if (content.spot.type === "음식점") {
@@ -155,7 +155,7 @@ const TravelRegister = () => {
                 }
             });
 
-            formData.append("travelVisitorCafeImage", new Blob([imgList], { type: 'image/png;image/jpeg' }));
+            //formData.append("travelVisitorCafeImage", new Blob([imgList], { type: 'image/png;image/jpeg' }));
 
             console.log(travelCafeList);
             console.log(travelRestaurantList);
