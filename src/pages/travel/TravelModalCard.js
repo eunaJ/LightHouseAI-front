@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./TravelModalCard.css";
 
-const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onSpotToModal, onClose }) => {
+const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onCafeSpotToModal, onRestaurantSpotToModal, onShoppingMallSpotToModal, onTourListSpotToModal, onOtherServiceSpotToModal, onClose }) => {
     const upload = useRef();
     const [spotImg, setSpotImg] = useState('');
     const [spotImgUrl, setSpotImgUrl] = useState('');
@@ -26,7 +26,21 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
             type: type
         }
         e.preventDefault();
-        onSpotToModal(spotData, spotImg, spotImgUrl, review);
+        if(type === "카페") {
+            onCafeSpotToModal(spotData, spotImg, spotImgUrl, review);
+        }
+        else if(type === "음식점") {
+            onRestaurantSpotToModal(spotData, spotImg, spotImgUrl, review);
+        }
+        else if(type === "쇼핑몰") {
+            onShoppingMallSpotToModal(spotData, spotImg, spotImgUrl, review);
+        }
+        else if(type === "관광지") {
+            onTourListSpotToModal(spotData, spotImg, spotImgUrl, review);
+        }
+        else if(type === "기타서비스") {
+            onOtherServiceSpotToModal(spotData, spotImg, spotImgUrl, review);
+        }
         onClose();        
     };
 
@@ -45,7 +59,6 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
                         {type === "카페" || type === "음식점" ? (
                             <input type="text" placeholder="메뉴" value={menu} name="menu" id="menuTModal" onChange={(e) => setMenu(e.target.value)}></input>
                         ) : null}
-
                         <input type="number" placeholder="지불한 가격" value={price} name="price" id="priceTModal" onChange={(e) => setPrice(e.target.value)}></input>
                         <label className="travelmodalcard-spotimg-btn">
                             <input
