@@ -53,6 +53,10 @@
     cursor: pointer;
 }
 
+.travelregi-btn{
+    margin-left: 3%;
+}
+
 .spotdatacard {
     border: 1px solid #4F89E1;
     padding: 10px;
