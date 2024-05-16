@@ -7,7 +7,7 @@ import TravelModalCard from "./TravelModalCard";
 import "./TravelModal.css";
 import { areas } from "../../components/travel/Areas";
 
-function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
+function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index }) {
     const [searched, setSearched] = useState([]);
     const handleSearch = (e) => {
         // 영어인 경우 대소문자 구분 중, 애초에 title이 구분 중
@@ -69,7 +69,6 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                 try {
                     const res = await axios.get('http://localhost:8080/api/v1/restaurants/');
                     setRestaurantList(res.data);
-                    console.log(res.data);
                 } catch (error) {
                     console.error('음식점 데이터를 불러오는 중 오류 발생:', error);
                 }
@@ -77,7 +76,6 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                 try {
                     const res = await axios.get('http://localhost:8080/api/v1/shoppingmalls');
                     setShoppingmallList(res.data);
-                    console.log(res.data);
                 } catch (error) {
                     console.error('쇼핑몰 데이터를 불러오는 중 오류 발생:', error);
                 }
@@ -85,7 +83,6 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                 try {
                     const res = await axios.get('http://localhost:8080/api/v1/tourLists');
                     setTourlistList(res.data);
-                    console.log(res.data);
                 } catch (error) {
                     console.error('관광지 데이터를 불러오는 중 오류 발생:', error);
                 }
@@ -93,7 +90,6 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                 try {
                     const res = await axios.get('http://localhost:8080/api/v1/otherServices/');
                     setOtherserviceList(res.data);
-                    console.log(res.data);
                 } catch (error) {
                     console.error('기타서비스 데이터를 불러오는 중 오류 발생:', error);
                 }
@@ -113,11 +109,31 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
         }
     };
 
-    const [spot, setSpot] = useState('');
+    const [cafeSpot, setCafeSpot] = useState('');
+    const [restaurantSpot, setRestaurantSpot] = useState('');
+    const [shoppingMallSpot, setShoppingMallSpot] = useState('');
+    const [tourListSpot, setTourListSpot] = useState('');
+    const [otherServiceSpot, setOtherServiceSpot] = useState('');
 
-    const handleSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
-        setSpot(newSpot, spotImg, spotImgUrl, review);
-        onSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    const handleCafeSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
+        setCafeSpot(newSpot, spotImg, spotImgUrl, review);
+        onCafeSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    }
+    const handleRestaurantSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
+        setRestaurantSpot(newSpot, spotImg, spotImgUrl, review);
+        onRestaurantSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    }
+    const handleShoppingMallSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
+        setShoppingMallSpot(newSpot, spotImg, spotImgUrl, review);
+        onShoppingMallSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    }
+    const handleTourListSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
+        setTourListSpot(newSpot, spotImg, spotImgUrl, review);
+        onTourListSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    }
+    const handleOtherServiceSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
+        setOtherServiceSpot(newSpot, spotImg, spotImgUrl, review);
+        onOtherServiceSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
     }
 
     const [newSpot, setNewSpot] = useState({
@@ -152,19 +168,19 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
-            } if (type === "쇼핑몰") {
+            } else if (type === "쇼핑몰") {
                 res = await api.post('http://localhost:8080/api/v1/shoppingmalls/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
-            } if (type === "관광지") {
+            } else if (type === "관광지") {
                 res = await api.post('http://localhost:8080/api/v1/tourLists/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
-            } if (type === "기타서비스") {
+            } else if (type === "기타서비스") {
                 res = await api.post('http://localhost:8080/api/v1/otherServices/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
@@ -216,23 +232,23 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                 {!isSearching ? (
                     type === '카페' ? (
                         cafeList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onSpotToModal={handleSpotAdd} onClose={onClose} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onCafeSpotToModal={handleCafeSpotAdd} onClose={onClose} />
                         ))
                     ) : type === '음식점' ? (
                         restaurantList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onSpotToModal={handleSpotAdd} onClose={onClose} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onRestaurantSpotToModal={handleRestaurantSpotAdd} onClose={onClose} />
                         ))
                     ) : type === '쇼핑몰' ? (
                         shoppingmallList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onSpotToModal={handleSpotAdd} onClose={onClose} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onShoppingMallSpotToModal={handleShoppingMallSpotAdd} onClose={onClose} />
                         ))
                     ) : type === '관광지' ? (
                         tourlistList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onSpotToModal={handleSpotAdd} onClose={onClose} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onTourListSpotToModal={handleTourListSpotAdd} onClose={onClose} />
                         ))
                     ) : type === '기타서비스' ? (
                         otherserviceList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onSpotToModal={handleSpotAdd} onClose={onClose} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onOtherServiceSpotToModal={handleOtherServiceSpotAdd} onClose={onClose} />
                         ))
                     ) : null
                 ) : (
@@ -246,28 +262,28 @@ function TravelModal({ type, isOpen, onClose, onSpotAdd, index }) {
                                 <div className="modal-newspotadd">
                                     <div className="modal-newspotadd-form" >
                                         <div className="modal-newspotadd-form-input">
-                                        <label className="modal-newspotadd-form-label">이름 &nbsp;&nbsp;
-                                            <input type="text" className="modal-newspotadd-title" placeholder="이름" value={newSpot.title}
-                                                onChange={(e) => setNewSpot({ ...newSpot, title: e.target.value })} />
-                                                </label>
+                                            <label className="modal-newspotadd-form-label">이름 &nbsp;&nbsp;
+                                                <input type="text" className="modal-newspotadd-title" placeholder="이름" value={newSpot.title}
+                                                    onChange={(e) => setNewSpot({ ...newSpot, title: e.target.value })} />
+                                            </label>
                                         </div>
                                         <div className="modal-newspotadd-form-input">
-                                        <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;
-                                            <input type="text" className="modal-newspotadd-location" placeholder="위치" value={newSpot.location}
-                                                onChange={(e) => setNewSpot({ ...newSpot, location: e.target.value })} />
-                                                </label>
+                                            <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;
+                                                <input type="text" className="modal-newspotadd-location" placeholder="위치" value={newSpot.location}
+                                                    onChange={(e) => setNewSpot({ ...newSpot, location: e.target.value })} />
+                                            </label>
                                         </div>
                                         <div className="modal-newspotadd-form-input">
-                                        <label className="modal-newspotadd-form-label">영업시간 &nbsp;&nbsp;
-                                            <input type="text" className="modal-newspotadd-opentime" placeholder="00:00" value={newSpot.opentime}
-                                                onChange={(e) => setNewSpot({ ...newSpot, opentime: e.target.value })} />
-                                                </label>
+                                            <label className="modal-newspotadd-form-label">영업시간 &nbsp;&nbsp;
+                                                <input type="text" className="modal-newspotadd-opentime" placeholder="00:00" value={newSpot.opentime}
+                                                    onChange={(e) => setNewSpot({ ...newSpot, opentime: e.target.value })} />
+                                            </label>
                                         </div>
                                         <div className="modal-newspotadd-form-input">
-                                        <label className="modal-newspotadd-form-label">마감시간 &nbsp;&nbsp;
-                                            <input type="text" className="modal-newspotadd-closetime" placeholder="00:00" value={newSpot.closetime}
-                                                onChange={(e) => setNewSpot({ ...newSpot, closetime: e.target.value })} />
-                                                </label>
+                                            <label className="modal-newspotadd-form-label">마감시간 &nbsp;&nbsp;
+                                                <input type="text" className="modal-newspotadd-closetime" placeholder="00:00" value={newSpot.closetime}
+                                                    onChange={(e) => setNewSpot({ ...newSpot, closetime: e.target.value })} />
+                                            </label>
                                         </div>
                                         <div className='modal-newspotadd-region-select'>
                                             <select value={selectedRegion} onChange={handleRegionChange}>
