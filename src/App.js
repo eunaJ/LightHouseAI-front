@@ -10,6 +10,7 @@ import MyPage from './pages/user/MyPage';
 import MyInfo from './pages/user/MyInfo';
 import Board from './pages/board/Board';
 import Recommand from './pages/AI/Recommand';
+import TravelRegister from './pages/travel/TravelRegister';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/myinfo" element={<MyInfo />}></Route>
+          <Route path="/travelRegister" element={<TravelRegister/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

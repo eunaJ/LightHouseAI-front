@@ -1,0 +1,57 @@
+.travelmodalcard {
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+}
+
+.travelmodalcard img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.travelmodalcard-body{
+    margin-left: 15px;
+}
+
+.travelmodalcard-title {
+    font-weight: bold;
+    padding-left: 20px
+}
+
+.travelmodalcard-inputmodal{
+    display: flex;
+    flex-direction: column;
+}
+
+#menuTModal, #priceTModal{
+    margin-bottom: 10px;
+    width: 60%;
+}
+
+.travelmodalcard-bottom {
+    text-align: right;
+}  
+
+.travelmodalcard-bottom-addbtn{
+    background-color: #BAD4ED;
+    /* color: white; */
+    border-width: 0.5px;
+    margin-top: 10px;
+    border-radius: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.travelmodalcard-textarea-input{
+    margin-top: 10px;
+    width: 80%;
+    height: 100px;
+    overflow-y:scroll; 
+    overflow-x:hidden; 
+    resize: none
+}
