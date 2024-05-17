@@ -1,0 +1,86 @@
+.mytravel{
+    padding: 2% 15% 0 15%;
+    display: flex;
+    flex-direction: row;
+}
+.mytravel::after{
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("../../assets/img/background_img.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.mytravel-left-upper{
+    padding-left: 30%;
+}
+
+#mytravel-logo{
+    width: 150%;
+    height: 10vh;
+}
+
+.mytravel-login, .mytravel-logout{
+    background-color: #4F89E1;
+    color: white;
+    border: transparent;
+    width: 100px;
+    height: 25px;
+}
+
+.mytravel-category{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mytravel-board, .mytravel-myboard, .mytravel-mytravel, .mytravel-mypage, .mytravel-mytravel{
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border-width: 1px;
+}
+
+.mytravel-myboard, .mytravel-mytravel, .mytravel-mypage, .mytravel-myinfo{
+    border-top: none;
+}
+
+.mytravel-right{
+    margin-top: 2vh;
+    margin-left: 5vw;
+    width: 49vw;
+}
+
+.mytravel-search{
+    width: 45vw;
+    height: 6vh;
+    background-color: white;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    display: flex;
+}
+
+.mytravel-search-input{
+    padding-left: 3%;
+    width: 80%;
+    border: none;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+.mytravel-search-clear-icon, .mytravel-search-icon{
+    padding-top: 0.9vh;
+    width: 3vw;
+    height: 4vh;
+}
+
+.mytravel-bdlist{
+    margin-top: 2vh;
+    margin-left: 1vw;
+}
