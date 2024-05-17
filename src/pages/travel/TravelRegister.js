@@ -31,6 +31,7 @@ const TravelRegister = () => {
         cafe_title: '',
         image_url: '',
         spotImgUrl: '',
+        review: '',
     }]);
     const [restaurantContents, setRestaurantContents] = useState([{
         type: '',
@@ -42,6 +43,7 @@ const TravelRegister = () => {
         restaurant_title: '',
         image_url: '',
         spotImgUrl: '',
+        review: '',
     }]);
     const [shoppingMallContents, setShoppingMallContents] = useState([{
         type: '',
@@ -52,6 +54,7 @@ const TravelRegister = () => {
         shoppingMall_title: '',
         image_url: '',
         spotImgUrl: '',
+        review: '',
     }]);
     const [tourListContents, setTourListContents] = useState([{
         type: '',
@@ -62,6 +65,7 @@ const TravelRegister = () => {
         restaurant_title: '',
         image_url: '',
         spotImgUrl: '',
+        review: '',
     }]);
     const [otherServiceContents, setOtherServiceContents] = useState([{
         type: '',
@@ -72,6 +76,7 @@ const TravelRegister = () => {
         otherService_title: '',
         image_url: '',
         spotImgUrl: '',
+        review: '',
     }]);
 
     const handleTravelImgChange = (e) => {
@@ -197,7 +202,6 @@ const TravelRegister = () => {
             const travelData = {
                 "title": travelTitle,
                 "serving": travelServing,
-                "travel_expense": travelExpense,
                 "constituency": selectedConstituency,
                 "star": starCount
             };
@@ -265,6 +269,25 @@ const TravelRegister = () => {
                 }
             })
 
+            if (formData.get('travelVisitorCafeImage') === null) {
+                formData.append('travelVisitorCafeImage', new Blob(), '');
+            }
+            if (formData.get('TravelVisitorRestaurantImage') === null) {
+                formData.append('TravelVisitorRestaurantImage', new Blob(), '');
+            } 
+            if (formData.get('TravelVisitorShoppingMallImage') === null) {
+                formData.append('TravelVisitorShoppingMallImage', new Blob(), '');
+            } 
+            if (formData.get('TravelVisitorTourListImage') === null) {
+                formData.append('TravelVisitorTourListImage', new Blob(), '');
+            } 
+            if (formData.get('TravelVisitorOtherServiceImage') === null) {
+                formData.append('TravelVisitorOtherServiceImage', new Blob(), '');
+            }
+
+            console.log(formData.get('TravelVisitorShoppingMallImage'));
+            console.log(formData.get('TravelVisitorTourListImage'));
+
             formData.append("TravelVisitorCafeCreateServiceRequestDto", new Blob([JSON.stringify(travelCafeList)], { type: 'application/json' }));
             formData.append("TravelVisitorRestaurantCreateServiceRequestDto", new Blob([JSON.stringify(travelRestaurantList)], { type: 'application/json' }));
             formData.append("TravelVisitorShoppingMallCreateServiceRequestDto", new Blob([JSON.stringify(travelShoppingMallList)], { type: 'application/json' }));
@@ -279,6 +302,7 @@ const TravelRegister = () => {
             })
             if (res.status === 201) {
                 alert('등록되었습니다.');
+                navigate('/');
             }
         } catch (e) {
             console.error('오류 발생:', e);
@@ -432,10 +456,6 @@ const TravelRegister = () => {
                     </div>
                     <div className='travelregi-serving'>
                         <label>인원<input className="travelregi-serving-input" type="number" name="serving" placeholder="인원" onChange={(e) => setTravelServing(e.target.value)}></input></label>
-                    </div>
-                    <div className='travelregi-expense'>
-                        <label>경비 <input type="number"
-                            className="travelregi-expense-input" name="expense" placeholder="경비" onChange={(e) => setTravelExpense(e.target.value)}></input></label>
                     </div>
                     <div className='travelregi-star-container'>
                         <span className="travelregi-star">
