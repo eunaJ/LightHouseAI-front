@@ -1,0 +1,51 @@
+.recommand{
+    padding: 0% 15% 0 15%;
+    display: flex;
+    flex-direction: row;
+}
+.recommand::after{
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("../../assets/img/background_img.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.recommand-left-upper{
+    padding-left: 30%;
+}
+.recommand-right{
+    margin-top: 2vh;
+    margin-left: 5vw;
+}   
+
+.recommand_logo{
+    width: 150%;
+    height: 10vh;
+}
+
+.query{
+    position : absolute;
+    bottom: 0%;
+    width :100%;
+}
+
+.box-container{
+    position: absolute;
+    height : 100%;
+    left : 0;
+    top: 0;
+    width : 400px;
+    background-color: white;
+}
+
+textarea{
+    width : 396px;
+    border : none;
+    resize: none;
+}
