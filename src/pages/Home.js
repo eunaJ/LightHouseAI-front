@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import lighthouseaiLogo from "../assets/img/lighthouseai_logo.png";
 import { useEffect, useState } from "react";
@@ -68,15 +68,14 @@ const Home = () => {
     }
     
     const searched = travelList.filter((item) =>
-        item.title.includes(search)
+        item.cafe_title.includes(search)
     )
 
     const getTravelList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/cafes'); // 변경 필요 travel visitor
+        const res = await axios.get('http://localhost:8080/api/v1/travelVisitorCafes/'); // 변경 필요 travel
         console.log(res.data);
         setTravelList(res.data);
-        console.log(travelList);
-    }
+}
 
     useEffect(() => {
         getTravelList();
@@ -111,14 +110,18 @@ const Home = () => {
                 <div className="home-right-content">
                     {!isSearching ? (
                         travelList.map((travel) => (
-                            <TravelCard key={travel.id} title={travel.title} description={travel.description} imageUrl={travel.imageUrl} />
+                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
+                                <TravelCard key={travel.id} title={travel.cafe_title} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
+                            </Link>
                         ))
                     ) : (
                         searched.length === 0 ? (
                             <span>검색 결과가 없습니다</span>
                         ) : (
                             searched.map((item) => (
-                                <TravelCard key={item.id} {...item} />
+                                <Link key={item.id} to={`/travel/${item.id}`}>
+                                <TravelCard {...item} />
+                            </Link>
                             ))
                         )
                     )}

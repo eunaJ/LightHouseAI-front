@@ -10,6 +10,7 @@ import MyPage from './pages/user/MyPage';
 import MyInfo from './pages/user/MyInfo';
 import Board from './pages/board/Board';
 import TravelRegister from './pages/travel/TravelRegister';
+import TravelDetail from './pages/travel/TravelDetail';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/api/v1/users/kakao/login/callback" element={<KakaoRedirect />}></Route>
         <Route path="/api/v1/users/naver/login/callback" element={<NaverRedirect />}></Route>
         <Route path="/board" element={<Board />}></Route>
+        <Route path="/travel/:id" element={<TravelDetail/>}></Route>
         {/* 로그인 후 가능 */}
         <Route element={<PrivateRoute />}>
           <Route path="/mypage" element={<MyPage />}></Route>
