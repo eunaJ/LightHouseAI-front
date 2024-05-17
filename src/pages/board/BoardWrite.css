@@ -1,0 +1,108 @@
+.board{
+    padding: 2% 10% 0 15%;
+    display: flex;
+    flex-direction: row;
+}
+.board::after{
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: url("../../assets/img/background_img.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.board-left-upper{
+    padding-left: 30%;
+}
+
+#board-logo{
+    width: 150%;
+    height: 10vh;
+}
+
+.board-login, .board-logout{
+    background-color: #4F89E1;
+    color: white;
+    border: transparent;
+    width: 100px;
+    height: 25px;
+}
+
+.board-write{
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border-width: 1px;
+.element {
+        margin-left: 10%;
+        margin-right: auto;
+    }
+
+}
+
+.board-board, .board-myboard, .board-mylike, .board-myreview, .board-mypage, .board-myinfo{
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border-width: 1px;
+}
+
+.board-myboard, .board-mylike, .board-mypage, .board-myinfo{
+    border-top: none;
+}
+
+.board-mylike{
+    border-bottom: none;
+}
+
+.board-right {
+    margin-top: 2vh;
+    margin-left: 5vw;
+    width: 49vw;
+}
+
+
+.board-search{
+    width: 45vw;
+    height: 6vh;
+    background-color: white;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    display: flex;
+}
+
+.board-search-input{
+    padding-left: 3%;
+    width: 80%;
+    border: none;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+.board-search-clear-icon, .board-search-icon{
+    padding-top: 0.9vh;
+    width: 3vw;
+    height: 4vh;
+}
+
+.board-bdlist{
+    margin-top: 2vh;
+    margin-left: 1vw;
+    flex-direction: row;
+}
+
+.board-bd-title{
+    width: 35vw;
+    padding-left: 1vw;
+    text-align: left;
+}
+
+.boardList{
+    margin-top: 5vh;
+    margin-left: 5vw;
+}
