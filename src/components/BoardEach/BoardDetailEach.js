@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BoardDetailEach = ({ boardId, title, contents, nickname }) => {
+const BoardDetailEach = ({ id, title, contents, nickname }) => {
     return (
         <div>
             <h2>{title}</h2>

@@ -12,13 +12,7 @@ import Board from './pages/board/Board';
 import BoardDetail from './pages/board/BoardDetail';
 import BoardWrite from './pages/board/BoardWrite';
 import BoardUpdate from './pages/board/BoardUpdate';
-
-
 import BoardDetailEach from './components/BoardEach/BoardDetailEach';
-import TravelRegister from './pages/travel/TravelRegister';
-
-
-
 import TravelRegister from './pages/travel/TravelRegister';
 
 function App() {
@@ -33,7 +27,7 @@ function App() {
 
 
         <Route path="/board" element={<Board/>}></Route>
-        <Route path="/boards/" element={<BoardDetail/>}></Route>  
+        <Route path="/boards/:id" element={<BoardDetail/>}></Route>  
 
 
         {/* 로그인 후 가능 */}

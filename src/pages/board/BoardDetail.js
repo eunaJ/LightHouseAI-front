@@ -6,12 +6,12 @@ import BoardDetailEach from "../../components/BoardEach/BoardDetailEach";
 
 
 const BoardDetail = () => {
-
-    const { boardId } = useParams(); // /board/:id와 동일한 변수명으로 데이터를 꺼낼 수 있습니다.
+    const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [board, setBoard] = useState({});
     const getBoardDetailEach = async () => {
-        const resp =  await axios.get('http://localhost:8080/api/v1/boards/?{boardId}');
+      console.log(id);
+      const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
         setBoard(resp.data);
         setLoading(false);
     };
@@ -27,7 +27,7 @@ const BoardDetail = () => {
         <h2>loading...</h2>
       ) : (
         <BoardDetailEach
-          id={board.boardId}
+          id={board.id}
           title={board.title}
           contents={board.contents}
           nickname={board.nickname}

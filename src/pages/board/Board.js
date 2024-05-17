@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosAddCircle } from "react-icons/io";
-import  lighthouseaiLogo  from "../../assets/img/lighthouseai_logo.png"
+import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png"
 import { useNavigate } from 'react-router-dom';
 import "./Board.css";
 import axios from "axios";
@@ -33,7 +33,6 @@ const Board = () => {
     // const handleSearchValChange = (e) => {
     //     setSearchVal(e.target.value);
     // }
-
 
     const gotoHome = () => {
         navigate('/');
@@ -76,7 +75,7 @@ const Board = () => {
         navigate('/mytravelcontent');
     }
 
-     const getBoardList = async () => {
+    const getBoardList = async () => {
         const res = await axios.get('http://localhost:8080/api/v1/boards');
         console.log(res.data);
         setBoardList(res.data);
@@ -112,7 +111,7 @@ const Board = () => {
         });
     };
 
-    
+
 
     useEffect(() => {
         getBoardList();
@@ -160,7 +159,7 @@ const Board = () => {
           }
           
           fetchBoards();
-        }, []);
+    }, []);
     
     async function getData() {
         try {
@@ -200,7 +199,7 @@ const Board = () => {
                         <input type="text" name="sv" className="board-search-input" onChange={onChange} placeholder="   검색해주세요" />
                         <MdClear className="board-search-clear-icon" onClick={handleSearchClear} />
                         <CiSearch className="board-search-icon" />
-                        
+
                     </div>
                 </div>
                 <div className='board-right-center'>
@@ -209,7 +208,7 @@ const Board = () => {
                             <tr>
                                 <th scope="col" className="board-bd-no">
                                     <span>번호</span>
-                                    </th>
+                                </th>
                                 <th scope="col" className="board-bd-title">
                                     <span>제목</span>
                                 </th>
@@ -219,17 +218,17 @@ const Board = () => {
                             </tr>
                         </thread>
                         <tbody className="board-notice">
-                        
-                        <tr>
-                        {boardList.map((board) => (
-                                <tr key={board.id}>
-                                    <Link to={`/boards/${board.idx}`}>
-                                    {board.title}</Link>
-                                    {board.id}
-                                </tr>
-                            ))}
-                                
-                        </tr>
+
+                            <tr>
+                                {boardList.map((board) => (
+                                    <tr key={board.id}>
+                                        <Link to={`/boards/${board.id}`}>
+                                            {board.title}</Link>
+                                        {board.id}
+                                    </tr>
+                                ))}
+
+                            </tr>
                         </tbody>
                     </table>
                     <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />
