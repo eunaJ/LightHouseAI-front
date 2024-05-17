@@ -11,7 +11,6 @@ const BoardUpdate = () => {
   const [file, setFile] = useState(null);
 
 
-
   const gotoHome = () => {
     navigate('/');
 }

@@ -11,8 +11,6 @@ const BoardWrite= () => {
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
 
-
-
   const gotoHome = () => {
     navigate('/');
 }

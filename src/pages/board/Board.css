@@ -40,13 +40,7 @@
     flex-direction: column;
     justify-content: center;
 }
-.board-Writecategory{
-    margin-top: 2vh;
-    margin-left: 1vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+
 
 
 .board-board, .board-myboard, .board-mypage, .board-myTcontent{
