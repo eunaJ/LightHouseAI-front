@@ -11,6 +11,7 @@ import MyInfo from './pages/user/MyInfo';
 import Board from './pages/board/Board';
 import TravelRegister from './pages/travel/TravelRegister';
 import TravelDetail from './pages/travel/TravelDetail';
+import MyTravel from './pages/user/MyTravel';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/myinfo" element={<MyInfo />}></Route>
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
+          <Route path="/mytravel" element={<MyTravel/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
