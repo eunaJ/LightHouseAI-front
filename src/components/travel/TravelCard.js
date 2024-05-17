@@ -1,7 +1,7 @@
 import "./TravelCard.css";
 import { useNavigate } from "react-router-dom";
 
-const TravelCard = ({ id, title, description, imageUrl }) => {
+const TravelCard = ({ id, title, serving, star, imageUrl }) => {
     // const getTravel = async () => {
     //   const res = axios.get(`http://localhost:8080/api/v1/cafes/${id}`);
     //   console.log(res);
@@ -14,12 +14,15 @@ const TravelCard = ({ id, title, description, imageUrl }) => {
     }
 
     return (
-        <div className="travelcard-container">
-            <div className="travelcard" onClick={getTravel}>
+        <div className="travelcard-container" key={id}>
+            <div className="travelcard">
+                <p>{id}</p>
                 <h5 className="travelcard-title">{title}</h5>
                 <div className="travelcard-body">
-                    <img src={imageUrl} alt={title} />
-                    <p className="travelcard-text">{description}</p>
+                    {imageUrl && <img src={imageUrl} alt='travel_image' />}
+                    {/* <p>인원: {serving}</p> */}
+                    <p>별점: {star}</p>
+                    {/* <p className="travelcard-text">{description}</p> */}
                 </div>
             </div>
         </div>
