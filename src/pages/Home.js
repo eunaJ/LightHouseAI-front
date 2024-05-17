@@ -47,8 +47,12 @@ const Home = () => {
         navigate('/mypage');
     }
 
-    const gotoMyTravelContent = () => {
-        navigate('/mytravelcontent');
+    const gotoMyTravel = () => {
+        navigate('/mytravel');
+    }
+
+    const gotoTravelRegister = () => {
+        navigate('/travelRegister');
     }
 
     const onChange = (e) => {
@@ -64,15 +68,14 @@ const Home = () => {
     }
     
     const searched = travelList.filter((item) =>
-        // 현재는 타이틀만 기준으로 검색
         item.title.includes(search)
     )
 
     const getTravelList = async () => {
-        // const res = await axios.get('http://localhost:8080/api/v1/cafes'); // 변경 필요 travel visitor
-        // console.log(res.data);
-        // setTravelList(res.data);
-        // console.log(travelList);
+        const res = await axios.get('http://localhost:8080/api/v1/cafes'); // 변경 필요 travel visitor
+        console.log(res.data);
+        setTravelList(res.data);
+        console.log(travelList);
     }
 
     useEffect(() => {
@@ -94,7 +97,7 @@ const Home = () => {
                         <button className="home-board" onClick={gotoBoard}>자유게시판</button>
                         {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
                         {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
-                        {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
+                        {isLogin && <button className="home-mytravel" onClick={gotoMyTravel}>내 여행지</button>}
                     </div>
                 </div>
             </div>
@@ -119,7 +122,9 @@ const Home = () => {
                             ))
                         )
                     )}
-
+                </div>
+                <div className="home-right-bottom">
+                {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
                 </div>
             </div>
         </div>
