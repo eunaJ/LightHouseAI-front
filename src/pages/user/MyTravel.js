@@ -86,7 +86,6 @@ const MyTravel = () => {
   const getMyTreavelList = async () => {
     try {
       const res = await api.get('http://localhost:8080/api/v1/travels/user');
-      console.log(res.data);
       setMyTravelList(res.data);
     } catch (e) {
       console.error(e);
