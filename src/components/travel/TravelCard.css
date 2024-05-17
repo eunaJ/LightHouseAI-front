@@ -4,12 +4,14 @@
     border-radius: 4px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 80%;
+    height: 200px;
     background-color: white;
     margin-bottom: 10px;
 }
 
 .travelcard img {
-    width: 100%;
+    max-width: 30%;
+    max-height: 30%;
     height: auto;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -17,10 +19,15 @@
 
 .travelcard-title {
     font-size: 1.25rem;
-    font-weight: bold;
-    padding-left: 20px
+    padding-left: 3%;
+    margin-top: 3%;
+
 }
 
 .travelcard-text {
     color: #555;
+}
+
+.travelcard-body {
+    margin-left: 3%;
 }
