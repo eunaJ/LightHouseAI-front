@@ -1,0 +1,56 @@
+.modal-search {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    margin-bottom: 25px;
+}
+
+.modal-search-icon {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.modal-search-input {
+    border: transparent;
+    width: 95%;
+}
+
+.modal-add-btn{
+    margin-top: 3%;
+}
+
+.modal-newspotadd-form{
+    border: 1px solid #4F89E1;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.modal-newspotadd-form-input, .modal-newspotadd-region-select{
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    margin-left: 3%;
+}
+
+.modal-newspotadd-form-label{
+    padding-right: 3%;
+}
+
+.modal-newspotadd-save{
+    text-align: right;
+}
+
+.modal-newspotadd-save-btn{
+    background-color: #4F89E1;
+    color: white;
+    border: none;
+    height: 25px;
+    margin-bottom: 3%;
+}
+
+.modal-colse{
+    text-align: right;
+}

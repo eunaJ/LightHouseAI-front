@@ -41,7 +41,7 @@
     justify-content: center;
 }
 
-.home-board, .home-myboard, .home-mylike, .home-myreview, .home-mypage, .home-myinfo{
+.home-board, .home-myboard, .home-mypage, .home-mytravel{
     width: 100px;
     height: 35px;
     background-color: white;
@@ -86,4 +86,15 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     overflow-y: auto;
     padding-bottom: 10px;
+}
+
+.home-right-bottom{
+    text-align: right;
+}
+
+.home-travelRegisterBt{
+    background-color: #4F89E1;
+    color: white;
+    border: none;
+    font-size: large;
 }

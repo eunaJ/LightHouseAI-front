@@ -1,0 +1,106 @@
+.travelregi-inner {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid;
+}
+
+.travelregi-top {
+    text-align: center;
+}
+
+.travelregi-traveltitle-input {
+    width: 50%;
+    margin-bottom: 10px;
+    height: 20px;
+    /* border: 1px solid #4F89E1; */
+}
+
+.travelregi-img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.travelregi-img-preview, .travelregi-serving, .travelregi-expense, .travelregi-region-select, .travelregi-img-btn{
+    margin-top: 3%;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 3%;
+}
+
+.travelregi-serving-input, .travelregi-expense-input{
+    margin-left: 10px;
+}
+
+.travelregi-star-container{
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.travelregi-star {
+    position: relative;
+    font-size: 2rem;
+    color: #dee2e6;
+    margin-left: 3%;
+}
+
+.travelregi-star-input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.travelregi-btn{
+    margin-left: 3%;
+}
+
+.spotdatacard {
+    border: 1px solid #4F89E1;
+    padding: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.spotdatacard-img{
+    max-width: 80%;
+}
+
+.travelregi-textarea-input {
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    resize: none
+}
+
+.travelregi-bottom {
+    text-align: right;
+    margin-right: 25%;
+}
+
+.travelregi-main-delbtn,
+.travelregi-main-addbtn {
+    background-color: #4F89E1;
+    color: white;
+    border: transparent;
+    height: 25px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: 1%;
+    margin-left: 3%;
+}
+
+.travelregi-bottom-submit {
+    background-color: #4F89E1;
+    color: white;
+    border: transparent;
+    height: 25px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: 3%;
+}

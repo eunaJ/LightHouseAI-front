@@ -49,7 +49,7 @@
 }
 
 
-.board-board, .board-myboard, .board-mylike, .board-myreview, .board-mypage, .board-myinfo{
+.board-board, .board-myboard, .board-mypage, .board-myTcontent{
     width: 100px;
     height: 35px;
     background-color: white;

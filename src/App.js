@@ -15,8 +15,11 @@ import BoardUpdate from './pages/board/BoardUpdate';
 
 
 import BoardDetailEach from './components/BoardEach/BoardDetailEach';
+import TravelRegister from './pages/travel/TravelRegister';
 
 
+
+import TravelRegister from './pages/travel/TravelRegister';
 
 function App() {
   return (
@@ -41,6 +44,7 @@ function App() {
           <Route path="/boards/update/" element={<BoardUpdate />} />
 
 
+          <Route path="/travelRegister" element={<TravelRegister/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
