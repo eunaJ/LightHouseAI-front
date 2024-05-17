@@ -1,5 +1,5 @@
 .board{
-    padding: 2% 15% 0 15%;
+    padding: 2% 10% 0 15%;
     display: flex;
     flex-direction: row;
 }
@@ -33,21 +33,17 @@
     height: 25px;
 }
 
-.board-category{
-    margin-top: 2vh;
-    margin-left: 1vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.board-Writecategory{
-    margin-top: 2vh;
-    margin-left: 1vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+.board-write{
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border-width: 1px;
+    .element {
+        margin-left: 10%;
+        margin-right: auto;
+    }
 
+}
 
 .board-board, .board-myboard, .board-mylike, .board-myreview, .board-mypage, .board-myinfo{
     width: 100px;
@@ -97,6 +93,7 @@
 .board-bdlist{
     margin-top: 2vh;
     margin-left: 1vw;
+    flex-direction: row;
 }
 
 .board-bd-title{
