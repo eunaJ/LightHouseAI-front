@@ -59,7 +59,6 @@ const Home = () => {
         // 영어인 경우 대소문자 구분 중
         const searchText = e.target.value;
         setSearch(searchText);
-        console.log(searchText);
         if (searchText.trim() === '') {
             setIsSearching(false);
         } else {
@@ -68,11 +67,11 @@ const Home = () => {
     }
     
     const searched = travelList.filter((item) =>
-        item.cafe_title.includes(search)
+        item.title.includes(search)
     )
 
     const getTravelList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/travelVisitorCafes/'); // 변경 필요 travel
+        const res = await axios.get('http://localhost:8080/api/v1/travels');
         console.log(res.data);
         setTravelList(res.data);
 }
@@ -109,9 +108,9 @@ const Home = () => {
                 </div>
                 <div className="home-right-content">
                     {!isSearching ? (
-                        travelList.map((travel) => (
-                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
-                                <TravelCard key={travel.id} title={travel.cafe_title} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
+                        travelList.reverse().map((travel) => (
+                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none"}}>
+                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer } star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }} />
                             </Link>
                         ))
                     ) : (
@@ -119,8 +118,8 @@ const Home = () => {
                             <span>검색 결과가 없습니다</span>
                         ) : (
                             searched.map((item) => (
-                                <Link key={item.id} to={`/travel/${item.id}`}>
-                                <TravelCard {...item} />
+                                <Link key={item.id} to={`/travel/${item.id}`} style={{ textDecoration: "none" }}>
+                                <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }}/>
                             </Link>
                             ))
                         )
