@@ -12,6 +12,7 @@ import Board from './pages/board/Board';
 import TravelRegister from './pages/travel/TravelRegister';
 import TravelDetail from './pages/travel/TravelDetail';
 import MyTravel from './pages/user/MyTravel';
+import TravelUpdate from './pages/travel/TravelUpdate';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/myinfo" element={<MyInfo />}></Route>
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
           <Route path="/mytravel" element={<MyTravel/>}></Route>
+          <Route path="/travel/update/:id" element={<TravelUpdate/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

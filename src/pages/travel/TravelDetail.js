@@ -31,7 +31,6 @@ const TravelDetail = () => {
         setIsWriter(true);
       }
 
-
       const resTravelCafe = await axios.get(`http://localhost:8080/api/v1/travelVisitorCafes/travel/${visitorId}`);
       setTravelCafe(resTravelCafe.data);
       const resTravelRestaurant = await axios.get(`http://localhost:8080/api/v1/travelVisitorRestaurants/travel/${visitorId}`);
@@ -43,13 +42,14 @@ const TravelDetail = () => {
       const resTravelOtherService = await axios.get(`http://localhost:8080/api/v1/travelVisitorOtherServices/travel/${visitorId}`);
       setTravelOtherService(resTravelOtherService.data);
       setLoading(false);
+      console.log(resTravelCafe.data);
     } catch (e) {
       console.log(e);
     }
   };
 
   const gotoUpdate = () => {
-    navigate('/update/' + id);
+    navigate('/travel/update/' + id);
   };
 
   const deleteTravel = async () => {
@@ -105,7 +105,7 @@ const TravelDetail = () => {
                       <p>메뉴: {travelCafe[index].menu}</p>
                       <p>가격: {travelCafe[index].price}</p>
                       <p>운영시간: {travelCafe[index].opentime} ~ {travelCafe[index].closetime}</p>
-                      <p>{travelCafe[index].review}</p>
+                      <p>{travelCafe[index].content}</p>
                     </div>}
                   <p></p>
                 </div>
@@ -123,7 +123,7 @@ const TravelDetail = () => {
                       <p>메뉴: {travelRestaurant[index].menu}</p>
                       <p>가격: {travelRestaurant[index].price}</p>
                       <p>운영시간: {travelRestaurant[index].opentime} ~ {travelRestaurant[index].closetime}</p>
-                      <p>{travelRestaurant[index].review}</p>
+                      <p>{travelRestaurant[index].content}</p>
                     </div>
                   }
                   <p></p>
@@ -141,7 +141,7 @@ const TravelDetail = () => {
                       <p>위치: {travelShoppingMall[index].location}</p>
                       <p>가격: {travelShoppingMall[index].price}</p>
                       <p>운영시간: {travelShoppingMall[index].opentime} ~ {travelShoppingMall[index].closetime}</p>
-                      <p>{travelShoppingMall[index].review}</p>
+                      <p>{travelShoppingMall[index].content}</p>
                     </div>
                   }
                   <p></p>
@@ -159,7 +159,7 @@ const TravelDetail = () => {
                       <p>위치: {travelTourList[index].location}</p>
                       <p>가격: {travelTourList[index].price}</p>
                       <p>운영시간: {travelTourList[index].opentime} ~ {travelTourList[index].closetime}</p>
-                      <p>{travelTourList[index].review}</p>
+                      <p>{travelTourList[index].content}</p>
                     </div>}
                   <p></p>
                 </div>
@@ -176,7 +176,7 @@ const TravelDetail = () => {
                       <p>위치: {travelOtherService[index].location}</p>
                       <p>가격: {travelOtherService[index].price}</p>
                       <p>운영시간: {travelOtherService[index].opentime} ~ {travelOtherService[index].closetime}</p>
-                      <p>{travelOtherService[index].review}</p>
+                      <p>{travelOtherService[index].content}</p>
                     </div>
                   }
                   <p></p>

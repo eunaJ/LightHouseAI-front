@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./TravelModalCard.css";
 
-const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onCafeSpotToModal, onRestaurantSpotToModal, onShoppingMallSpotToModal, onTourListSpotToModal, onOtherServiceSpotToModal, onClose }) => {
+const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onCafeSpotToModal, onRestaurantSpotToModal, onShoppingMallSpotToModal, onTourListSpotToModal, onOtherServiceSpotToModal, onClose, menus, prices, contents, onUclose }) => {
     const upload = useRef();
     const [spotImg, setSpotImg] = useState('');
     const [spotImgUrl, setSpotImgUrl] = useState('');
@@ -27,26 +27,26 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
         }
         e.preventDefault();
         if(type === "카페") {
-            onCafeSpotToModal(spotData, spotImg, spotImgUrl, review);
+            onCafeSpotToModal(spotData, spotImg, spotImgUrl, content);
         }
         else if(type === "음식점") {
-            onRestaurantSpotToModal(spotData, spotImg, spotImgUrl, review);
+            onRestaurantSpotToModal(spotData, spotImg, spotImgUrl, content);
         }
         else if(type === "쇼핑몰") {
-            onShoppingMallSpotToModal(spotData, spotImg, spotImgUrl, review);
+            onShoppingMallSpotToModal(spotData, spotImg, spotImgUrl, content);
         }
         else if(type === "관광지") {
-            onTourListSpotToModal(spotData, spotImg, spotImgUrl, review);
+            onTourListSpotToModal(spotData, spotImg, spotImgUrl, content);
         }
         else if(type === "기타서비스") {
-            onOtherServiceSpotToModal(spotData, spotImg, spotImgUrl, review);
+            onOtherServiceSpotToModal(spotData, spotImg, spotImgUrl, content);
         }
-        onClose();        
+        onClose();
     };
 
-    const [menu, setMenu] = useState('');
-    const [price, setPrice] = useState('');
-    const [review, setReview] = useState('');
+    const [menu, setMenu] = useState(menus);
+    const [price, setPrice] = useState(prices);
+    const [content, setcontent] = useState(contents);
 
     return (
         <div className="travelmodalcard-container">
@@ -72,15 +72,15 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
                         <div className='travelmodalcard-textarea'>
                             <textarea
                                 className='travelmodalcard-textarea-input'
-                                value={review}
-                                onChange={(e) => setReview(e.target.value)}
+                                value={content}
+                                onChange={(e) => setcontent(e.target.value)}
                                 placeholder="후기를 입력해주세요"
                             />
                         </div>
                     </div>
                 </div>
                 <div className="travelmodalcard-bottom">
-                    <button className="travelmodalcard-bottom-addbtn" onClick={handleItemClick}>추가</button>
+                    <button className="travelmodalcard-bottom-addbtn" onClick={handleItemClick}>등록</button>
                 </div>
             </div>
         </div>

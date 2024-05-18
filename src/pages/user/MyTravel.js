@@ -138,12 +138,12 @@ const MyTravel = () => {
             <hr />
             <tbody className="mytravel-notice">
               <tr>
-                {myTravelList.reverse().map((mytravel) => (
+                {myTravelList.slice().reverse().map((mytravel, index) => (
                   <Link key={mytravel.id} to={`/travel/${mytravel.id}`} style={{ textDecoration: "none" }}>
-                    <li key={mytravel.id} style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
+                    <li style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
                       <table>
                         <tr>
-                          <td style={{ textAlign: 'center', width: '50px' }}>{mytravel.id}</td>
+                          <td style={{ textAlign: 'center', width: '50px' }}>{myTravelList.length - index}</td>
                           <td><span style={{ padding: '20px' }}>{mytravel.title}</span></td>
                         </tr>
                       </table>
@@ -151,6 +151,8 @@ const MyTravel = () => {
                     <hr style={{ color: "lightGray" }} />
                   </Link>
                 ))}
+
+
               </tr>
             </tbody>
           </table>
