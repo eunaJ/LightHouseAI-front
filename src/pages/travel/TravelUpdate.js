@@ -469,11 +469,6 @@ const TravelUpdate = () => {
                         <p style={{ textAlign: 'left' }}>작성자: {travel.writer}</p>
                         <p style={{ textAlign: 'left' }}>시/군/구: {travel.constituency_name}</p>
                         <div className="travelupdate-inner-main">
-                            {/* <div className='travelupdate-img-pcontent'>
-                                {travelImgUrl && (
-                                    <img src={travelImgUrl} alt="여행지 사진" width={'30%'} />
-                                )}
-                            </div> */}
                             <div className='travelupdate-travelimg'>
                                 <input
                                     className="travelupdate-img-input"
@@ -520,13 +515,6 @@ const TravelUpdate = () => {
                                     {travelCafe[index].location && index >= -1 &&
                                         <div className='travelupdate-card'>
                                             <h3>{travelCafe[index].cafe_title}</h3>
-                                            {!travelCafe[index].spotImgUrl ? (
-                                                travelCafe[index].image_url && (
-                                                    <img src={travelCafe[index].image_url} alt="여행지 사진" width={'30%'} />
-                                                )
-                                            ) : (
-                                                <img src={travelCafe[index].spotImgUrl} alt="여행지 사진" width={'30%'} />
-                                            )}
                                             <div className="travelupdate-img">
                                                 <label className="travelupdate-img-btn">
                                                     <input
@@ -566,13 +554,6 @@ const TravelUpdate = () => {
                                     {travelRestaurant[index].location && index >= -1 &&
                                         <div className='travelupdate-card'>
                                             <h3>{travelRestaurant[index].restaurant_title}</h3>
-                                            {!travelRestaurant[index].spotImgUrl ? (
-                                                travelRestaurant[index].image_url && (
-                                                    <img src={travelRestaurant[index].image_url} alt="여행지 사진" width={'30%'} />
-                                                )
-                                            ) : (
-                                                <img src={travelRestaurant[index].spotImgUrl} alt="여행지 사진" width={'30%'} />
-                                            )}
                                             <div className="travelupdate-img">
                                                 <label className="travelupdate-img-btn">
                                                     <input
@@ -612,13 +593,6 @@ const TravelUpdate = () => {
                                     {travelShoppingMall[index].location && index >= -1 &&
                                         <div className='travelupdate-card'>
                                             <h3>{travelShoppingMall[index].shoppingMall_title}</h3>
-                                            {!travelShoppingMall[index].spotImgUrl ? (
-                                                travelShoppingMall[index].image_url && (
-                                                    <img src={travelShoppingMall[index].image_url} alt="여행지 사진" width={'30%'} />
-                                                )
-                                            ) : (
-                                                <img src={travelShoppingMall[index].spotImgUrl} alt="여행지 사진" width={'30%'} />
-                                            )}
                                             <div className="travelupdate-img">
                                                 <label className="travelupdate-img-btn">
                                                     <input
@@ -655,13 +629,6 @@ const TravelUpdate = () => {
                                     {travelTourList[index].location && index >= -1 &&
                                         <div className='travelupdate-card'>
                                             <h3>{travelTourList[index].tourList_title}</h3>
-                                            {!travelTourList[index].spotImgUrl ? (
-                                                travelTourList[index].image_url && (
-                                                    <img src={travelTourList[index].image_url} alt="여행지 사진" width={'30%'} />
-                                                )
-                                            ) : (
-                                                <img src={travelTourList[index].spotImgUrl} alt="여행지 사진" width={'30%'} />
-                                            )}
                                             <div className="travelupdate-img">
                                                 <label className="travelupdate-img-btn">
                                                     <input
@@ -686,7 +653,6 @@ const TravelUpdate = () => {
                                                 />
                                             </div>
                                         </div>}
-
                                     <div className="travelupdate-btn-div">
                                         {index >= 0 && travelTourList[index].id && <button className='travelupdate-btn' type="button" onClick={() => updateTourListContentField(travelTourList[index], index)}>수정</button>}
                                         {index >= 0 && <button className='travelupdate-btn' type="button" onClick={() => removeTourListContentField(index)}>삭제</button>}
@@ -699,13 +665,6 @@ const TravelUpdate = () => {
                                     {travelOtherService[index].location && index >= -1 &&
                                         <div className='travelupdate-card'>
                                             <h3>{travelOtherService[index].otherService_title}</h3>
-                                            {!travelOtherService[index].spotImgUrl ? (
-                                                travelOtherService[index].image_url && (
-                                                    <img src={travelOtherService[index].image_url} alt="여행지 사진" width={'30%'} />
-                                                )
-                                            ) : (
-                                                <img src={travelOtherService[index].spotImgUrl} alt="여행지 사진" width={'30%'} />
-                                            )}
                                             <div className="travelupdate-img">
                                                 <label className="travelupdate-img-btn">
                                                     <input
@@ -742,7 +701,6 @@ const TravelUpdate = () => {
                         <button className="travelupdate-bottom-submit" type="submit" onClick={handleSubmit}>저장</button>
                     </div>
                 </div>
-
             )}
         </div>
     );
