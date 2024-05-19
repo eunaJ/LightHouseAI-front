@@ -13,9 +13,9 @@ const Travel = ({ id, title, writer, image_url, serving, expense, star }) => {
             image_url.includes('.jpg') &&
             <img src={image_url} alt='여행지 이미지' />
       )}
-      {serving && <p>{serving}명과 함께</p>}
-      {expense && <p>총 {expense}원</p>}
-      {star && <p>별점 {star}</p>}
+      {serving !== 0 && <p>{serving}명과 함께</p>}
+      {expense !== 0 && <p>총 {expense}원</p>}
+      {star !== 0 && <p>별점 {star}</p>}
     </div>
   );
 };

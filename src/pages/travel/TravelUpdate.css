@@ -15,9 +15,17 @@
     width: 50%;
     margin-bottom: 10px;
     height: 20px;
-    /* border: 1px solid #4F89E1; */
 }
 
+.travelupdate-card{
+    border: 1px solid #4F89E1;
+    padding: 10px;
+    margin-top: 3%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
 
 .travelupdate-star-container{
     text-align: left;
@@ -38,4 +46,28 @@
     left: 0;
     opacity: 0;
     cursor: pointer;
+}
+
+.travelupdate-btn-div{
+    margin-top: 3%;
+    margin-right: 3%;
+    text-align: right;
+}
+
+.travelupdate-travelimg, .travelupdate-serving{
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+.travelupdate-textarea-input{
+    margin-top: 3%;
+    width: 80%;
+    height: 100px;
+    overflow-y:scroll; 
+    overflow-x:hidden; 
+    resize: none
+}
+
+.travelupdate-serving-div{
+    margin-left: 3%;
 }
