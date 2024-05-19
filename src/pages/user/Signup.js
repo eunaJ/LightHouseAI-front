@@ -32,7 +32,6 @@ const SignUp = () => {
     }
 
     const handleProfileImgChange = (e) => {
-        console.log(upload.current.files);
         // setProfileImg(URL.createObjectURL(upload.current.files[0]));
         setProfileImg(upload.current.files[0]);
     };
@@ -159,10 +158,7 @@ const SignUp = () => {
             },
         })
             .then(res => {
-                console.log(res.status);
-                console.log(res);
                 if (res.status === 201) {
-                    console.log('회원가입 성공!');
                     alert('회원가입에 성공했어요!');
                     navigate('/login');
                 }

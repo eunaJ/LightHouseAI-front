@@ -115,25 +115,25 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
     const [tourListSpot, setTourListSpot] = useState('');
     const [otherServiceSpot, setOtherServiceSpot] = useState('');
 
-    const handleCafeSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
-        setCafeSpot(newSpot, spotImg, spotImgUrl, review);
-        onCafeSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    const handleCafeSpotAdd = (newSpot, spotImg, spotImgUrl, content) => {
+        setCafeSpot(newSpot, spotImg, spotImgUrl, content);
+        onCafeSpotAdd(newSpot, spotImg, spotImgUrl, content, index);
     }
-    const handleRestaurantSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
-        setRestaurantSpot(newSpot, spotImg, spotImgUrl, review);
-        onRestaurantSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    const handleRestaurantSpotAdd = (newSpot, spotImg, spotImgUrl, content) => {
+        setRestaurantSpot(newSpot, spotImg, spotImgUrl, content);
+        onRestaurantSpotAdd(newSpot, spotImg, spotImgUrl, content, index);
     }
-    const handleShoppingMallSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
-        setShoppingMallSpot(newSpot, spotImg, spotImgUrl, review);
-        onShoppingMallSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    const handleShoppingMallSpotAdd = (newSpot, spotImg, spotImgUrl, content) => {
+        setShoppingMallSpot(newSpot, spotImg, spotImgUrl, content);
+        onShoppingMallSpotAdd(newSpot, spotImg, spotImgUrl, content, index);
     }
-    const handleTourListSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
-        setTourListSpot(newSpot, spotImg, spotImgUrl, review);
-        onTourListSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    const handleTourListSpotAdd = (newSpot, spotImg, spotImgUrl, content) => {
+        setTourListSpot(newSpot, spotImg, spotImgUrl, content);
+        onTourListSpotAdd(newSpot, spotImg, spotImgUrl, content, index);
     }
-    const handleOtherServiceSpotAdd = (newSpot, spotImg, spotImgUrl, review) => {
-        setOtherServiceSpot(newSpot, spotImg, spotImgUrl, review);
-        onOtherServiceSpotAdd(newSpot, spotImg, spotImgUrl, review, index);
+    const handleOtherServiceSpotAdd = (newSpot, spotImg, spotImgUrl, content) => {
+        setOtherServiceSpot(newSpot, spotImg, spotImgUrl, content);
+        onOtherServiceSpotAdd(newSpot, spotImg, spotImgUrl, content, index);
     }
 
     const [newSpot, setNewSpot] = useState({
@@ -313,7 +313,7 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
                     )
                 )}
             </div>
-            <div className="modal-colse">
+            <div className="modal-close">
                 <button onClick={handleClear}>닫기</button>
             </div>
         </ReactModal>
