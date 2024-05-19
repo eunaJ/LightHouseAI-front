@@ -26,7 +26,6 @@ const Home = () => {
             try {
                 const res = await api.post('/users/logout');
                 localStorage.clear();
-                // 쿠키 삭제
                 navigate('/');
             } catch (e) {
                 alert('로그아웃 실패');
@@ -72,7 +71,6 @@ const Home = () => {
 
     const getTravelList = async () => {
         const res = await axios.get('http://localhost:8080/api/v1/travels');
-        console.log(res.data);
         setTravelList(res.data);
 }
 

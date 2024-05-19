@@ -34,7 +34,6 @@ const MyTravel = () => {
     const procLogout = async () => {
       try {
         const res = await api.post('/users/logout');
-        console.log(res);
         localStorage.clear();
         navigate('/');
       } catch (e) {

@@ -42,9 +42,8 @@ const TravelDetail = () => {
       const resTravelOtherService = await axios.get(`http://localhost:8080/api/v1/travelVisitorOtherServices/travel/${visitorId}`);
       setTravelOtherService(resTravelOtherService.data);
       setLoading(false);
-      console.log(resTravelCafe.data);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

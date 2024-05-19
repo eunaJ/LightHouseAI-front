@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactModal from 'react-modal';
-import TravelModalCard from './TravelModalCard';
-import axios from 'axios';
 
 const TravelModalCardUpdate = ({ index, type, isUOpen, onUClose, travel, title, onCafeSpotToModal, onRestaurantSpotToModal, onShoppingMallSpotToModal, onTourListSpotToModal, onOtherServiceSpotToModal }) => {
     const modalStyles = {
@@ -70,15 +68,6 @@ const TravelModalCardUpdate = ({ index, type, isUOpen, onUClose, travel, title, 
     const [menu, setMenu] = useState();
     const [price, setPrice] = useState();
     const [content, setContent] = useState();
-
-    // const getSpot = () => {
-    //     if(type === "카페"){
-
-    //     }
-    //     try{
-    //         const res = axios.get(`http://localhost:8080/api/v1/travelVisitorCafes/`)
-    //     }
-    // }
 
     useEffect(() => {
         if (!isUOpen) {
