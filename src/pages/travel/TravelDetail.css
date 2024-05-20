@@ -1,0 +1,37 @@
+.traveldetail-inner {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.traveldetail-inner-main{
+    border: 1px solid black;
+}
+
+.traveldetail-top {
+    text-align: center;
+}
+
+.traveldetail-img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.traveldetail-card{
+    border: 1px solid #4F89E1;
+    padding: 10px;
+    margin-top: 3%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.traveldetail-card-img{
+    max-width: 80%;
+}
+
+.traveldetail-btn{
+    margin-top: 3%;
+    text-align: right;
+}

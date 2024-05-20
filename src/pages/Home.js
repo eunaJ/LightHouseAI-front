@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import lighthouseaiLogo from "../assets/img/lighthouseai_logo.png";
 import { useEffect, useState } from "react";
@@ -26,7 +26,6 @@ const Home = () => {
             try {
                 const res = await api.post('/users/logout');
                 localStorage.clear();
-                // 쿠키 삭제
                 navigate('/');
             } catch (e) {
                 alert('로그아웃 실패');
@@ -59,7 +58,6 @@ const Home = () => {
         // 영어인 경우 대소문자 구분 중
         const searchText = e.target.value;
         setSearch(searchText);
-        console.log(searchText);
         if (searchText.trim() === '') {
             setIsSearching(false);
         } else {
@@ -72,11 +70,9 @@ const Home = () => {
     )
 
     const getTravelList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/cafes'); // 변경 필요 travel visitor
-        console.log(res.data);
+        const res = await axios.get('http://localhost:8080/api/v1/travels');
         setTravelList(res.data);
-        console.log(travelList);
-    }
+}
 
     useEffect(() => {
         getTravelList();
@@ -110,15 +106,19 @@ const Home = () => {
                 </div>
                 <div className="home-right-content">
                     {!isSearching ? (
-                        travelList.map((travel) => (
-                            <TravelCard key={travel.id} title={travel.title} description={travel.description} imageUrl={travel.imageUrl} />
+                        travelList.reverse().map((travel) => (
+                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none"}}>
+                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer } star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }} />
+                            </Link>
                         ))
                     ) : (
                         searched.length === 0 ? (
                             <span>검색 결과가 없습니다</span>
                         ) : (
                             searched.map((item) => (
-                                <TravelCard key={item.id} {...item} />
+                                <Link key={item.id} to={`/travel/${item.id}`} style={{ textDecoration: "none" }}>
+                                <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }}/>
+                            </Link>
                             ))
                         )
                     )}
