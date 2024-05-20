@@ -7,10 +7,11 @@ import TravelModalCard from "./TravelModalCard";
 import "./TravelModal.css";
 import { areas } from "../../components/travel/Areas";
 
-function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index }) {
+function TravelModal({constituency_id,type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index }) {
     const [searched, setSearched] = useState([]);
     const handleSearch = (e) => {
         // 영어인 경우 대소문자 구분 중, 애초에 title이 구분 중
+
         const searchText = e.target.value;
         setSearch(searchText);
         if (searchText.trim() === '') {
@@ -47,6 +48,7 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
         }
     }
 
+    
     const [search, setSearch] = useState({});
     const [isSearching, setIsSearching] = useState(false);
 
@@ -57,10 +59,11 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
     const [otherserviceList, setOtherserviceList] = useState([]);
 
     useEffect(() => {
+    
         const fetchData = async () => {
             if (type === '카페') {
                 try {
-                    const res = await axios.get('http://localhost:8080/api/v1/cafes');
+                    const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/cafes`);
                     setCafeList(res.data);
                 } catch (error) {
                     console.error('카페 데이터를 불러오는 중 오류 발생:', error);
@@ -96,7 +99,7 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
             }
         };
         fetchData();
-    }, [type, isSearching]);
+    }, [type, isSearching,constituency_id]);
 
     const modalStyles = {
         content: {
