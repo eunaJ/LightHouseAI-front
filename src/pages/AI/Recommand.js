@@ -14,7 +14,7 @@ const Recommand = () => {
     const getQuery = (e) => {
         setUserInput(e.target.value);
     }
-    const [response, setResponse] = useState(null);
+    const [response, setResponse] = useState([]);
     const textRef = useRef();
     const handleResizeHeight = useCallback(() => {
         //textRef.current.style.height = textRef.current.scrollHeight + "px";
@@ -28,8 +28,8 @@ const Recommand = () => {
                 'msg' : userInput,
             }
         );
-        const data = res.data.response.map(item => ({ title: item.title, location: item.location }));
-        setResponse(data);
+        console.log(res);
+        setResponse(res.data.response);
     };
     return (
         <div className="recommand">
@@ -46,9 +46,11 @@ const Recommand = () => {
                         <h1>여행지 추천</h1>
                     </div>
                     <div className = "box-content">
-                        {response && response.map((item, index) => (
-                            <pre key={index}>{`Title: ${item.title}\nLocation: ${item.location}`}</pre>
-                        ))}                    
+                        <ul>
+                            {response.map((item, index) => (
+                                <p key={index}>{item}</p>
+                            ))}
+                        </ul>
                     </div>
                 </div>
                 <div className = "query">

@@ -41,7 +41,7 @@
     justify-content: center;
 }
 
-.home-board, .home-myboard, .home-mypage, .home-mytravel{
+.home-board, .home-myboard, .home-mypage, .home-mytravel, .home-recommand{
     width: 100px;
     height: 35px;
     background-color: white;

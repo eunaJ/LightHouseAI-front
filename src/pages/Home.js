@@ -38,6 +38,10 @@ const Home = () => {
         navigate('/board');
     }
 
+    const gotoRecommand = () => {
+        navigate('/recommand');
+    }
+
     const gotoMyBoard = () => {
         navigate('/myboard');
     }
@@ -91,6 +95,7 @@ const Home = () => {
                     {isLogin && <button className="home-logout" onClick={handleLogout}>로그아웃</button>}
                     <div className='home-category'>
                         <button className="home-board" onClick={gotoBoard}>자유게시판</button>
+                        <button className="home-recommand" onClick={gotoRecommand}>AI 추천</button>
                         {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
                         {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
                         {isLogin && <button className="home-mytravel" onClick={gotoMyTravel}>내 여행지</button>}
