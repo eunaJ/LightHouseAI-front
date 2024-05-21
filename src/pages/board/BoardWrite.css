@@ -50,6 +50,7 @@
     height: 35px;
     background-color: white;
     border-width: 1px;
+    border-radius: 15px;
 }
 
 .board-myboard, .board-mylike, .board-mypage, .board-myinfo{
@@ -106,3 +107,7 @@
     margin-top: 5vh;
     margin-left: 5vw;
 }
+.boardimg{
+    max-width: 80%;
+}
+

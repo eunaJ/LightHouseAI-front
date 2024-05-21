@@ -99,6 +99,13 @@
     text-align: left;
 }
 
+.board-bd-num{
+    width: 35vw;
+    padding-left: 10%;
+    text-align: left;
+}
+
+
 .boardList{
     margin-top: 5vh;
     margin-left: 5vw;

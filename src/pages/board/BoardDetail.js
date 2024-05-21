@@ -1,39 +1,123 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import api from '../../components/RefreshApi';
 
 import axios from 'axios';
 import BoardDetailEach from "../../components/BoardEach/BoardDetailEach";
-
+import  lighthouseaiLogo  from "../../assets/img/lighthouseai_logo.png";
 
 const BoardDetail = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [board, setBoard] = useState({});
+
+    
     const getBoardDetailEach = async () => {
-      console.log(id);
-      const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
+        console.log(id);
+        const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
         setBoard(resp.data);
         setLoading(false);
+        
     };
-  
+    const moveToUpdate = () => {
+        navigate('/board/update/'+id);
+    }
+
+
+      const moveToList = () => {
+        navigate('/board');
+      };
+
+
+
+    const isLogin = !!localStorage.getItem("accessToken");
+
     useEffect(() => {
         getBoardDetailEach();
     }, [])
 
+    const gotoHome = () => {
+        navigate('/');
+    }
+    const gotoLogin = () => {
+        navigate('/login');
+    }
+
+    const gotoBoard = () => {
+        navigate('/board');
+    }
+
+    const gotoMyBoard = () => {
+        navigate('/myboard');
+    }
+
+    const gotoMyPage = () => {
+        navigate('/mypage');
+    }
+
+    const gotoMyTravelContent = () => {
+        navigate('/mytravelcontent');
+    }
+    const backToList = () => {
+        navigate('/board');
+    }
+
+    const deleteBoard = async () => {
+        if (window.confirm('게시글을 삭제하시겠습니까?')) {
+          await api.delete(`http://localhost:8080/api/v1/boards/${id}`)
+          .then((res) => {
+            alert('삭제되었습니다.');
+            navigate('/board');
+          });
+        }
+      };
+    
+
 
     return (
         <div>
-      {loading ? (
-        <h2>loading...</h2>
-      ) : (
-        <BoardDetailEach
-          id={board.id}
-          title={board.title}
-          contents={board.contents}
-          nickname={board.nickname}
-        />
-      )}
-    </div>
+            {loading ? (
+                <h2>loading...</h2>
+            ) : (
+                <div>
+                    <div className='board'>
+                        <div className='board-left'>
+                            <div className="board-left-upper">
+                                <div className='board-logo'>
+                                    <img src={lighthouseaiLogo} alt="로고" height={"60px"} id='board-logo' onClick={gotoHome}></img>
+                                </div>
+                                <div className='board-category'>
+                                    <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+                                    {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
+                                    {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
+                                    {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <BoardDetailEach
+                        id={board.boardId}
+                        title={board.title}
+                        content={board.content}
+                        nickname={board.nickname}
+                        image_url ={board.image_url}
+                    />
+                </div>
+
+                
+            )}
+
+            <div>
+            <button onClick={moveToUpdate}>수정</button>
+            <button onClick={deleteBoard}>삭제</button>
+            <button onClick={moveToList}>목록</button>
+      </div>
+
+
+        </div>
     );
 
 };

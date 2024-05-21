@@ -1,120 +1,146 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef,useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 페이지 이동을 위해 useNavigate 훅을 사용합
+import "./BoardWrite.css"; 
 import axios from 'axios';
-import "./BoardWrite.css";
-import  lighthouseaiLogo  from "../../assets/img/lighthouseai_logo.png"
+import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png"; // 로고 이미지를 임포트
+import api from '../../components/RefreshApi';
 
+const BoardWrite = () => {
+  const isLogin = !!localStorage.getItem("accessToken"); // 로컬 스토리지에서 accessToken을 가져와 로그인 상태를 확인
+  const navigate = useNavigate(); // 페이지 이동을 위한 navigate 함수를 초기화
+  const [title, setTitle] = useState(''); // 제목 상태를 관리
+  const [content, setContent] = useState(''); // 내용 상태를 관리
+  const [file, setFile] = useState(''); // 파일 상태를 관리
+  const [image_url, setImage_url] = useState('');
+  const [image, setImage] = useState('');
+  const upload = useRef();
 
-const BoardWrite= () => {
-  const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [file, setFile] = useState(null);
+  // 페이지 이동 함수들
+  const gotoHome = () => navigate('/');
+  const gotoBoard = () => navigate('/board');
+  const gotoMyBoard = () => navigate('/myboard');
+  const gotoMyPage = () => navigate('/mypage');
+  const gotoMyTravelContent = () => navigate('/mytravelcontent');
+  const backToList = () => navigate('/board');
+  
 
-  const gotoHome = () => {
-    navigate('/');
-}
-  const gotoLogin = () => {
-    navigate('/login');
-  }
-
-  const gotoBoard = () => {
-    navigate('/boards');
-  }
-
-  const gotoMyBoard = () => {
-      navigate('/myboard');
-  }
-
-  const gotoMyPage = () => {
-    navigate('/mypage');
-  }
-
-  const gotoMyTravelContent = () => {
-    navigate('/mytravelcontent');
-  }
-  const backToList = () => {
-    navigate('/board');
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    setImage(image)
+    /**const image= upload.current.files[0];
+         setImage(image);
+         const reader = new FileReader();
+         reader.readAsDataURL(image);
+         reader.onload = () => {
+          setImage_url(reader.result);
+        };
+    **/
   };
 
-  const saveBoard = async () => {
-    await axios.post(`http://localhost:8080/api/v1/boards/create`).
-    then((res) => {
-      alert('등록되었습니다.');
-      navigate('/board');
-    });
+  const onChange = (event) => {
+    const { value, name } = event.target;
+    if (name === 'title') setTitle(value);
+    else if (name === 'content') setContent(value);
+    else if (name == 'image_url') setImage_url(value);
   };
-
-
-
-  const isLogin = !!localStorage.getItem("accessToken");
-
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //console.log("handleSubmit 호출됨");
 
     const formData = new FormData();
-    formData.append('controllerRequestDto', new Blob([JSON.stringify({ title, content })], {
-      type: "application/json"
-    }));
-      await axios.post('http://localhost:8080/api/v1/boards/create', formData, {
-      });
-      alert('게시물이 등록되었습니다.');
-      navigate('/board');
-
+    const controllerRequestDto ={"title" : title , "content":content};
+    formData.append("controllerRequestDto",new Blob([JSON.stringify(controllerRequestDto)],{ type: 'application/json' }));
+    //formData.append('controllerRequestDto', controllerRequestDto);
+    
+    if (file) {
+      formData.append('multipartFile', file);
+      formData.append('image_url',image_url);
+    }
+    else {
+      formData.append('multipartFile', new Blob(), '');
+    }
+        e.preventDefault();
+        api.post('http://localhost:8080/api/v1/boards/create', formData,{
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+    })
+      .then(res => {
+        console.log(res);
+        alert('게시글이 성공적으로 저장되었습니다.');
+        navigate('/board')
+       if (!res.status === 200) throw new Error('서버 오류 발생');
+      })
+      .catch(e => {
+        console.error('게시글 등록에 실패하였습니다.');
+        alert('게시글 등록에 실패하였습니다.');
+      
+    })
   };
 
+  
 
   return (
-
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-        <div className='board'>
-      <div className='board-left'>
+      <div className='board'>
+        <div className='board-left'>
           <div className="board-left-upper">
-              <div className='board-logo'>
-                  <img src={lighthouseaiLogo} alt="로고" height={"60px"} id='board-logo' onClick={gotoHome}></img>
-              </div>
-              <div className='board-category'>
-                        <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-                        {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-                        {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
-                        {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
-                    </div>
-              </div>
-              </div>
-              </div>
-
-          <label>제목:</label>
-          <input type="text"
-          textarea value={title} 
-          onChange={(e) => setTitle(e.target.value)} 
-          rows="5"
-          cols="50" 
-          />
+            <div className='board-logo'>
+              <img src={lighthouseaiLogo} alt="로고" height={"60px"} onClick={gotoHome}></img>
+            </div>
+            <div className='board-category'>
+              <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+              {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
+              {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
+              {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
+            </div>
+          </div>
         </div>
-        <div>
-          <label>내용:</label>
-          <textarea value={content} 
-          onChange={(e) => setContent(e.target.value)}
+      </div>
+      <div className='board'>
+        <div className='board-left'>
+          <div className="board-left-upper">
+
+      <form onSubmit={handleSubmit}>
+        <div className >
+        <input
+          name="title"
+          type="text"
+          placeholder="제목을 입력해주세요"
+          value={title}
+          onChange={onChange}
           rows="10"
-          cols="50" 
-          />
-
+          cols="50"
+        />
         </div>
         <div>
-          <label>파일:</label>
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+        <textarea
+          name="content"
+          placeholder="내용을 입력해주세요"
+          value={content}
+          onChange={onChange}
+          rows="10"
+          cols="50"
+        />
         </div>
-        <button type="submit">등록</button>
+        <label>파일:</label>
+        <input
+          className = "boardimg-input"
+          type="file"
+          accept=".png, .jpeg, .jpg"
+          ref={upload}
+          onChange={handleFileChange}
+        />
+        <button type="submit">게시글 등록</button>
         <button onClick={backToList}>취소</button>
-
       </form>
     </div>
+    </div>
+    </div>
+        </div>
+
   );
-}
+};
 
 export default BoardWrite;

@@ -11,6 +11,9 @@ import api from "../../components/RefreshApi";
 import { Link } from "react-router-dom";
 
 
+
+
+
 const Board = () => {
     // const [searchVal, setSearchVal] = useState('');
     const navigate = useNavigate();
@@ -85,7 +88,7 @@ const Board = () => {
     const getBoard = async () => {
         const res = await axios.get('http://localhost:8080/api/v1/boards');
         console.log(res.data);
-        setBoardList(res.data);
+        setBoard(res.data);
         console.log(board);
     }
 
@@ -117,60 +120,6 @@ const Board = () => {
         getBoardList();
 
     }, []);
-    /** 
-
-    const [inputData, setInputData] = useState([{
-        idx: '',
-        title: ' ',
-        createdAt: ' '
-      }])
-
-    useEffect(async () => {
-        try{
-        // 데이터를 받아오는 동안 시간이 소요됨으로 await 로 대기
-          const res = await axios.get('http://localhost:8080/api/v1/boards')
-          // 받아온 데이터로 다음 작업을 진행하기 위해 await 로 대기
-          // 받아온 데이터를 map 해주어 rowData 별로 _inputData 선언
-          const _inputData = await res.data.map((board) => ({
-                  idx: board.idx,
-                  title: board.title,
-                  createdAt: board.createdAt
-                })
-          )
-          // 선언된 _inputData 를 최초 선언한 inputData 에 concat 으로 추가
-          setInputData(inputData.concat(_inputData))
-        } catch(e){
-          console.error(e.message)
-        }
-      },[])
-      
-
-      const BoardList = () => {
-        const [boards, setBoards] = useState([]); // 1. 상태 관리
-      
-        useEffect(() => { // 2. 데이터 로딩
-          async function fetchBoards() {
-            try {
-              const response = await axios.get('http://localhost:8080/api/boards'); // 여기서 URL은 예시입니다. 실제 서버 URL로 변경해야 합니다.
-              setBoards(response.data); // 서버로부터 받은 데이터를 상태에 저장
-            } catch (error) {
-              console.error('Error loading the board data', error);
-            }
-          }
-          
-          fetchBoards();
-    }, []);
-    
-    async function getData() {
-        try {
-         const response = await axios.get('http://localhost:8080/api/boards');
-            console.log(response);
-
-        } catch (error) {
-             console.error(error);
-           }
-          }
-          **/
 
 
 
@@ -187,9 +136,9 @@ const Board = () => {
                     {isLogin && <button className="board-logout" onClick={handleLogout}>로그아웃</button>}
                     <div className='board-category'>
                         <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-                        {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-                        {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
-                        {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
                     </div>
                 </div>
             </div>
@@ -208,31 +157,33 @@ const Board = () => {
                             <tr>
                                 <th scope="col" className="board-bd-no">
                                     <span>번호</span>
+
                                 </th>
                                 <th scope="col" className="board-bd-title">
                                     <span>제목</span>
-                                </th>
-                                <th scope="col" className="board-bd-date">
-                                    <span>날짜</span>
+
                                 </th>
                             </tr>
                         </thread>
                         <tbody className="board-notice">
 
-                            <tr>
-                                {boardList.map((board) => (
-                                    <tr key={board.id}>
-                                        <Link to={`/boards/${board.id}`}>
-                                            {board.title}</Link>
-                                        {board.id}
-                                    </tr>
-                                ))}
+                        <tr>
+                            {boardList.map((board) => (
+                                <tr key={board.id}>
+                                    <tr className="board-bd-num"> </tr>
+                                      <span> {board.id} </span>
+                                    <Link to={`/boards/${board.id}`}>
+                                        {board.title}</Link>
 
-                            </tr>
+                                </tr>
+                            ))}
+
+                        </tr>
                         </tbody>
                     </table>
                     <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />
                     <div className="board-pagenation"></div>
+                    
                     <button onClick={onClickPage} value={1}>
                         &lt;&lt;
                     </button>
@@ -251,14 +202,7 @@ const Board = () => {
                         &gt;&gt;
                     </button>
                 </div>
-                {/* <form action="/" method="get" className="home-pagenation">
-                        <ul>
-                            <li className="lastprev">
-                            </li>
-                            <li className="prev">
-                            </li>
-                        </ul>
-                    </form> */}
+
             </div>
         </div>
     )

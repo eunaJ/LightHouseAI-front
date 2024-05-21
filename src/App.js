@@ -14,8 +14,9 @@ import BoardWrite from './pages/board/BoardWrite';
 import BoardUpdate from './pages/board/BoardUpdate';
 import BoardDetailEach from './components/BoardEach/BoardDetailEach';
 import TravelRegister from './pages/travel/TravelRegister';
+import 'semantic-ui-css/semantic.min.css';
 
-function App() {
+function App() { 
   return (
     
     <BrowserRouter>
@@ -36,7 +37,8 @@ function App() {
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/myinfo" element={<MyInfo />}></Route>
           <Route path="/boards/create" element={<BoardWrite />}></Route>
-          <Route path="/boards/update/" element={<BoardUpdate />} />
+          <Route path="board/update/:id" element={<BoardUpdate />} />
+
 
 
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
@@ -47,3 +49,5 @@ function App() {
 }
 
 export default App;
+
+//          <Route path="/boards/update/" element={<BoardUpdate />} />
