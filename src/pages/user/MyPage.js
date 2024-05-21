@@ -26,11 +26,11 @@ const MyPage = () => {
     }
 
     const gotoTravel = () => {
-        navigate('/travel');
+        navigate('/');
     }
 
     const gotoTravelRegister = () => {
-        navigate('/travel/create');
+        navigate('/travelRegister');
     }
 
     const gotoMyBoard = () => {
@@ -54,7 +54,6 @@ const MyPage = () => {
         const procLogout = async () => {
             try {
                 const res = await api.post('/users/logout');
-                console.log(res);
                 localStorage.clear();
                 // cookie
                 navigate('/');
@@ -69,17 +68,15 @@ const MyPage = () => {
         const fetchDataForMyPage = async () => {
             try {
                 const res = await api.get('/users/user');
-                console.log(res.config);
                 if (res.status === 200) {
                     const data = res.data;
-                    console.log(data);
                     setUserInfo({
                         ...data,
                         profile_img_url: data.profile_img_url === '' || data.profile_img_url === null || data.profile_img_url === '/static/media/initialProfileImg.b31adf0c9ab904bf0899.png' ? initProfileImg : data.profile_img_url // 추후 수정
                     });
                 }
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 alert('내 페이지를 불러오지 못했어요.');
             }
         };
@@ -111,7 +108,7 @@ const MyPage = () => {
                     <button id="myBoardBt" onClick={gotoMyBoard}>내 게시물</button>
                     <button id="myReviewBt" onClick={gotoMyReview}>내 댓글</button>
                     <button id="myLikeBt" onClick={gotoMyLike}>내 좋아요</button>
-                    <button id="myTContentBt" onClick={gotoMyTravel}>내 방문지</button>
+                    <button id="myTContentBt" onClick={gotoMyTravel}>내 여행지</button>
                 </div>
             </div>
 
