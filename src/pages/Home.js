@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import TravelCard from "../components/travel/TravelCard";
 import api from "../components/RefreshApi";
 import axios from "axios";
+import { RiReservedFill } from "react-icons/ri";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -67,9 +68,18 @@ const Home = () => {
         }
     }
 
-    const searched = travelList.filter((item) =>
-        item.title.includes(search)
-    )
+    const [allTravel, setAllTravel] = useState([]);
+
+    const getAllTravelList = async() => {
+        try{
+        const res = await axios.get('http://localhost:8080/api/v1/travels/');
+        if(res.status === 200){
+            setAllTravel(res.data);
+        }
+        } catch(e){
+            console.error(e);
+        }
+    }
 
     const getTravelList = async (page) => {
         try {
@@ -90,6 +100,15 @@ const Home = () => {
     useEffect(() => {
         getTravelList(page);
     }, [page]);
+
+    useEffect(()=>{
+        getAllTravelList();
+    }, [])
+
+    
+    const searched = allTravel.filter((item) =>
+        item.title.includes(search)
+    )
 
     const isLogin = !!localStorage.getItem("accessToken");
 
@@ -128,7 +147,7 @@ const Home = () => {
                         searched.length === 0 ? (
                             <span>검색 결과가 없습니다</span>
                         ) : (
-                            searched.map((item) => (
+                            searched.reverse().map((item) => (
                                 <Link key={item.id} to={`/travel/${item.id}`} style={{ textDecoration: "none" }}>
                                     <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
                                 </Link>
@@ -138,8 +157,8 @@ const Home = () => {
                 </div>
                 <div className="home-right-bottom">
                     <div className="home-right-bottom-btn">
-                        <button onClick={() => setPage(page - 1)} disabled={page === 0}>이전</button>
-                        <button onClick={() => setPage(page + 1)} disabled={!hasMore}>다음</button>
+                        {!isSearching && <button onClick={() => setPage(page - 1)} disabled={page === 0}>이전</button>}
+                        {!isSearching && <button onClick={() => setPage(page + 1)} disabled={!hasMore}>다음</button>}
                         {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
                     </div>
                 </div>

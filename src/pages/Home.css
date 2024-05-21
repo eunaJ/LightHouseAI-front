@@ -69,12 +69,16 @@
     height: 4vh;
 }
 
+.home-right{
+    margin-left: 10%;
+}
+
 .home-right-content{
     min-height: 75vh;
     padding-top: 3vh;
     padding-left: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, 240px);
     overflow-y: auto;
     padding-bottom: 10px;
 }
