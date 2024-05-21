@@ -7,7 +7,7 @@ const Travel = ({ id, title, writer, image_url, serving, expense, star }) => {
       <h5 style={{ marginTop:"0",  paddingLeft: "3%", backgroundColor:"#f1f3f5" }}>{writer}</h5>
       {serving || expense ? <hr/> : null}
       {image_url && (['.png', '.jpeg', '.jpg'].some(ext => image_url.includes(ext)) && (
-        <img src={image_url} alt='여행지 이미지' />
+        <img src={image_url} style={{marginLeft:"3%"}} alt='여행지 이미지' />
       ))}
       {/* {image_url && (
         image_url.includes('.png') ?
