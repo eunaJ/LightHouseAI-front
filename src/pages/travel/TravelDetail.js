@@ -26,9 +26,12 @@ const TravelDetail = () => {
       const res = await axios.get(`http://localhost:8080/api/v1/travels/${id}`);
       setTravel(res.data);
       const visitorId = res.data.id;
-      const w = await api.get('/users/user');
-      if (w.data.nickname === res.data.writer) {
-        setIsWriter(true);
+      const isLogin = !!localStorage.getItem("accessToken");
+      if (isLogin) {
+        const w = await api.get('/users/user');
+        if (w.data.nickname === res.data.writer) {
+          setIsWriter(true);
+        }
       }
 
       const resTravelCafe = await axios.get(`http://localhost:8080/api/v1/travelVisitorCafes/travel/${visitorId}`);
@@ -55,7 +58,9 @@ const TravelDetail = () => {
     if (window.confirm('여행지를 삭제하시겠습니까?')) {
       try {
         const res = await api.delete(`http://localhost:8080/api/v1/travels/${id}`);
-        alert('삭제되었습니다!');
+        if (res.status === 200) {
+          alert('삭제되었습니다!');
+        }
         navigate('/');
       } catch (e) {
         alert('삭제하지 못했습니다.');
@@ -93,7 +98,7 @@ const TravelDetail = () => {
               />
               {travelCafe.map((content, index) => (
                 <div key={index}>
-                {index === 0 && <hr></hr>}
+                  {index === 0 && <hr></hr>}
                   {travelCafe[index].location && index >= -1 &&
                     <div className='traveldetail-card'>
                       <h3>{travelCafe[index].cafe_title}</h3>
@@ -111,7 +116,7 @@ const TravelDetail = () => {
               ))}
               {travelRestaurant.map((content, index) => (
                 <div key={index}>
-                {index === 0 && <hr></hr>}
+                  {index === 0 && <hr></hr>}
                   {travelRestaurant[index].location && index >= -1 &&
                     <div className='traveldetail-card'>
                       <h3>{travelRestaurant[index].restaurant_title}</h3>
@@ -130,7 +135,7 @@ const TravelDetail = () => {
               ))}
               {travelShoppingMall.map((content, index) => (
                 <div key={index}>
-                {index === 0 && <hr></hr>}
+                  {index === 0 && <hr></hr>}
                   {travelShoppingMall[index].location && index >= -1 &&
                     <div className='traveldetail-card'>
                       <h3>{travelShoppingMall[index].shoppingMall_title}</h3>
@@ -148,7 +153,7 @@ const TravelDetail = () => {
               ))}
               {travelTourList.map((content, index) => (
                 <div key={index}>
-                {index === 0 && <hr></hr>}
+                  {index === 0 && <hr></hr>}
                   {travelTourList[index].location && index >= -1 &&
                     <div className='traveldetail-card'>
                       <h3>{travelTourList[index].tourList_title}</h3>
@@ -165,7 +170,7 @@ const TravelDetail = () => {
               ))}
               {travelOtherService.map((content, index) => (
                 <div key={index}>
-                {index === 0 && <hr></hr>}
+                  {index === 0 && <hr></hr>}
                   {travelOtherService[index].location && index >= -1 &&
                     <div className='traveldetail-card'>
                       <h3>{travelOtherService[index].otherService_title}</h3>

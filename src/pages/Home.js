@@ -12,6 +12,8 @@ const Home = () => {
     const [travelList, setTravelList] = useState([]);
     const [search, setSearch] = useState({});
     const [isSearching, setIsSearching] = useState(false);
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     const gotoHome = () => {
         navigate('/');
@@ -64,19 +66,40 @@ const Home = () => {
             setIsSearching(true);
         }
     }
-    
+
     const searched = travelList.filter((item) =>
         item.title.includes(search)
     )
 
-    const getTravelList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/travels');
-        setTravelList(res.data);
-}
+    const getTravelList = async (page) => {
+        try {
+            const res = await axios.get('http://localhost:8080/api/v1/travels', {
+                params: { page: page }
+            });
+            setTravelList(res.data);
+            if (res.data.length < 9) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+        } catch (error) {
+            console.error('Error fetching travel data', error);
+        }
+    };
 
     useEffect(() => {
-        getTravelList();
-    }, [])
+        getTravelList(page);
+    }, [page]);
+
+    const loadMore = () => {
+        console.log('Current page:', page);
+        setPage(prevPage => prevPage + 1);
+    };
+
+    const loadPrev = () => {
+        setPage(prevPage => prevPage - 1);
+    }
+
 
     const isLogin = !!localStorage.getItem("accessToken");
 
@@ -105,10 +128,24 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="home-right-content">
+                    {/* <InfiniteScroll
+                        dataLength={travelList.length}
+                        next={loadMore}
+                        hasMore={hasMore}
+                        scrollThreshold={0.9}
+                        loader={<h4>Loading...</h4>}
+                        endMessage={<p style={{ textAlign: 'center' }}><b>Yay! You have seen it all</b></p>}
+                    >
+                        {travelList.map((travel) => (
+                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
+                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer} star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
+                            </Link>
+                        ))}
+                    </InfiniteScroll> */}
                     {!isSearching ? (
-                        travelList.reverse().map((travel) => (
-                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none"}}>
-                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer } star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }} />
+                        travelList.map((travel) => (
+                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
+                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer} star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
                             </Link>
                         ))
                     ) : (
@@ -117,17 +154,21 @@ const Home = () => {
                         ) : (
                             searched.map((item) => (
                                 <Link key={item.id} to={`/travel/${item.id}`} style={{ textDecoration: "none" }}>
-                                <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }}/>
-                            </Link>
+                                    <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
+                                </Link>
                             ))
                         )
                     )}
                 </div>
                 <div className="home-right-bottom">
-                {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
+                    <div className="home-right-bottom-btn">
+                        <button onClick={loadPrev} disabled={page === 0}>이전</button>
+                        <button onClick={loadMore} disabled={!hasMore}>다음</button>
+                        {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
+                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
