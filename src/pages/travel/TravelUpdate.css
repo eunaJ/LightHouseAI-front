@@ -1,5 +1,4 @@
 .travelupdate{
-    /* min-width: 100%; */
     min-height: 100vh;
     background-image: url("../../assets/img/background_img.png");
     background-size: cover;
@@ -10,7 +9,6 @@
 .travelupdate-inner {
     width: 50%;
     margin: 0 auto;
-    /* background-color: white; */
 }
 
 .travelupdate-inner-main{

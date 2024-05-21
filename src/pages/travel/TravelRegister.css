@@ -1,5 +1,4 @@
 .travelregi{
-    /* min-width: 100%; */
     min-height: 100vh;
     background-image: url("../../assets/img/background_img.png");
     background-size: cover;
@@ -22,7 +21,6 @@
     width: 50%;
     margin-bottom: 10px;
     height: 20px;
-    /* border: 1px solid #4F89E1; */
 }
 
 .travelregi-img {
@@ -93,8 +91,7 @@
     margin-right: 25%;
 }
 
-.travelregi-main-delbtn,
-.travelregi-main-addbtn {
+.travelregi-main-delbtn, .travelregi-main-addbtn {
     background-color: #4F89E1;
     color: white;
     border: transparent;

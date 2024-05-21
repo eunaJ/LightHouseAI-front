@@ -91,14 +91,6 @@ const Home = () => {
         getTravelList(page);
     }, [page]);
 
-    const loadMore = () => {
-        setPage(prevPage => prevPage + 1);
-    };
-
-    const loadPrev = () => {
-        setPage(prevPage => prevPage - 1);
-    }
-
     const isLogin = !!localStorage.getItem("accessToken");
 
     return (

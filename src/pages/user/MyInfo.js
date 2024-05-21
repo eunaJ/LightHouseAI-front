@@ -46,7 +46,7 @@ const MyInfo = () => {
         e.preventDefault();
         axios.put('http://localhost:8080/api/v1/users/update', formData, {
             headers: {
-                // "Content-Type": "multipart/form-data;",
+                "Content-Type": "multipart/form-data;",
                 'Authorization': localStorage.getItem('accessToken')
             },
         })

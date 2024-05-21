@@ -55,7 +55,6 @@ const MyPage = () => {
             try {
                 const res = await api.post('/users/logout');
                 localStorage.clear();
-                // cookie
                 navigate('/');
             } catch (e) {
                 alert('로그아웃 실패');
