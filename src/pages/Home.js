@@ -113,8 +113,8 @@ const Home = () => {
             <div className="home-right">
                 <div className="home-right-upper">
                     <div className="home-search">
-                        <input type="search" name="sv" className="home-search-input" onChange={onChange} placeholder="   여행지를 검색해주세요" />
                         <CiSearch className="home-search-icon" />
+                        <input type="search" name="sv" className="home-search-input" onChange={onChange} placeholder="여행지를 검색해주세요" />
                     </div>
                 </div>
                 <div className="home-right-content">
