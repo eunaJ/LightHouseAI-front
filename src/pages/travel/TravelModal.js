@@ -285,20 +285,6 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
                                                     onChange={(e) => setNewSpot({ ...newSpot, closetime: e.target.value })} />
                                             </label>
                                         </div>
-                                        <div className='modal-newspotadd-region-select'>
-                                            <select value={selectedRegion} onChange={handleRegionChange}>
-                                                <option value="">지역을 선택해주세요</option>
-                                                {areas.map((region) => (
-                                                    <option key={region.name} value={region.name}>{region.name}</option>
-                                                ))}
-                                            </select>
-                                            <select value={selectedConstituency} onChange={handleConstituencyChange}>
-                                                <option value="">시,군,구를 선택해주세요</option>
-                                                {subAreas.map((constituency) => (
-                                                    <option key={constituency} value={constituency}>{constituency}</option>
-                                                ))}
-                                            </select>
-                                        </div>
                                     </div>
                                     <div className="modal-newspotadd-save">
                                         <button className="modal-newspotadd-save-btn" onClick={handleNewSpot}>새로운 {type} 등록</button>

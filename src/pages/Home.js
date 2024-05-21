@@ -6,12 +6,15 @@ import { CiSearch } from "react-icons/ci";
 import TravelCard from "../components/travel/TravelCard";
 import api from "../components/RefreshApi";
 import axios from "axios";
+import { RiReservedFill } from "react-icons/ri";
 
 const Home = () => {
     const navigate = useNavigate();
     const [travelList, setTravelList] = useState([]);
     const [search, setSearch] = useState({});
     const [isSearching, setIsSearching] = useState(false);
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     const gotoHome = () => {
         navigate('/');
@@ -64,19 +67,48 @@ const Home = () => {
             setIsSearching(true);
         }
     }
-    
-    const searched = travelList.filter((item) =>
-        item.title.includes(search)
-    )
 
-    const getTravelList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/travels');
-        setTravelList(res.data);
-}
+    const [allTravel, setAllTravel] = useState([]);
+
+    const getAllTravelList = async() => {
+        try{
+        const res = await axios.get('http://localhost:8080/api/v1/travels/');
+        if(res.status === 200){
+            setAllTravel(res.data);
+        }
+        } catch(e){
+            console.error(e);
+        }
+    }
+
+    const getTravelList = async (page) => {
+        try {
+            const res = await axios.get('http://localhost:8080/api/v1/travels', {
+                params: { page: page }
+            });
+            setTravelList(res.data);
+            if (res.data.length < 9) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+        } catch (error) {
+            console.error('Error fetching travel data', error);
+        }
+    };
 
     useEffect(() => {
-        getTravelList();
+        getTravelList(page);
+    }, [page]);
+
+    useEffect(()=>{
+        getAllTravelList();
     }, [])
+
+    
+    const searched = allTravel.filter((item) =>
+        item.title.includes(search)
+    )
 
     const isLogin = !!localStorage.getItem("accessToken");
 
@@ -100,34 +132,38 @@ const Home = () => {
             <div className="home-right">
                 <div className="home-right-upper">
                     <div className="home-search">
-                        <input type="search" name="sv" className="home-search-input" onChange={onChange} placeholder="   여행지를 검색해주세요" />
                         <CiSearch className="home-search-icon" />
+                        <input type="search" name="sv" className="home-search-input" onChange={onChange} placeholder="여행지를 검색해주세요" />
                     </div>
                 </div>
                 <div className="home-right-content">
                     {!isSearching ? (
-                        travelList.reverse().map((travel) => (
-                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none"}}>
-                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer } star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }} />
+                        travelList.map((travel) => (
+                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
+                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer} expense={travel.travel_expense} star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
                             </Link>
                         ))
                     ) : (
                         searched.length === 0 ? (
                             <span>검색 결과가 없습니다</span>
                         ) : (
-                            searched.map((item) => (
+                            searched.reverse().map((item) => (
                                 <Link key={item.id} to={`/travel/${item.id}`} style={{ textDecoration: "none" }}>
-                                <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink", Height: "300px" }}/>
-                            </Link>
+                                    <TravelCard {...item} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
+                                </Link>
                             ))
                         )
                     )}
                 </div>
                 <div className="home-right-bottom">
-                {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
+                    <div className="home-right-bottom-btn">
+                        {!isSearching && <button onClick={() => setPage(page - 1)} disabled={page === 0}>이전</button>}
+                        {!isSearching && <button onClick={() => setPage(page + 1)} disabled={!hasMore}>다음</button>}
+                        {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
+                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
