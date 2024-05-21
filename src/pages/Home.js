@@ -92,14 +92,12 @@ const Home = () => {
     }, [page]);
 
     const loadMore = () => {
-        console.log('Current page:', page);
         setPage(prevPage => prevPage + 1);
     };
 
     const loadPrev = () => {
         setPage(prevPage => prevPage - 1);
     }
-
 
     const isLogin = !!localStorage.getItem("accessToken");
 
@@ -128,20 +126,6 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="home-right-content">
-                    {/* <InfiniteScroll
-                        dataLength={travelList.length}
-                        next={loadMore}
-                        hasMore={hasMore}
-                        scrollThreshold={0.9}
-                        loader={<h4>Loading...</h4>}
-                        endMessage={<p style={{ textAlign: 'center' }}><b>Yay! You have seen it all</b></p>}
-                    >
-                        {travelList.map((travel) => (
-                            <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
-                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer} star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
-                            </Link>
-                        ))}
-                    </InfiniteScroll> */}
                     {!isSearching ? (
                         travelList.map((travel) => (
                             <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
@@ -162,8 +146,8 @@ const Home = () => {
                 </div>
                 <div className="home-right-bottom">
                     <div className="home-right-bottom-btn">
-                        <button onClick={loadPrev} disabled={page === 0}>이전</button>
-                        <button onClick={loadMore} disabled={!hasMore}>다음</button>
+                        <button onClick={() => setPage(page - 1)} disabled={page === 0}>이전</button>
+                        <button onClick={() => setPage(page + 1)} disabled={!hasMore}>다음</button>
                         {isLogin && <button className="home-travelRegisterBt" onClick={gotoTravelRegister}>+</button>}
                     </div>
                 </div>
