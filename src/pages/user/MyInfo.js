@@ -83,7 +83,6 @@ const MyInfo = () => {
                     setNickname(data.nickname);
                     setCurrentNickname(data.nickname);
                     setBirth(data.birth);
-                    console.log(data);
                     if (data.profile_img_url === '' || data.profile_img_url === null || data.profile_img_url === undefined ||
                         data.profile_img_url === '/static/media/initialProfileImg.b31adf0c9ab904bf0899.png') {
                         setProfileImg(initProfileImg);
@@ -119,7 +118,6 @@ const MyInfo = () => {
             reader.onload = () => {
                 setProfileImgUrl(reader.result);
             };
-            console.log(img);
             e.target.value = '';
         }
     };
