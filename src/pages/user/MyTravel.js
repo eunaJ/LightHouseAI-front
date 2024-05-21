@@ -2,25 +2,23 @@ import { useEffect, useState } from "react";
 import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png"
 import { Link, useNavigate } from 'react-router-dom';
 import api from "../../components/RefreshApi";
-import { MdClear } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import "./MyTravel.css";
 
 const MyTravel = () => {
   const navigate = useNavigate();
+  const [search, setSearch] = useState({});
+  const [isSearching, setIsSearching] = useState(false);
 
-  const [pageList, setPageList] = useState([]);
-
-  const [curPage, setCurPage] = useState(0);
-  const [prevBlock, setPrevBlock] = useState(0);
-  const [nextBlock, setNextBlock] = useState(0);
-  const [lastPage, setLastPage] = useState(0);
-
-  const [search, setSearch] = useState({
-    page: 1,
-    sk: '',
-    sv: '',
-  });
+  const onChange = (e) => {
+    const searchText = e.target.value;
+    setSearch(searchText);
+    if (searchText.trim() === '') {
+      setIsSearching(false);
+    } else {
+      setIsSearching(true);
+    }
+  }
 
   const gotoHome = () => {
     navigate('/');
@@ -59,27 +57,6 @@ const MyTravel = () => {
     navigate('/mytravel');
   }
 
-  const handleSearchClear = (e) => {
-    setSearch('');
-  }
-
-  const onClickPage = (e) => {
-    let value = e.target.value;
-    setSearch({
-      ...search,
-      page: value,
-    });
-    getMyTreavelList();
-  };
-
-  const onChange = (event) => {
-    const { value, name } = event.target;
-    setSearch({
-      ...search,
-      [name]: value,
-    });
-  };
-
   const [myTravelList, setMyTravelList] = useState([]);
 
   const getMyTreavelList = async () => {
@@ -90,6 +67,10 @@ const MyTravel = () => {
       console.error(e);
     }
   }
+  
+  const searched = myTravelList.filter((item) =>
+    item.title.includes(search)
+  )
 
   useEffect(() => {
     getMyTreavelList();
@@ -117,9 +98,8 @@ const MyTravel = () => {
       <div className="mytravel-right">
         <div className='mytravel-right-upper'>
           <div className='mytravel-search'>
-            <input type="text" name="sv" className="mytravel-search-input" onChange={onChange} placeholder="   검색해주세요" />
-            <MdClear className="mytravel-search-clear-icon" onClick={handleSearchClear} />
             <CiSearch className="mytravel-search-icon" />
+            <input type="search" name="sv" className="mytravel-search-input" onChange={onChange} placeholder="   검색해주세요" />
           </div>
         </div>
         <div className='mytravel-right-center'>
@@ -150,38 +130,10 @@ const MyTravel = () => {
                     <hr style={{ color: "lightGray" }} />
                   </Link>
                 ))}
-
-
               </tr>
             </tbody>
           </table>
-          <div className="mytravel-pagenation"></div>
-          <button onClick={onClickPage} value={1}>
-            &lt;&lt;
-          </button>
-          <button onClick={onClickPage} value={prevBlock}>
-            &lt;
-          </button>
-          {pageList.map((page, index) => (
-            <button key={index} onClick={onClickPage} value={page} id="pageListBtn">
-              {page}
-            </button>
-          ))}
-          <button onClick={onClickPage} value={nextBlock}>
-            &gt;
-          </button>
-          <button onClick={onClickPage} value={lastPage}>
-            &gt;&gt;
-          </button>
         </div>
-        {/* <form action="/" method="get" className="home-pagenation">
-                        <ul>
-                            <li className="lastprev">
-                            </li>
-                            <li className="prev">
-                            </li>
-                        </ul>
-                    </form> */}
       </div>
     </div>
   )

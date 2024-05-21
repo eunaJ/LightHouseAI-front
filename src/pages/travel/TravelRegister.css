@@ -29,14 +29,14 @@
     text-align: left;
 }
 
-.travelregi-img-preview, .travelregi-serving, .travelregi-expense, .travelregi-region-select, .travelregi-img-btn{
+.travelregi-img-preview, .travelregi-serving, .travelregi-region-select, .travelregi-img-btn{
     margin-top: 3%;
     text-align: left;
     margin-bottom: 10px;
     margin-left: 3%;
 }
 
-.travelregi-serving-input, .travelregi-expense-input{
+.travelregi-serving-input{
     margin-left: 10px;
 }
 
