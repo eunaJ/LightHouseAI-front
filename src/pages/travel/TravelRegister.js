@@ -13,7 +13,6 @@ const TravelRegister = () => {
     const [travelImg, setTravelImg] = useState('');
     const [travelImgUrl, setTravelImgUrl] = useState('');
     const [travelServing, setTravelServing] = useState(0);
-    const [travelExpense, setTravelExpense] = useState(0);
     const upload = useRef();
     const [constituency_Id, setConstituencyId] = useState(null); // constituency_id 상태 추가
 
@@ -90,7 +89,6 @@ const TravelRegister = () => {
             reader.readAsDataURL(img);
             reader.onload = () => {
                 setTravelImgUrl(reader.result);
-                console.log(reader.result);
             };
         }
     };
@@ -242,7 +240,7 @@ const TravelRegister = () => {
             let travelTourListList = [];
             let travelOtherServiceList = [];
             cafeContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelCafeList.push(content);
                     if (content.image_url) {
                         formData.append('travelVisitorCafeImage', content.image_url);
@@ -252,7 +250,7 @@ const TravelRegister = () => {
                 }
             })
             restaurantContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelRestaurantList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorRestaurantImage', content.image_url);
@@ -262,7 +260,7 @@ const TravelRegister = () => {
                 }
             })
             shoppingMallContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelShoppingMallList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorShoppingMallImage', content.image_url);
@@ -272,7 +270,7 @@ const TravelRegister = () => {
                 }
             })
             tourListContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelTourListList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorTourListImage', content.image_url);
@@ -282,7 +280,7 @@ const TravelRegister = () => {
                 }
             })
             otherServiceContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelOtherServiceList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorOtherServiceImage', content.image_url);
@@ -297,13 +295,13 @@ const TravelRegister = () => {
             }
             if (formData.get('TravelVisitorRestaurantImage') === null) {
                 formData.append('TravelVisitorRestaurantImage', new Blob(), '');
-            } 
+            }
             if (formData.get('TravelVisitorShoppingMallImage') === null) {
                 formData.append('TravelVisitorShoppingMallImage', new Blob(), '');
-            } 
+            }
             if (formData.get('TravelVisitorTourListImage') === null) {
                 formData.append('TravelVisitorTourListImage', new Blob(), '');
-            } 
+            }
             if (formData.get('TravelVisitorOtherServiceImage') === null) {
                 formData.append('TravelVisitorOtherServiceImage', new Blob(), '');
             }
@@ -513,6 +511,7 @@ const TravelRegister = () => {
                     {cafeContents.map((content, index) => (
                         <div key={index}>
                             <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onCafeSpotAdd={handleCafeSpotAdd} index={index}></TravelModal>
+
                             {cafeContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{cafeContents[index].cafe_title}</h3>
@@ -525,7 +524,7 @@ const TravelRegister = () => {
                                     <p>운영시간: {cafeContents[index].opentime} ~ {cafeContents[index].closetime}</p>
                                     <p>{cafeContents[index].content}</p>
                                 </div>}
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeCafeContentField(index)}>삭제</button>}
+                            {index > 0 && cafeContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeCafeContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelCafeField}>카페 추가</button>
@@ -546,7 +545,7 @@ const TravelRegister = () => {
                                     <p>{restaurantContents[index].content}</p>
                                 </div>
                             }
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeRestaurantContentField(index)}>삭제</button>}
+                            {index > 0 && restaurantContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeRestaurantContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelRestaurantField}>음식점 추가</button>
@@ -566,7 +565,7 @@ const TravelRegister = () => {
                                     <p>{shoppingMallContents[index].content}</p>
                                 </div>
                             }
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeShoppingMallContentField(index)}>삭제</button>}
+                            {index > 0 && shoppingMallContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeShoppingMallContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelShoppingMallField}>쇼핑몰 추가</button>
@@ -585,7 +584,7 @@ const TravelRegister = () => {
                                     <p>운영시간: {tourListContents[index].opentime} ~ {tourListContents[index].closetime}</p>
                                     <p>{tourListContents[index].content}</p>
                                 </div>}
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeTourListContentField(index)}>삭제</button>}
+                            {index > 0 && tourListContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeTourListContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelTourListField}>관광지 추가</button>
@@ -605,7 +604,7 @@ const TravelRegister = () => {
                                     <p>{otherServiceContents[index].content}</p>
                                 </div>
                             }
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeOtherServiceContentField(index)}>삭제</button>}
+                            {index > 0 && otherServiceContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeOtherServiceContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelOtherServiceField}>기타서비스 추가</button>

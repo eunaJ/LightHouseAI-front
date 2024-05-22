@@ -39,6 +39,12 @@ const Login = () => {
         window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URI}&state=${process.env.REACT_APP_NAVER_STATE}`;
     }
 
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
     const loginProcess = (e) => {
         e.preventDefault();
         // removeCookie("refreshToken");
@@ -48,33 +54,32 @@ const Login = () => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true
         })
             .then(res => {
-                // if (res.status === 200) {
-                //res.config.headers
-                // const token = res.data.token;
-                // res.client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-                let access = res.headers.get('Access-token');
-                // console.log(res.headers.get('Set-Cookie'));
-                console.log(res.headers);
-                // console.log(document.cookie);
-                // let refresh = res.headers.get('Set-Cookie');
-                localStorage.setItem('accessToken', access);
-                axios.defaults.headers.common[
-                    "Authorization"
-                ] = `Bearer ${access}`;
-                // axios.defaults.headers.common[
-                //     "Set-Cookie"
-                // ] = `${refresh}`;
-                console.log(res);
-                console.log('로그인 성공');
-                navigate('/');
-                // }
+                if (res.status === 200) {
+                    //res.config.headers
+                    // const token = res.data.token;
+                    // res.client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+                    let access = res.headers.get('Access-token');
+                    // console.log(res.headers);
+                    // console.log(document.cookie);
+                    let refresh = res.headers.get('Set-Cookie');
+                    localStorage.setItem('accessToken', access);
+                    axios.defaults.headers.common[
+                        "Authorization"
+                    ] = `Bearer ${access}`;
+                    axios.defaults.headers.common[
+                        "refreshToken"
+                    ] = `${refresh}`;
+                    console.log('로그인 성공');
+                    navigate('/');
+                }
             })
             .catch(e => {
-                    console.log('로그인 실패');
-                    alert(e.response.data.message);
-                    navigate('/login');
+                console.error('로그인 실패');
+                alert(e.response.data.message);
+                navigate('/login');
             })
     };
 

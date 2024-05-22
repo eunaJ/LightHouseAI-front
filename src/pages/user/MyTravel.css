@@ -2,18 +2,11 @@
     padding: 2% 15% 0 15%;
     display: flex;
     flex-direction: row;
-}
-.mytravel::after{
-    width: 100%;
-    height: 100%;
-    content: "";
-    background: url("../../assets/img/background_img.png") no-repeat;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0.3;
+    min-height: 95.5vh;
+    background-image: url("../../assets/img/background_img_03.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .mytravel-left-upper{
@@ -53,8 +46,8 @@
 
 .mytravel-right{
     margin-top: 2vh;
-    margin-left: 5vw;
-    width: 49vw;
+    margin-left: 10%;
+    width: 48vw;
 }
 
 .mytravel-search{
@@ -67,15 +60,14 @@
 }
 
 .mytravel-search-input{
-    padding-left: 3%;
-    width: 80%;
+    width: 100%;
     border: none;
     font-size: 15px;
     background-color: transparent;
 }
 
 .mytravel-search-clear-icon, .mytravel-search-icon{
-    padding-top: 0.9vh;
+    padding-top: 1vh;
     width: 3vw;
     height: 4vh;
 }

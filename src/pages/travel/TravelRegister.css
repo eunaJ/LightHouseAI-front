@@ -1,7 +1,16 @@
+.travelregi{
+    min-height: 100vh;
+    background-image: url("../../assets/img/background_img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .travelregi-inner {
     width: 50%;
     margin: 0 auto;
     border: 1px solid;
+    background-color: white;
 }
 
 .travelregi-top {
@@ -12,7 +21,6 @@
     width: 50%;
     margin-bottom: 10px;
     height: 20px;
-    /* border: 1px solid #4F89E1; */
 }
 
 .travelregi-img {
@@ -21,14 +29,14 @@
     text-align: left;
 }
 
-.travelregi-img-preview, .travelregi-serving, .travelregi-expense, .travelregi-region-select, .travelregi-img-btn{
+.travelregi-img-preview, .travelregi-serving, .travelregi-region-select, .travelregi-img-btn{
     margin-top: 3%;
     text-align: left;
     margin-bottom: 10px;
     margin-left: 3%;
 }
 
-.travelregi-serving-input, .travelregi-expense-input{
+.travelregi-serving-input{
     margin-left: 10px;
 }
 
@@ -83,8 +91,7 @@
     margin-right: 25%;
 }
 
-.travelregi-main-delbtn,
-.travelregi-main-addbtn {
+.travelregi-main-delbtn, .travelregi-main-addbtn {
     background-color: #4F89E1;
     color: white;
     border: transparent;
