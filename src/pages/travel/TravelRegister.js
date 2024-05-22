@@ -532,7 +532,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {restaurantContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onRestaurantSpotAdd={handleRestaurantSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onRestaurantSpotAdd={handleRestaurantSpotAdd} index={index}></TravelModal>
                             {restaurantContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{restaurantContents[index].restaurant_title}</h3>
@@ -553,7 +553,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {shoppingMallContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} index={index}></TravelModal>
                             {shoppingMallContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{shoppingMallContents[index].shoppingMall_title}</h3>
@@ -573,7 +573,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {tourListContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onTourListSpotAdd={handleTourListSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onTourListSpotAdd={handleTourListSpotAdd} index={index}></TravelModal>
                             {tourListContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{tourListContents[index].tourList_title}</h3>
@@ -592,7 +592,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {otherServiceContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
                             {otherServiceContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{otherServiceContents[index].otherService_title}</h3>
