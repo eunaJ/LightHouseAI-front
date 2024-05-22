@@ -26,15 +26,14 @@ const BoardWrite = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setImage(image)
-    /**const image= upload.current.files[0];
+    const image= upload.current.files[0];
          setImage(image);
          const reader = new FileReader();
          reader.readAsDataURL(image);
          reader.onload = () => {
           setImage_url(reader.result);
         };
-    **/
+    
   };
 
   const onChange = (event) => {
@@ -91,19 +90,16 @@ const BoardWrite = () => {
             </div>
             <div className='board-category'>
               <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-              {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
-              {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
-              {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
+              {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
+              {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
+              {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
             </div>
           </div>
         </div>
       </div>
-      <div className='board'>
-        <div className='board-left'>
-          <div className="board-left-upper">
 
       <form onSubmit={handleSubmit}>
-        <div className >
+        <div>
         <input
           name="title"
           type="text"
@@ -131,15 +127,12 @@ const BoardWrite = () => {
           accept=".png, .jpeg, .jpg"
           ref={upload}
           onChange={handleFileChange}
+          
         />
         <button type="submit">게시글 등록</button>
         <button onClick={backToList}>취소</button>
       </form>
     </div>
-    </div>
-    </div>
-        </div>
-
   );
 };
 

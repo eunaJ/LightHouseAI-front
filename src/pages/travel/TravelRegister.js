@@ -31,6 +31,7 @@ const TravelRegister = () => {
         cafe_title: '',
         image_url: '',
         spotImgUrl: '',
+        content: '',
     }]);
     const [restaurantContents, setRestaurantContents] = useState([{
         type: '',
@@ -42,6 +43,7 @@ const TravelRegister = () => {
         restaurant_title: '',
         image_url: '',
         spotImgUrl: '',
+        content: '',
     }]);
     const [shoppingMallContents, setShoppingMallContents] = useState([{
         type: '',
@@ -52,6 +54,7 @@ const TravelRegister = () => {
         shoppingMall_title: '',
         image_url: '',
         spotImgUrl: '',
+        content: '',
     }]);
     const [tourListContents, setTourListContents] = useState([{
         type: '',
@@ -62,6 +65,7 @@ const TravelRegister = () => {
         restaurant_title: '',
         image_url: '',
         spotImgUrl: '',
+        content: '',
     }]);
     const [otherServiceContents, setOtherServiceContents] = useState([{
         type: '',
@@ -72,6 +76,7 @@ const TravelRegister = () => {
         otherService_title: '',
         image_url: '',
         spotImgUrl: '',
+        content: '',
     }]);
 
     const handleTravelImgChange = (e) => {
@@ -83,6 +88,7 @@ const TravelRegister = () => {
             reader.readAsDataURL(img);
             reader.onload = () => {
                 setTravelImgUrl(reader.result);
+                console.log(reader.result);
             };
         }
     };
@@ -98,7 +104,7 @@ const TravelRegister = () => {
             cafe_title: '',
             image_url: '',
             spotImgUrl: '',
-            review: '',
+            content: '',
         }]);
         setSelectedType('카페');
         setModalIsOpen(true);
@@ -114,7 +120,7 @@ const TravelRegister = () => {
             restaurant_title: '',
             image_url: '',
             spotImgUrl: '',
-            review: '',
+            content: '',
         }]);
         setSelectedType('음식점');
         setModalIsOpen(true);
@@ -129,7 +135,7 @@ const TravelRegister = () => {
             shoppingMall_title: '',
             image_url: '',
             spotImgUrl: '',
-            review: '',
+            content: '',
         }]);
         setSelectedType('쇼핑몰');
         setModalIsOpen(true);
@@ -144,7 +150,7 @@ const TravelRegister = () => {
             tourList_title: '',
             image_url: '',
             spotImgUrl: '',
-            review: '',
+            content: '',
         }]);
         setSelectedType('관광지');
         setModalIsOpen(true);
@@ -159,7 +165,7 @@ const TravelRegister = () => {
             otherService_title: '',
             image_url: '',
             spotImgUrl: '',
-            review: '',
+            content: '',
         }]);
         setSelectedType('기타서비스');
         setModalIsOpen(true);
@@ -197,7 +203,6 @@ const TravelRegister = () => {
             const travelData = {
                 "title": travelTitle,
                 "serving": travelServing,
-                "travel_expense": travelExpense,
                 "constituency": selectedConstituency,
                 "star": starCount
             };
@@ -265,6 +270,22 @@ const TravelRegister = () => {
                 }
             })
 
+            if (formData.get('travelVisitorCafeImage') === null) {
+                formData.append('travelVisitorCafeImage', new Blob(), '');
+            }
+            if (formData.get('TravelVisitorRestaurantImage') === null) {
+                formData.append('TravelVisitorRestaurantImage', new Blob(), '');
+            } 
+            if (formData.get('TravelVisitorShoppingMallImage') === null) {
+                formData.append('TravelVisitorShoppingMallImage', new Blob(), '');
+            } 
+            if (formData.get('TravelVisitorTourListImage') === null) {
+                formData.append('TravelVisitorTourListImage', new Blob(), '');
+            } 
+            if (formData.get('TravelVisitorOtherServiceImage') === null) {
+                formData.append('TravelVisitorOtherServiceImage', new Blob(), '');
+            }
+
             formData.append("TravelVisitorCafeCreateServiceRequestDto", new Blob([JSON.stringify(travelCafeList)], { type: 'application/json' }));
             formData.append("TravelVisitorRestaurantCreateServiceRequestDto", new Blob([JSON.stringify(travelRestaurantList)], { type: 'application/json' }));
             formData.append("TravelVisitorShoppingMallCreateServiceRequestDto", new Blob([JSON.stringify(travelShoppingMallList)], { type: 'application/json' }));
@@ -279,6 +300,7 @@ const TravelRegister = () => {
             })
             if (res.status === 201) {
                 alert('등록되었습니다.');
+                navigate('/');
             }
         } catch (e) {
             console.error('오류 발생:', e);
@@ -286,7 +308,7 @@ const TravelRegister = () => {
         }
     };
 
-    const handleCafeSpotAdd = (newSpot, spotImg, spotImgUrl, review, index) => {
+    const handleCafeSpotAdd = (newSpot, spotImg, spotImgUrl, content, index) => {
         const newContents = [...cafeContents];
         newContents[index] = {
             type: newSpot.type,
@@ -298,11 +320,11 @@ const TravelRegister = () => {
             cafe_title: newSpot.title,
             image_url: spotImg,
             spotImgUrl: spotImgUrl,
-            review: review
+            content: content
         }
         setCafeContents(newContents);
     };
-    const handleRestaurantSpotAdd = (newSpot, spotImg, spotImgUrl, review, index) => {
+    const handleRestaurantSpotAdd = (newSpot, spotImg, spotImgUrl, content, index) => {
         const newContents = [...restaurantContents];
         newContents[index] = {
             type: newSpot.type,
@@ -314,11 +336,11 @@ const TravelRegister = () => {
             restaurant_title: newSpot.title,
             image_url: spotImg,
             spotImgUrl: spotImgUrl,
-            review: review
+            content: content
         }
         setRestaurantContents(newContents);
     };
-    const handleShoppingMallSpotAdd = (newSpot, spotImg, spotImgUrl, review, index) => {
+    const handleShoppingMallSpotAdd = (newSpot, spotImg, spotImgUrl, content, index) => {
         const newContents = [...shoppingMallContents];
         newContents[index] = {
             type: newSpot.type,
@@ -329,11 +351,11 @@ const TravelRegister = () => {
             shoppingMall_title: newSpot.title,
             image_url: spotImg,
             spotImgUrl: spotImgUrl,
-            review: review
+            content: content
         }
         setShoppingMallContents(newContents);
     };
-    const handleTourListSpotAdd = (newSpot, spotImg, spotImgUrl, review, index) => {
+    const handleTourListSpotAdd = (newSpot, spotImg, spotImgUrl, content, index) => {
         const newContents = [...tourListContents];
         newContents[index] = {
             type: newSpot.type,
@@ -344,11 +366,11 @@ const TravelRegister = () => {
             tourList_title: newSpot.title,
             image_url: spotImg,
             spotImgUrl: spotImgUrl,
-            review: review
+            content: content
         }
         setTourListContents(newContents);
     };
-    const handleOtherServiceSpotAdd = (newSpot, spotImg, spotImgUrl, review, index) => {
+    const handleOtherServiceSpotAdd = (newSpot, spotImg, spotImgUrl, content, index) => {
         const newContents = [...otherServiceContents];
         newContents[index] = {
             type: newSpot.type,
@@ -359,7 +381,7 @@ const TravelRegister = () => {
             otherService_title: newSpot.title,
             image_url: spotImg,
             spotImgUrl: spotImgUrl,
-            review: review
+            content: content
         }
         setOtherServiceContents(newContents);
     };
@@ -400,7 +422,7 @@ const TravelRegister = () => {
             </div>
             <div className='travelregi-inner'>
                 <div className='travelregi-main'>
-                    <div className='travelregi-img-preview'>
+                    <div className='travelregi-img-pcontent'>
                         {travelImgUrl && (
                             <img src={travelImgUrl} alt="여행지 사진" width={'30%'} />
                         )}
@@ -432,10 +454,6 @@ const TravelRegister = () => {
                     </div>
                     <div className='travelregi-serving'>
                         <label>인원<input className="travelregi-serving-input" type="number" name="serving" placeholder="인원" onChange={(e) => setTravelServing(e.target.value)}></input></label>
-                    </div>
-                    <div className='travelregi-expense'>
-                        <label>경비 <input type="number"
-                            className="travelregi-expense-input" name="expense" placeholder="경비" onChange={(e) => setTravelExpense(e.target.value)}></input></label>
                     </div>
                     <div className='travelregi-star-container'>
                         <span className="travelregi-star">
@@ -476,7 +494,7 @@ const TravelRegister = () => {
                                     <p>메뉴: {cafeContents[index].menu}</p>
                                     <p>가격: {cafeContents[index].price}</p>
                                     <p>운영시간: {cafeContents[index].opentime} ~ {cafeContents[index].closetime}</p>
-                                    <p>{cafeContents[index].review}</p>
+                                    <p>{cafeContents[index].content}</p>
                                 </div>}
                             {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeCafeContentField(index)}>삭제</button>}
                         </div>
@@ -496,7 +514,7 @@ const TravelRegister = () => {
                                     <p>메뉴: {restaurantContents[index].menu}</p>
                                     <p>가격: {restaurantContents[index].price}</p>
                                     <p>운영시간: {restaurantContents[index].opentime} ~ {restaurantContents[index].closetime}</p>
-                                    <p>{restaurantContents[index].review}</p>
+                                    <p>{restaurantContents[index].content}</p>
                                 </div>
                             }
                             {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeRestaurantContentField(index)}>삭제</button>}
@@ -516,7 +534,7 @@ const TravelRegister = () => {
                                     <p>위치: {shoppingMallContents[index].location}</p>
                                     <p>가격: {shoppingMallContents[index].price}</p>
                                     <p>운영시간: {shoppingMallContents[index].opentime} ~ {shoppingMallContents[index].closetime}</p>
-                                    <p>{shoppingMallContents[index].review}</p>
+                                    <p>{shoppingMallContents[index].content}</p>
                                 </div>
                             }
                             {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeShoppingMallContentField(index)}>삭제</button>}
@@ -536,7 +554,7 @@ const TravelRegister = () => {
                                     <p>위치: {tourListContents[index].location}</p>
                                     <p>가격: {tourListContents[index].price}</p>
                                     <p>운영시간: {tourListContents[index].opentime} ~ {tourListContents[index].closetime}</p>
-                                    <p>{tourListContents[index].review}</p>
+                                    <p>{tourListContents[index].content}</p>
                                 </div>}
                             {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeTourListContentField(index)}>삭제</button>}
                         </div>
@@ -555,7 +573,7 @@ const TravelRegister = () => {
                                     <p>위치: {otherServiceContents[index].location}</p>
                                     <p>가격: {otherServiceContents[index].price}</p>
                                     <p>운영시간: {otherServiceContents[index].opentime} ~ {otherServiceContents[index].closetime}</p>
-                                    <p>{otherServiceContents[index].review}</p>
+                                    <p>{otherServiceContents[index].content}</p>
                                 </div>
                             }
                             {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeOtherServiceContentField(index)}>삭제</button>}

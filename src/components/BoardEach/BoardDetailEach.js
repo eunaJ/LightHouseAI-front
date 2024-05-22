@@ -4,24 +4,19 @@ import axios from 'axios';
 
 
 const BoardDetailEach = ({ id, title, content, nickname, image_url}) => {
+    console.log(image_url)
     
-
-    const navigate = useNavigate();
-
-
-
     return (
 
-
-        <div>
-            <h2>{title}</h2>
-            <h3>{nickname}</h3>
-            <hr />
+        <div style={{marginLeft: "20%"}}>
+             <div style={{marginTop: "30%"}}></div>
+            <h1>{title}</h1>
+            <hr/>
+            <h5>{nickname}</h5>
             <p>{content}</p>
-
+            
             <img src={image_url} width = '400px'/>
-           
-        
+            
          </div>
     );
 };

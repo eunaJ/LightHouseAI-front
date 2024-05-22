@@ -14,7 +14,11 @@ import BoardWrite from './pages/board/BoardWrite';
 import BoardUpdate from './pages/board/BoardUpdate';
 import BoardDetailEach from './components/BoardEach/BoardDetailEach';
 import TravelRegister from './pages/travel/TravelRegister';
-import 'semantic-ui-css/semantic.min.css';
+import TravelDetail from './pages/travel/TravelDetail';
+import MyTravel from './pages/user/MyTravel';
+import TravelUpdate from './pages/travel/TravelUpdate';
+import BoardReviewEach from './pages/board/BoardReviewEach';
+//>>>>>>> develop
 
 function App() { 
   return (
@@ -28,20 +32,25 @@ function App() {
         <Route path="/api/v1/users/naver/login/callback" element={<NaverRedirect />}></Route>
 
 
+
         <Route path="/board" element={<Board/>}></Route>
         <Route path="/boards/:id" element={<BoardDetail/>}></Route>  
 
+
+
+        <Route path="/board" element={<Board />}></Route>
+        <Route path="/travel/:id" element={<TravelDetail/>}></Route>
 
         {/* 로그인 후 가능 */}
           <Route element={<PrivateRoute />}>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/myinfo" element={<MyInfo />}></Route>
           <Route path="/boards/create" element={<BoardWrite />}></Route>
-          <Route path="board/update/:id" element={<BoardUpdate />} />
-
-
+          <Route path="board/update/:id" element={<BoardUpdate />}></Route>
 
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
+          <Route path="/mytravel" element={<MyTravel/>}></Route>
+          <Route path="/travel/update/:id" element={<TravelUpdate/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

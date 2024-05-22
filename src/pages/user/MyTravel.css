@@ -1,9 +1,9 @@
-.board{
-    padding: 2% 10% 0 15%;
+.mytravel{
+    padding: 2% 15% 0 15%;
     display: flex;
     flex-direction: row;
 }
-.board::after{
+.mytravel::after{
     width: 100%;
     height: 100%;
     content: "";
@@ -16,16 +16,16 @@
     background-size: cover;
 }
 
-.board-left-upper{
+.mytravel-left-upper{
     padding-left: 30%;
 }
 
-#board-logo{
+#mytravel-logo{
     width: 150%;
     height: 10vh;
 }
 
-.board-login, .board-logout{
+.mytravel-login, .mytravel-logout{
     background-color: #4F89E1;
     color: white;
     border: transparent;
@@ -33,51 +33,31 @@
     height: 25px;
 }
 
-.board-write{
+.mytravel-category{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mytravel-board, .mytravel-myboard, .mytravel-mytravel, .mytravel-mypage, .mytravel-mytravel{
     width: 100px;
     height: 35px;
     background-color: white;
     border-width: 1px;
-    .element {
-        margin-left: 10%;
-        margin-right: auto;
-    }
-
 }
 
-.home-boards, .home-myboards, .home-mypages, .home-mytravels{
-    width: 100px;
-    height: 35px;
-    background-color: white;
-    border-width: 1px;
-    border-radius: 15px;
-}
-
-
-.board-board, .board-myboard, .board-mylike, .board-myreview, .board-mypage, .board-myinfo{
-    width: 100px;
-    height: 35px;
-    background-color: white;
-    border-width: 1px;
-    border-radius: 15px;
-}
-
-.board-myboard, .board-mylike, .board-mypage, .board-myinfo{
+.mytravel-myboard, .mytravel-mytravel, .mytravel-mypage, .mytravel-myinfo{
     border-top: none;
 }
 
-.board-mylike{
-    border-bottom: none;
-}
-
-.board-right {
+.mytravel-right{
     margin-top: 2vh;
     margin-left: 5vw;
     width: 49vw;
 }
 
-
-.board-search{
+.mytravel-search{
     width: 45vw;
     height: 6vh;
     background-color: white;
@@ -86,7 +66,7 @@
     display: flex;
 }
 
-.board-search-input{
+.mytravel-search-input{
     padding-left: 3%;
     width: 80%;
     border: none;
@@ -94,29 +74,13 @@
     background-color: transparent;
 }
 
-.board-search-clear-icon, .board-search-icon{
+.mytravel-search-clear-icon, .mytravel-search-icon{
     padding-top: 0.9vh;
     width: 3vw;
     height: 4vh;
 }
 
-.board-bdlist{
+.mytravel-bdlist{
     margin-top: 2vh;
     margin-left: 1vw;
-    flex-direction: row;
 }
-
-.board-bd-title{
-    width: 35vw;
-    padding-left: 1vw;
-    text-align: left;
-}
-
-.boardList{
-    margin-top: 5vh;
-    margin-left: 5vw;
-}
-.boardimg{
-    max-width: 80%;
-}
-

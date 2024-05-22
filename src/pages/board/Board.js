@@ -60,7 +60,7 @@ const Board = () => {
     }
 
     const gotoBoard = () => {
-        navigate('/boards');
+        navigate('/board');
     }
 
     const gotoMyBoard = () => {
@@ -166,19 +166,20 @@ const Board = () => {
                             </tr>
                         </thread>
                         <tbody className="board-notice">
-
                         <tr>
-                            {boardList.map((board) => (
-                                <tr key={board.id}>
-                                    <tr className="board-bd-num"> </tr>
-                                      <span> {board.id} </span>
-                                    <Link to={`/boards/${board.id}`}>
-                                        {board.title}</Link>
-
-                                </tr>
-                            ))}
+                        {boardList.slice().reverse().map((board, index) => (
+                        <Link key={board.id} to={`/boards/${board.id}`} style={{ textDecoration: "none" }}>
+                        <li style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
+                        <td style={{ textAlign: 'center', width: '50px' }}>{boardList.length - index}</td>
+                        <td><span style={{ padding: '20px' }}>{board.title}</span></td>
+                            </li>
+                            <hr style={{ color: "lightGray" }} />
+                            
+                            </Link>
+                        ))}
 
                         </tr>
+                        
                         </tbody>
                     </table>
                     <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />

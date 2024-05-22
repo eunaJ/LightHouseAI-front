@@ -2,19 +2,24 @@
     padding: 2% 15% 0 15%;
     display: flex;
     flex-direction: row;
-}
-.board::after{
-    width: 100%;
-    height: 100%;
-    content: "";
-    background: url("../../assets/img/background_img.png") no-repeat;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0.3;
+    min-height: 95.5vh;
+    background-image: url("../../assets/img/background_img.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+
 }
+
+.boardwrite{
+ 
+
+}
+
+.blue-text {
+    color: blue;
+  }
+
 
 .board-left-upper{
     padding-left: 30%;

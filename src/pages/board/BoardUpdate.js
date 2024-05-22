@@ -14,8 +14,7 @@ const BoardUpdate = () => {
   const [file, setFile] = useState(''); // 파일 상태를 관리
   const [image_url, setImage_url] = useState('');
   const [image, setImage] = useState('');
-  const upload = useRef();
-  
+  const upload = useRef();  
   const [imageChange, setImageChange] = useState(false); 
 
   const { id } = useParams();
@@ -27,6 +26,8 @@ const BoardUpdate = () => {
 };
 useEffect(() => {
   getBoardDetailEach();
+
+  
 }, [])
 
 
@@ -156,7 +157,7 @@ useEffect(() => {
         />
         
          
-        <button type="submit">게시글 수정</button>
+<button type="submit">게시글 수정</button>
         <button onClick={backToList}>취소</button>
       </form>
     </div>
