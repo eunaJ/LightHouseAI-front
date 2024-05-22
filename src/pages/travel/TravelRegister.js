@@ -13,8 +13,9 @@ const TravelRegister = () => {
     const [travelImg, setTravelImg] = useState('');
     const [travelImgUrl, setTravelImgUrl] = useState('');
     const [travelServing, setTravelServing] = useState(0);
-    const [travelExpense, setTravelExpense] = useState(0);
     const upload = useRef();
+    const [constituency_Id, setConstituencyId] = useState(null); // constituency_id 상태 추가
+
 
     const navigate = useNavigate();
     const gotoHome = () => {
@@ -88,12 +89,15 @@ const TravelRegister = () => {
             reader.readAsDataURL(img);
             reader.onload = () => {
                 setTravelImgUrl(reader.result);
-                console.log(reader.result);
             };
         }
     };
 
     const addTravelCafeField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setCafeContents([...cafeContents, {
             type: '',
             menu: '',
@@ -110,6 +114,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelRestaurantField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setRestaurantContents([...restaurantContents, {
             type: '',
             menu: '',
@@ -126,6 +134,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelShoppingMallField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setShoppingMallContents([...shoppingMallContents, {
             type: '',
             price: '',
@@ -141,6 +153,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelTourListField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setTourListContents([...tourListContents, {
             type: '',
             price: '',
@@ -156,6 +172,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelOtherServiceField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setOtherServiceContents([...otherServiceContents, {
             type: '',
             price: '',
@@ -220,7 +240,7 @@ const TravelRegister = () => {
             let travelTourListList = [];
             let travelOtherServiceList = [];
             cafeContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelCafeList.push(content);
                     if (content.image_url) {
                         formData.append('travelVisitorCafeImage', content.image_url);
@@ -230,7 +250,7 @@ const TravelRegister = () => {
                 }
             })
             restaurantContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelRestaurantList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorRestaurantImage', content.image_url);
@@ -240,7 +260,7 @@ const TravelRegister = () => {
                 }
             })
             shoppingMallContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelShoppingMallList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorShoppingMallImage', content.image_url);
@@ -250,7 +270,7 @@ const TravelRegister = () => {
                 }
             })
             tourListContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelTourListList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorTourListImage', content.image_url);
@@ -260,7 +280,7 @@ const TravelRegister = () => {
                 }
             })
             otherServiceContents.forEach((content, i) => {
-                if (i !== 0) {
+                if (i !== 0 && content.type !== '') {
                     travelOtherServiceList.push(content);
                     if (content.image_url) {
                         formData.append('TravelVisitorOtherServiceImage', content.image_url);
@@ -275,13 +295,13 @@ const TravelRegister = () => {
             }
             if (formData.get('TravelVisitorRestaurantImage') === null) {
                 formData.append('TravelVisitorRestaurantImage', new Blob(), '');
-            } 
+            }
             if (formData.get('TravelVisitorShoppingMallImage') === null) {
                 formData.append('TravelVisitorShoppingMallImage', new Blob(), '');
-            } 
+            }
             if (formData.get('TravelVisitorTourListImage') === null) {
                 formData.append('TravelVisitorTourListImage', new Blob(), '');
-            } 
+            }
             if (formData.get('TravelVisitorOtherServiceImage') === null) {
                 formData.append('TravelVisitorOtherServiceImage', new Blob(), '');
             }
@@ -397,11 +417,18 @@ const TravelRegister = () => {
         setSelectedRegion(e.target.value);
         setSelectedConstituency('');
     };
-
+    
     const handleConstituencyChange = (e) => {
         setSelectedConstituency(e.target.value);
-    };
+        setConstituencyId(findSubAreaIndex(selectedRegion, e.target.value)); // Update constituency_id
 
+    };
+    const findSubAreaIndex = (region, constituency) => {
+    const area = areas.find(area => area.name === region);
+        if (!area) return 0;
+        return area.subArea.findIndex(subArea => subArea === constituency);
+    };
+    var constituency_id = parseInt(findSubAreaIndex(selectedRegion, selectedConstituency)) + 1;
     const [starCount, setStarcount] = useState(0);
     const starColor = starCount * 20 + "%";
 
@@ -483,7 +510,8 @@ const TravelRegister = () => {
                     <hr></hr>
                     {cafeContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onCafeSpotAdd={handleCafeSpotAdd} onRestaurantSpotAdd={handleRestaurantSpotAdd} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} onTourListSpotAdd={handleTourListSpotAdd} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onCafeSpotAdd={handleCafeSpotAdd} index={index}></TravelModal>
+
                             {cafeContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{cafeContents[index].cafe_title}</h3>
@@ -496,14 +524,14 @@ const TravelRegister = () => {
                                     <p>운영시간: {cafeContents[index].opentime} ~ {cafeContents[index].closetime}</p>
                                     <p>{cafeContents[index].content}</p>
                                 </div>}
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeCafeContentField(index)}>삭제</button>}
+                            {index > 0 && cafeContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeCafeContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelCafeField}>카페 추가</button>
                     <hr></hr>
                     {restaurantContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onRestaurantSpotAdd={handleRestaurantSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onRestaurantSpotAdd={handleRestaurantSpotAdd} index={index}></TravelModal>
                             {restaurantContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{restaurantContents[index].restaurant_title}</h3>
@@ -517,14 +545,14 @@ const TravelRegister = () => {
                                     <p>{restaurantContents[index].content}</p>
                                 </div>
                             }
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeRestaurantContentField(index)}>삭제</button>}
+                            {index > 0 && restaurantContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeRestaurantContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelRestaurantField}>음식점 추가</button>
                     <hr></hr>
                     {shoppingMallContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} index={index}></TravelModal>
                             {shoppingMallContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{shoppingMallContents[index].shoppingMall_title}</h3>
@@ -537,14 +565,14 @@ const TravelRegister = () => {
                                     <p>{shoppingMallContents[index].content}</p>
                                 </div>
                             }
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeShoppingMallContentField(index)}>삭제</button>}
+                            {index > 0 && shoppingMallContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeShoppingMallContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelShoppingMallField}>쇼핑몰 추가</button>
                     <hr></hr>
                     {tourListContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onTourListSpotAdd={handleTourListSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onTourListSpotAdd={handleTourListSpotAdd} index={index}></TravelModal>
                             {tourListContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{tourListContents[index].tourList_title}</h3>
@@ -556,14 +584,14 @@ const TravelRegister = () => {
                                     <p>운영시간: {tourListContents[index].opentime} ~ {tourListContents[index].closetime}</p>
                                     <p>{tourListContents[index].content}</p>
                                 </div>}
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeTourListContentField(index)}>삭제</button>}
+                            {index > 0 && tourListContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeTourListContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelTourListField}>관광지 추가</button>
                     <hr></hr>
                     {otherServiceContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
                             {otherServiceContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{otherServiceContents[index].otherService_title}</h3>
@@ -576,7 +604,7 @@ const TravelRegister = () => {
                                     <p>{otherServiceContents[index].content}</p>
                                 </div>
                             }
-                            {index > 0 && <button className='travelregi-main-delbtn' type="button" onClick={() => removeOtherServiceContentField(index)}>삭제</button>}
+                            {index > 0 && otherServiceContents[index].type && <button className='travelregi-main-delbtn' type="button" onClick={() => removeOtherServiceContentField(index)}>삭제</button>}
                         </div>
                     ))}
                     <button className='travelregi-main-addbtn' type="button" onClick={addTravelOtherServiceField}>기타서비스 추가</button>

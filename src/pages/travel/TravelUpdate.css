@@ -1,3 +1,11 @@
+.travelupdate{
+    min-height: 100vh;
+    background-image: url("../../assets/img/background_img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .travelupdate-inner {
     width: 50%;
     margin: 0 auto;
@@ -5,6 +13,7 @@
 
 .travelupdate-inner-main{
     border: 1px solid;
+    background-color: white;
 }
 
 .travelupdate-top {
@@ -70,4 +79,9 @@
 
 .travelupdate-serving-div{
     margin-left: 3%;
+    margin-top: 2%;
+}
+
+.travelupdate-div{
+    margin-top: 2%;
 }

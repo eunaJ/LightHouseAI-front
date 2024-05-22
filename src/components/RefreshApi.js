@@ -14,7 +14,6 @@ api.interceptors.request.use(
             config.headers.Authorization = `${accessToken}`;
         }
         // const refreshToken = axios.defaults.headers.common;
-        // console.log(refreshToken);
         return config;
     },
     (error) => {
@@ -46,14 +45,14 @@ async function getNewAccessToken() {
         }, {
             headers: {
                 "Content-Type": "application/json",
-                "Set-Cookie": "" // 쿠키 세팅 필요
+                "Set-Cookie": ""
             }
         });
         const newAccessToken = refreshRes.headers.get('Access-Token');
         localStorage.setItem('accessToken', newAccessToken);
         return newAccessToken;
     } catch (error) {
-        console.log('토큰 재발급에 실패했습니다.');
+        console.error('토큰 재발급에 실패했습니다.');
         return null;
     }
 }
