@@ -14,6 +14,8 @@ const TravelRegister = () => {
     const [travelImgUrl, setTravelImgUrl] = useState('');
     const [travelServing, setTravelServing] = useState(0);
     const upload = useRef();
+    const [constituency_Id, setConstituencyId] = useState(null); // constituency_id 상태 추가
+
 
     const navigate = useNavigate();
     const gotoHome = () => {
@@ -92,6 +94,10 @@ const TravelRegister = () => {
     };
 
     const addTravelCafeField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setCafeContents([...cafeContents, {
             type: '',
             menu: '',
@@ -108,6 +114,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelRestaurantField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setRestaurantContents([...restaurantContents, {
             type: '',
             menu: '',
@@ -124,6 +134,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelShoppingMallField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setShoppingMallContents([...shoppingMallContents, {
             type: '',
             price: '',
@@ -139,6 +153,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelTourListField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setTourListContents([...tourListContents, {
             type: '',
             price: '',
@@ -154,6 +172,10 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelOtherServiceField = () => {
+         if (!selectedRegion || !selectedConstituency) {
+            alert('지역과 시/군/구를 선택해주세요.');
+            return;
+        }
         setOtherServiceContents([...otherServiceContents, {
             type: '',
             price: '',
@@ -395,11 +417,18 @@ const TravelRegister = () => {
         setSelectedRegion(e.target.value);
         setSelectedConstituency('');
     };
-
+    
     const handleConstituencyChange = (e) => {
         setSelectedConstituency(e.target.value);
-    };
+        setConstituencyId(findSubAreaIndex(selectedRegion, e.target.value)); // Update constituency_id
 
+    };
+    const findSubAreaIndex = (region, constituency) => {
+    const area = areas.find(area => area.name === region);
+        if (!area) return 0;
+        return area.subArea.findIndex(subArea => subArea === constituency);
+    };
+    var constituency_id = parseInt(findSubAreaIndex(selectedRegion, selectedConstituency)) + 1;
     const [starCount, setStarcount] = useState(0);
     const starColor = starCount * 20 + "%";
 
@@ -481,7 +510,8 @@ const TravelRegister = () => {
                     <hr></hr>
                     {cafeContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onCafeSpotAdd={handleCafeSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onCafeSpotAdd={handleCafeSpotAdd} index={index}></TravelModal>
+
                             {cafeContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{cafeContents[index].cafe_title}</h3>
@@ -501,7 +531,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {restaurantContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onRestaurantSpotAdd={handleRestaurantSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onRestaurantSpotAdd={handleRestaurantSpotAdd} index={index}></TravelModal>
                             {restaurantContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{restaurantContents[index].restaurant_title}</h3>
@@ -522,7 +552,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {shoppingMallContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onShoppingMallSpotAdd={handleShoppingMallSpotAdd} index={index}></TravelModal>
                             {shoppingMallContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{shoppingMallContents[index].shoppingMall_title}</h3>
@@ -542,7 +572,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {tourListContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onTourListSpotAdd={handleTourListSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onTourListSpotAdd={handleTourListSpotAdd} index={index}></TravelModal>
                             {tourListContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{tourListContents[index].tourList_title}</h3>
@@ -561,7 +591,7 @@ const TravelRegister = () => {
                     <hr></hr>
                     {otherServiceContents.map((content, index) => (
                         <div key={index}>
-                            <TravelModal type={selectedType} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
+                            <TravelModal type={selectedType} isOpen={modalIsOpen} constituency_id={constituency_id} onClose={() => setModalIsOpen(false)} onOtherServiceSpotAdd={handleOtherServiceSpotAdd} index={index}></TravelModal>
                             {otherServiceContents[index].location && index >= -1 &&
                                 <div className='spotdatacard'>
                                     <h3>{otherServiceContents[index].otherService_title}</h3>
