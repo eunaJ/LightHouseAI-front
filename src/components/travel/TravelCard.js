@@ -14,7 +14,7 @@ const TravelCard = ({ id, title, expense, star, image_url }) => {
                 </div>
                 <hr style={{ color: "black", height: "0.1px", marginTop: "0.1px" }} />
                 {title ? (<h3 className="travelcard-title">{title}</h3>) : (<h3> </h3>)}
-                <div style={{ display: "flex", alignItems: "center", marginTop: "2%" }}>
+                <div style={{ display: "flex", alignItems: "center", marginTop: "2%", color: "black" }}>
                 &nbsp;
                     {star !== 0 && (
                         <p style={{ margin: "0" }}>
