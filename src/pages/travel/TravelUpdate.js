@@ -697,9 +697,6 @@ const TravelUpdate = () => {
                             ))}
                         </div>
                     </div>
-                    <div className='travelupdate-bottom'>
-                        <button className="travelupdate-bottom-submit" type="submit" onClick={handleSubmit}>저장</button>
-                    </div>
                 </div>
             )}
         </div>

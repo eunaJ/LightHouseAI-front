@@ -1,54 +1,37 @@
 import "./TravelCard.css";
+import lighthouseaiLogo from '../../assets/img/lighthouseai_logo.png';
 
-import { useNavigate } from "react-router-dom";
-
-const TravelCard = ({ id, title, serving, star, imageUrl }) => {
-    // const getTravel = async () => {
-    //   const res = axios.get(`http://localhost:8080/api/v1/cafes/${id}`);
-    //   console.log(res);
-    // }
-
-    const navigate = useNavigate();
-
-    const getTravel = () => {
-        // navigate(`/travel/${id}`);
-    }
-
-
-
-const TravelCard = ({ id, title, writer, star, image_url }) => {
+const TravelCard = ({ id, title, writer, expense, star, image_url }) => {
     return (
         <div className="travelcard-container" key={id}>
             <div className="travelcard">
-
-                <p>{id}</p>
-                <h5 className="travelcard-title">{title}</h5>
-                <div className="travelcard-body">
-                    {imageUrl && <img src={imageUrl} alt='travel_image' />}
-                    {/* <p>인원: {serving}</p> */}
-                    <p>{star}</p>
-                    {/* <p className="travelcard-text">{description}</p> */}
-
+                <div className="travelcard-img" style={{height:"50%"}}>
+                    {image_url && ['.png', '.jpeg', '.jpg'].some(ext => image_url.includes(ext)) ? (
+                        <img src={image_url} alt="여행지 이미지" style={{width: "100%", maxHeight:"100%"}} />
+                    ) : (
+                        <img src={lighthouseaiLogo} alt="기본 이미지" style={{ width: "100%", maxHeight:"100%" }} />
+                    )}
+                </div>
+                <hr style={{ color: "black", height: "0.1px", marginTop:"0.1px" }} />
                 {title ? (<h3 className="travelcard-title">{title}</h3>) : (<h3> </h3>)}
                 <div className="travelcard-body" style={{ color: "black" }}>
-                    {image_url && (
-                        image_url.includes('.png') ?
-                            <img src={image_url} alt='여행지 이미지' /> :
-                            image_url.includes('.jpeg') ?
-                                <img src={image_url} alt='여행지 이미지' /> :
-                                image_url.includes('.jpg') &&
-                                <img src={image_url} alt='여행지 이미지' />
+                    {expense !== 0 ? (
+                        <p style={{ marginTop: "2%" }}>총 {expense}원</p>
+                    ) : null}
+                    {star !== 0 && (
+                        <p>
+                            별점{' '}
+                            {[...Array(star)].map((_, index) => (
+                                <span key={index}>★</span>
+                            ))}
+                        </p>
                     )}
-                    <p>{writer}</p>
-                    <p>별점 {star}</p>
-
                 </div>
             </div>
-        </div>
         </div>
     )
 
 };
-}
+
 
 export default TravelCard;

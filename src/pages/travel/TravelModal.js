@@ -6,11 +6,11 @@ import axios from "axios";
 import TravelModalCard from "./TravelModalCard";
 import "./TravelModal.css";
 import { areas } from "../../components/travel/Areas";
+import DaumPostcode from 'react-daum-postcode';
 
-function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index }) {
+function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index }) {
     const [searched, setSearched] = useState([]);
     const handleSearch = (e) => {
-        // 영어인 경우 대소문자 구분 중, 애초에 title이 구분 중
         const searchText = e.target.value;
         setSearch(searchText);
         if (searchText.trim() === '') {
@@ -60,35 +60,35 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
         const fetchData = async () => {
             if (type === '카페') {
                 try {
-                    const res = await axios.get('http://localhost:8080/api/v1/cafes');
+                    const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/cafes`);
                     setCafeList(res.data);
                 } catch (error) {
                     console.error('카페 데이터를 불러오는 중 오류 발생:', error);
                 }
             } else if (type === '음식점') {
                 try {
-                    const res = await axios.get('http://localhost:8080/api/v1/restaurants/');
+                    const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/restaurants`);
                     setRestaurantList(res.data);
                 } catch (error) {
                     console.error('음식점 데이터를 불러오는 중 오류 발생:', error);
                 }
             } else if (type === '쇼핑몰') {
                 try {
-                    const res = await axios.get('http://localhost:8080/api/v1/shoppingmalls');
+                    const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/shoppingmalls`);
                     setShoppingmallList(res.data);
                 } catch (error) {
                     console.error('쇼핑몰 데이터를 불러오는 중 오류 발생:', error);
                 }
             } else if (type === '관광지') {
                 try {
-                    const res = await axios.get('http://localhost:8080/api/v1/tourLists');
+                    const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/tourLists`);
                     setTourlistList(res.data);
                 } catch (error) {
                     console.error('관광지 데이터를 불러오는 중 오류 발생:', error);
                 }
             } else if (type === '기타서비스') {
                 try {
-                    const res = await axios.get('http://localhost:8080/api/v1/otherServices/');
+                    const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/otherServices`);
                     setOtherserviceList(res.data);
                 } catch (error) {
                     console.error('기타서비스 데이터를 불러오는 중 오류 발생:', error);
@@ -96,7 +96,7 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
             }
         };
         fetchData();
-    }, [type, isSearching]);
+    }, [type, isSearching, constituency_id]);
 
     const modalStyles = {
         content: {
@@ -144,6 +144,7 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
         constituency_name: ''
     });
     const [isNewSpot, setIsNewSpot] = useState(false);
+    const [showPostcode, setShowPostcode] = useState(false); // 주소 검색 모달 상태
 
     const handleNewSpot = async (e) => {
         e.preventDefault();
@@ -197,6 +198,17 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
             alert(e.response.data.message);
         }
     }
+
+    const onCompletePost = (data) => {
+        setShowPostcode(false);
+        setNewSpot({ ...newSpot, location: data.address });
+
+        const addressParts = data.address.split(' ');
+        if (addressParts.length >= 2) {
+            setSelectedRegion(addressParts[0]);
+            setSelectedConstituency(addressParts[1]);
+        }
+    };
 
     const [selectedRegion, setSelectedRegion] = useState('');
     const [selectedConstituency, setSelectedConstituency] = useState('');
@@ -271,6 +283,16 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
                                             <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;
                                                 <input type="text" className="modal-newspotadd-location" placeholder="위치" value={newSpot.location}
                                                     onChange={(e) => setNewSpot({ ...newSpot, location: e.target.value })} />
+                                                <button type="button" onClick={() => setShowPostcode(true)}>주소 검색</button>
+                                                {showPostcode && (
+                                                    <div>
+                                                        <DaumPostcode
+                                                            onComplete={onCompletePost}
+                                                            style={{ width: '100%', height: '400px' }}
+                                                        />
+                                                        <button onClick={() => setShowPostcode(false)}>취소</button>
+                                                    </div>
+                                                )}
                                             </label>
                                         </div>
                                         <div className="modal-newspotadd-form-input">
@@ -284,20 +306,6 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
                                                 <input type="text" className="modal-newspotadd-closetime" placeholder="00:00" value={newSpot.closetime}
                                                     onChange={(e) => setNewSpot({ ...newSpot, closetime: e.target.value })} />
                                             </label>
-                                        </div>
-                                        <div className='modal-newspotadd-region-select'>
-                                            <select value={selectedRegion} onChange={handleRegionChange}>
-                                                <option value="">지역을 선택해주세요</option>
-                                                {areas.map((region) => (
-                                                    <option key={region.name} value={region.name}>{region.name}</option>
-                                                ))}
-                                            </select>
-                                            <select value={selectedConstituency} onChange={handleConstituencyChange}>
-                                                <option value="">시,군,구를 선택해주세요</option>
-                                                {subAreas.map((constituency) => (
-                                                    <option key={constituency} value={constituency}>{constituency}</option>
-                                                ))}
-                                            </select>
                                         </div>
                                     </div>
                                     <div className="modal-newspotadd-save">
@@ -313,6 +321,69 @@ function TravelModal({ type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd
                     )
                 )}
             </div>
+            <div className="modal-isadd">
+                <button className="modal-add-btn" onClick={(e) => setIsNewSpot(true)}>새로운 장소를 등록하시겠습니까?</button>
+            </div>
+            {isNewSpot &&
+                <div className="modal-newspotadd">
+                    <div className="modal-newspotadd-form" >
+                        <div className="modal-newspotadd-form-input">
+                            <label className="modal-newspotadd-form-label">이름 &nbsp;&nbsp;
+                                <input type="text" className="modal-newspotadd-title" placeholder="이름" value={newSpot.title}
+                                    onChange={(e) => setNewSpot({ ...newSpot, title: e.target.value })} />
+                            </label>
+                        </div>
+                        <div className="modal-newspotadd-form-input">
+                            <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;
+                                <input type="text" className="modal-newspotadd-location" placeholder="위치" value={newSpot.location}
+                                    onChange={(e) => setNewSpot({ ...newSpot, location: e.target.value })} />
+                                <button type="button" onClick={() => setShowPostcode(true)}>주소 검색</button>
+                                {showPostcode && (
+                                    <div>
+                                        <DaumPostcode
+                                            onComplete={onCompletePost}
+                                            style={{ width: '100%', height: '400px' }}
+                                        />
+                                        <button onClick={() => setShowPostcode(false)}>취소</button>
+                                    </div>
+                                )}
+                            </label>
+                        </div>
+                        <div className="modal-newspotadd-form-input">
+                            <label className="modal-newspotadd-form-label">영업시간 &nbsp;&nbsp;
+                                <input type="text" className="modal-newspotadd-opentime" placeholder="00:00" value={newSpot.opentime}
+                                    onChange={(e) => setNewSpot({ ...newSpot, opentime: e.target.value })} />
+                            </label>
+                        </div>
+                        <div className="modal-newspotadd-form-input">
+                            <label className="modal-newspotadd-form-label">마감시간 &nbsp;&nbsp;
+                                <input type="text" className="modal-newspotadd-closetime" placeholder="00:00" value={newSpot.closetime}
+                                    onChange={(e) => setNewSpot({ ...newSpot, closetime: e.target.value })} />
+                            </label>
+                        </div>
+                        <div className='modal-newspotadd-region-select'>
+                            <select value={selectedRegion} onChange={handleRegionChange}>
+                                <option value="">지역을 선택해주세요</option>
+                                {areas.map((region) => (
+                                    <option key={region.name} value={region.name}>{region.name}</option>
+                                ))}
+                            </select>
+                            <select value={selectedConstituency} onChange={handleConstituencyChange}>
+                                <option value="">시,군,구를 선택해주세요</option>
+                                {subAreas.map((constituency) => (
+                                    <option key={constituency} value={constituency}>{constituency}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="modal-newspotadd-save">
+                        <button className="modal-newspotadd-save-btn" onClick={handleNewSpot}>새로운 {type} 등록</button>
+                    </div>
+                    <div className="modal-newspotadd-save">
+                        <button className="modal-newspotadd-save-btn" onClick={() => setIsNewSpot(false)}>취소</button>
+                    </div>
+                </div>
+            }
             <div className="modal-close">
                 <button onClick={handleClear}>닫기</button>
             </div>

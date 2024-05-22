@@ -164,7 +164,7 @@ const SignUp = () => {
                 }
             })
             .catch(e => {
-                console.log('회원가입 실패');
+                console.error('회원가입 실패');
                 alert(e.response.data.message);
                 navigate('/signup');
             })
