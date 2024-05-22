@@ -60,7 +60,6 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
         const fetchData = async () => {
             if (type === '카페') {
                 try {
-                    console.log(constituency_id);
                     const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/cafes`);
                     setCafeList(res.data);
                 } catch (error) {
