@@ -94,7 +94,7 @@ const TravelRegister = () => {
     };
 
     const addTravelCafeField = () => {
-         if (!selectedRegion || !selectedConstituency) {
+        if (!selectedRegion || !selectedConstituency) {
             alert('지역과 시/군/구를 선택해주세요.');
             return;
         }
@@ -114,7 +114,7 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelRestaurantField = () => {
-         if (!selectedRegion || !selectedConstituency) {
+        if (!selectedRegion || !selectedConstituency) {
             alert('지역과 시/군/구를 선택해주세요.');
             return;
         }
@@ -134,7 +134,7 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelShoppingMallField = () => {
-         if (!selectedRegion || !selectedConstituency) {
+        if (!selectedRegion || !selectedConstituency) {
             alert('지역과 시/군/구를 선택해주세요.');
             return;
         }
@@ -153,7 +153,7 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelTourListField = () => {
-         if (!selectedRegion || !selectedConstituency) {
+        if (!selectedRegion || !selectedConstituency) {
             alert('지역과 시/군/구를 선택해주세요.');
             return;
         }
@@ -172,7 +172,7 @@ const TravelRegister = () => {
         setModalIsOpen(true);
     };
     const addTravelOtherServiceField = () => {
-         if (!selectedRegion || !selectedConstituency) {
+        if (!selectedRegion || !selectedConstituency) {
             alert('지역과 시/군/구를 선택해주세요.');
             return;
         }
@@ -333,7 +333,7 @@ const TravelRegister = () => {
         newContents[index] = {
             type: newSpot.type,
             menu: newSpot.menu,
-            price: newSpot.price,
+            price: newSpot.price || 0,
             opentime: newSpot.opentime,
             closetime: newSpot.closetime,
             location: newSpot.location,
@@ -349,7 +349,7 @@ const TravelRegister = () => {
         newContents[index] = {
             type: newSpot.type,
             menu: newSpot.menu,
-            price: newSpot.price,
+            price: newSpot.price || 0,
             opentime: newSpot.opentime,
             closetime: newSpot.closetime,
             location: newSpot.location,
@@ -364,7 +364,7 @@ const TravelRegister = () => {
         const newContents = [...shoppingMallContents];
         newContents[index] = {
             type: newSpot.type,
-            price: newSpot.price,
+            price: newSpot.price || 0,
             opentime: newSpot.opentime,
             closetime: newSpot.closetime,
             location: newSpot.location,
@@ -379,7 +379,7 @@ const TravelRegister = () => {
         const newContents = [...tourListContents];
         newContents[index] = {
             type: newSpot.type,
-            price: newSpot.price,
+            price: newSpot.price || 0,
             opentime: newSpot.opentime,
             closetime: newSpot.closetime,
             location: newSpot.location,
@@ -394,7 +394,7 @@ const TravelRegister = () => {
         const newContents = [...otherServiceContents];
         newContents[index] = {
             type: newSpot.type,
-            price: newSpot.price,
+            price: newSpot.price || 0,
             opentime: newSpot.opentime,
             closetime: newSpot.closetime,
             location: newSpot.location,
@@ -417,20 +417,22 @@ const TravelRegister = () => {
         setSelectedRegion(e.target.value);
         setSelectedConstituency('');
     };
-    
+
     const handleConstituencyChange = (e) => {
         setSelectedConstituency(e.target.value);
         setConstituencyId(findSubAreaIndex(selectedRegion, e.target.value)); // Update constituency_id
 
     };
     const findSubAreaIndex = (region, constituency) => {
-    const area = areas.find(area => area.name === region);
+        const area = areas.find(area => area.name === region);
         if (!area) return 0;
         return area.subArea.findIndex(subArea => subArea === constituency);
     };
     var constituency_id = parseInt(findSubAreaIndex(selectedRegion, selectedConstituency)) + 1;
     const [starCount, setStarcount] = useState(0);
     const starColor = starCount * 20 + "%";
+
+    console.log(constituency_id);
 
     return (
         <div className='travelregi'>
