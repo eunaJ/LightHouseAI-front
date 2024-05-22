@@ -7,22 +7,15 @@ import axios from 'axios';
 import BoardDetailEach from "../../components/BoardEach/BoardDetailEach";
 import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png";
 
-const BoardDetail = () => {
+const BoardReviewUpdate = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); //boardId
+    const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [board, setBoard] = useState({});
+    const [review, setReview] = useState({});
 
     const [reviewList, setReviewList] = useState([]);
     const [content, setContent] = useState('');
-
-
-   
-    const [review, setReview] = useState({
-        id: '',
-        content: ''
-      });
-     
 
     
     const getBoardDetailEach = async () => {
@@ -41,11 +34,13 @@ const BoardDetail = () => {
         navigate('/board/update/'+id);
     }
 
+
      const moveToList = () => {
         navigate('/board');
       };
 
     const isLogin = !!localStorage.getItem("accessToken");
+
 
     const gotoHome = () => {
         navigate('/');
@@ -80,7 +75,7 @@ const BoardDetail = () => {
         const res = await axios.get(`http://localhost:8080/api/v1/boards/${id}/reviews`)
         console.log(res.data);
         setReviewList(res.data);
-        //console.log(reviewList);
+        console.log(reviewList);
     }
 
 
@@ -88,64 +83,51 @@ const BoardDetail = () => {
         getReviewList();
     }, []);
 
-    const deleteBoard = async () => {
-        if (window.confirm('게시글을 삭제하시겠습니까?')) {
-          await api.delete(`http://localhost:8080/api/v1/boards/${reviewList}`)
-          .then(() => {
-            alert('삭제되었습니다.');
-            navigate('/board');
-          });
-        }
-      };
 
       const onChange = (event) => {
           const { value, name } = event.target;
-          if (name === 'content') setContent(value);
-              //console.log(value); // 입력한 값이 올바르게 출력되는지 확인
+          if (name === 'content') {
+              setReview(value);
+              console.log(value); // 입력한 값이 올바르게 출력되는지 확인
+          }
       };
       
-      const postReview  = async (e) => {
-        api.post(`http://localhost:8080/api/v1/boards/${id}/reviews/create`,{
-              content: content,
+      const UpdateReview = async () => {
+        api.put(`http://localhost:8080/api/v1/reviews/${id}`,{
+              content: review,
           headers: {
               "Content-Type": "application/json",
           },
        })
        .then(res => {
+          console.log(res);
           if (!res.status === 200) throw new Error('서버 오류 발생');
-          alert('댓글 등록에 성공하였습니다.');
+          alert('댓글 수정에 성공하였습니다.');
           setContent(" ")
           getReviewList();
+         //navigate('/boards/'+id)
       })
       .catch (e => {
         //console.error("댓글 작성 실패", error);
         alert('댓글 등록에 실패하였습니다.');
         getReviewList();
       })
+      const getBoardDetailReview =  async () => {
+        console.log(id);
+        const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}/reviews`);
+        setReview(resp.data.review.content);
+        console.log(resp.data.content);
+
+    };
+    
+
+
     }
     
-    const deleteReview  = async (id ,boardId) => {
-        if (window.confirm('댓글을 삭제하시겠습니까?')) {
-        await api.delete(`http://localhost:8080/api/v1/reviews/${id}` )
-        .then((res) => {
-            alert('삭제되었습니다.');
-            // 성공적으로 삭제 후 리뷰 목록을 새로고침
-            getReviewList();
-            navigate('/boards/'+ boardId);
-          })
-          .catch((error) => {
-            console.error('댓글 삭제 실패', error);
-            alert('댓글 삭제에 실패하였습니다.');
-          });
-        }
-      };
 
-    const moveToReviewUpdate = (id ,boardId) => {
-        navigate('/reviews/update/'+boardId);
-    }
 
     
-    return (
+      return (
         <div>
             {loading ? (
                 <h2>loading...</h2>
@@ -174,9 +156,6 @@ const BoardDetail = () => {
                             />
                          <div style={{marginLeft: "20%"}}>
              <             div style={{marginTop: "3%"}}></div>
-                            <button onClick={moveToUpdate}>수정</button>
-                            <button onClick={deleteBoard}>삭제</button>
-                            <button onClick={moveToList}>목록</button>
                         </div>
 
                         <div style={{marginLeft: "20%", width: '90%'}}>
@@ -186,11 +165,9 @@ const BoardDetail = () => {
                                 name="content"
                                 type="text"
                                 placeholder="댓글을 작성하세요"
-                                value={content}
-                                onChange={onChange}
-                                //onChange={(e) => setReview(e.target.value)}
+                                onChange={(e) => setReview(e.target.value)}
                                 />
-                             <button onClick={()=>postReview()}>댓글 작성</button>
+                             <button onClick={()=>UpdateReview(review.id, id)}>댓글 수정</button>
                           <table>
                         <tbody> 
                         <div style={{marginTop: "20%"}}></div>  
@@ -204,8 +181,6 @@ const BoardDetail = () => {
                              </td>
                              <div style={{paddingLeft: "40%"}}>
                              <div style={{marginTop: "3%"}}></div>
-                             <button onClick={()=> moveToReviewUpdate(content.id, id)}>수정</button>
-                            <button onClick={()=>deleteReview(review.id ,id)}>삭제</button>
                             </div>
                              </tr>
                             ))}
@@ -220,7 +195,6 @@ const BoardDetail = () => {
         </div>
     );
 
+
 };
-
-export default BoardDetail;
-
+export default BoardReviewUpdate;

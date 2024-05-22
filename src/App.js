@@ -17,7 +17,8 @@ import TravelRegister from './pages/travel/TravelRegister';
 import TravelDetail from './pages/travel/TravelDetail';
 import MyTravel from './pages/user/MyTravel';
 import TravelUpdate from './pages/travel/TravelUpdate';
-import BoardReviewEach from './pages/board/BoardReviewEach';
+import BoardReviewUpdate from './pages/board/BoardReviweUpdate';
+
 //>>>>>>> develop
 
 function App() { 
@@ -41,6 +42,8 @@ function App() {
           <Route path="/myinfo" element={<MyInfo />}></Route>
           <Route path="/boards/create" element={<BoardWrite />}></Route>
           <Route path="board/update/:id" element={<BoardUpdate />}></Route>
+          <Route path="/reviews/update/:id" element={<BoardReviewUpdate />}></Route>
+          
 
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
           <Route path="/mytravel" element={<MyTravel/>}></Route>
