@@ -1,10 +1,10 @@
 .travelcard {
     margin-left: 10px;
     border: 1px solid #e1e1e1;
-    /* border-radius: 10px; */
+    border-color: black;
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
     width: 90%;
-    height: 35vh;
+    height: 30vh;
     background-color: white;
     margin-bottom: 10px;
 }
