@@ -82,7 +82,6 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
                 }
             } else if (type === '관광지') {
                 try {
-                    console.log(constituency_id)
                     const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/tourLists`);
                     setTourlistList(res.data);
                 } catch (error) {
@@ -90,7 +89,6 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
                 }
             } else if (type === '기타서비스') {
                 try {
-                    console.log(constituency_id)
                     const res = await axios.get(`http://localhost:8080/api/v1/${constituency_id}/otherServices`);
                     setOtherserviceList(res.data);
                 } catch (error) {
