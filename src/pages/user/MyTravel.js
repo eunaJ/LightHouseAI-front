@@ -2,23 +2,10 @@ import { useEffect, useState } from "react";
 import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png"
 import { Link, useNavigate } from 'react-router-dom';
 import api from "../../components/RefreshApi";
-import { CiSearch } from "react-icons/ci";
 import "./MyTravel.css";
 
 const MyTravel = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState({});
-  const [isSearching, setIsSearching] = useState(false);
-
-  const onChange = (e) => {
-    const searchText = e.target.value;
-    setSearch(searchText);
-    if (searchText.trim() === '') {
-      setIsSearching(false);
-    } else {
-      setIsSearching(true);
-    }
-  }
 
   const gotoHome = () => {
     navigate('/');
@@ -67,10 +54,6 @@ const MyTravel = () => {
       console.error(e);
     }
   }
-  
-  const searched = myTravelList.filter((item) =>
-    item.title.includes(search)
-  )
 
   useEffect(() => {
     getMyTreavelList();
@@ -96,12 +79,6 @@ const MyTravel = () => {
         </div>
       </div>
       <div className="mytravel-right">
-        <div className='mytravel-right-upper'>
-          <div className='mytravel-search'>
-            <CiSearch className="mytravel-search-icon" />
-            <input type="search" name="sv" className="mytravel-search-input" onChange={onChange} placeholder="   검색해주세요" />
-          </div>
-        </div>
         <div className='mytravel-right-center'>
           <table className="mytravel-bdlist">
             <thread>
