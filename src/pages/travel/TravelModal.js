@@ -321,69 +321,6 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
                     )
                 )}
             </div>
-            <div className="modal-isadd">
-                <button className="modal-add-btn" onClick={(e) => setIsNewSpot(true)}>새로운 장소를 등록하시겠습니까?</button>
-            </div>
-            {isNewSpot &&
-                <div className="modal-newspotadd">
-                    <div className="modal-newspotadd-form" >
-                        <div className="modal-newspotadd-form-input">
-                            <label className="modal-newspotadd-form-label">이름 &nbsp;&nbsp;
-                                <input type="text" className="modal-newspotadd-title" placeholder="이름" value={newSpot.title}
-                                    onChange={(e) => setNewSpot({ ...newSpot, title: e.target.value })} />
-                            </label>
-                        </div>
-                        <div className="modal-newspotadd-form-input">
-                            <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;
-                                <input type="text" className="modal-newspotadd-location" placeholder="위치" value={newSpot.location}
-                                    onChange={(e) => setNewSpot({ ...newSpot, location: e.target.value })} />
-                                <button type="button" onClick={() => setShowPostcode(true)}>주소 검색</button>
-                                {showPostcode && (
-                                    <div>
-                                        <DaumPostcode
-                                            onComplete={onCompletePost}
-                                            style={{ width: '100%', height: '400px' }}
-                                        />
-                                        <button onClick={() => setShowPostcode(false)}>취소</button>
-                                    </div>
-                                )}
-                            </label>
-                        </div>
-                        <div className="modal-newspotadd-form-input">
-                            <label className="modal-newspotadd-form-label">영업시간 &nbsp;&nbsp;
-                                <input type="text" className="modal-newspotadd-opentime" placeholder="00:00" value={newSpot.opentime}
-                                    onChange={(e) => setNewSpot({ ...newSpot, opentime: e.target.value })} />
-                            </label>
-                        </div>
-                        <div className="modal-newspotadd-form-input">
-                            <label className="modal-newspotadd-form-label">마감시간 &nbsp;&nbsp;
-                                <input type="text" className="modal-newspotadd-closetime" placeholder="00:00" value={newSpot.closetime}
-                                    onChange={(e) => setNewSpot({ ...newSpot, closetime: e.target.value })} />
-                            </label>
-                        </div>
-                        <div className='modal-newspotadd-region-select'>
-                            <select value={selectedRegion} onChange={handleRegionChange}>
-                                <option value="">지역을 선택해주세요</option>
-                                {areas.map((region) => (
-                                    <option key={region.name} value={region.name}>{region.name}</option>
-                                ))}
-                            </select>
-                            <select value={selectedConstituency} onChange={handleConstituencyChange}>
-                                <option value="">시,군,구를 선택해주세요</option>
-                                {subAreas.map((constituency) => (
-                                    <option key={constituency} value={constituency}>{constituency}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="modal-newspotadd-save">
-                        <button className="modal-newspotadd-save-btn" onClick={handleNewSpot}>새로운 {type} 등록</button>
-                    </div>
-                    <div className="modal-newspotadd-save">
-                        <button className="modal-newspotadd-save-btn" onClick={() => setIsNewSpot(false)}>취소</button>
-                    </div>
-                </div>
-            }
             <div className="modal-close">
                 <button onClick={handleClear}>닫기</button>
             </div>
