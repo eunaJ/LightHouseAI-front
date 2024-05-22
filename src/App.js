@@ -31,14 +31,8 @@ function App() {
         <Route path="/api/v1/users/kakao/login/callback" element={<KakaoRedirect />}></Route>
         <Route path="/api/v1/users/naver/login/callback" element={<NaverRedirect />}></Route>
 
-
-
         <Route path="/board" element={<Board/>}></Route>
         <Route path="/boards/:id" element={<BoardDetail/>}></Route>  
-
-
-
-        <Route path="/board" element={<Board />}></Route>
         <Route path="/travel/:id" element={<TravelDetail/>}></Route>
 
         {/* 로그인 후 가능 */}

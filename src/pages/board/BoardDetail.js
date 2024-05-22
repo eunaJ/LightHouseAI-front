@@ -80,20 +80,9 @@ const BoardDetail = () => {
         console.log(reviewList);
     }
 
-    const getReview = async () => {
-        const res = await axios.get(`http://localhost:8080/api/v1/boards/${id}/reviews`)
-        console.log(res.data);
-        //setReview(res.data);
-        setReview(res.data)
-        //console.log(boardList);
-        console.log(review.id);
-    }
 
     useEffect(() => {
         getReviewList();
-       
-        getReview();
-
     }, []);
 
 
@@ -115,38 +104,36 @@ const BoardDetail = () => {
           }
       };
       
-     const postReview  = async (e) => {
-      api.post(`http://localhost:8080/api/v1/boards/${id}/reviews/create`,{
-            content: review,
-        headers: {
-            "Content-Type": "application/json",
-        },
-     })
-     .then(res => {
-        setReview('');
-        console.log(res);
-        if (!res.status === 200) throw new Error('서버 오류 발생');
-        alert('댓글 등록에 성공하였습니다.');
+      const postReview  = async (e) => {
+        api.post(`http://localhost:8080/api/v1/boards/${id}/reviews/create`,{
+              content: review,
+          headers: {
+              "Content-Type": "application/json",
+          },
+       })
+       .then(res => {
+          console.log(res);
+          if (!res.status === 200) throw new Error('서버 오류 발생');
+          alert('댓글 등록에 성공하였습니다.');
+          getReviewList();
+          navigate('/boards/'+id)
+          //onReviewAdded(); // 댓글 추가 후 목록 새로고침을 위한 콜백
+      })
+      .catch (e => {
+        //console.error("댓글 작성 실패", error);
+        alert('댓글 등록에 실패하였습니다.');
         getReviewList();
-        navigate('/boards/'+id)
-        //onReviewAdded(); // 댓글 추가 후 목록 새로고침을 위한 콜백
-    })
-    .catch (e => {
-      //console.error("댓글 작성 실패", error);
-      alert('댓글 등록에 실패하였습니다.');
-      getReviewList();
-    })
-};
+      })
+    }
 
-    const deleteReview  = async () => {
+    const deleteReview  = async (id ,boardId) => {
         if (window.confirm('댓글을 삭제하시겠습니까?')) {
-            
-        await api.delete(`http://localhost:8080/api/v1/reviews/${review.id}`)
+        await api.delete(`http://localhost:8080/api/v1/reviews/${id}` )
         .then((res) => {
             alert('삭제되었습니다.');
             // 성공적으로 삭제 후 리뷰 목록을 새로고침
             getReviewList();
-            navigate('/boards/' + id);
+            navigate('/boards/' + boardId);
           })
           .catch((error) => {
             console.error('댓글 삭제 실패', error);
@@ -200,12 +187,12 @@ const BoardDetail = () => {
                                 placeholder="댓글을 작성하세요"
                                 onChange={(e) => setReview(e.target.value)}
                                 />
-                             <button onClick={postReview}>댓글 작성</button>
+                             <button onClick={()=>postReview(review.id, id)}>댓글 작성</button>
                           <table>
                         <tbody> 
                         <div style={{marginTop: "20%"}}></div>  
                             {reviewList.slice().reverse().map((review) => (
-                             <tr key={review.boardId}>
+                             <tr key={review.id}>
                              <td style={{ listStyleType: 'none', paddingBottom: '1px', height: '1px' }}> 
                              <tr style={{ textAlign: 'center', frontSize: '10px' }}>{review.writer}</tr>
                              <tr style={{ textAlign: 'left',fontSize: '15px', width: '100%', height: '10px' }}>{review.content}</tr>
@@ -215,7 +202,7 @@ const BoardDetail = () => {
                              <div style={{paddingLeft: "40%"}}>
                              <div style={{marginTop: "3%"}}></div>
                              <button onClick={moveToUpdate}>수정</button>
-                            <button onClick={deleteReview}>삭제</button>
+                            <button onClick={()=>deleteReview(review.id, id)}>삭제</button>
                             </div>
                              </tr>
                             ))}

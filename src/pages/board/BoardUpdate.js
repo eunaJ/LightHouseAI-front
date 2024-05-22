@@ -18,18 +18,20 @@ const BoardUpdate = () => {
   const [imageChange, setImageChange] = useState(false); 
 
   const { id } = useParams();
+ 
   const getBoardDetailEach = async () => {
     console.log(id);
     const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
-    setBoard(resp.data);
+    setTitle(resp.data.title);
+    setContent(resp.data.content);
+    setImage_url(resp.data.image_url);
+
     setLoading(false);
 };
+
 useEffect(() => {
-  getBoardDetailEach();
-
-  
+    getBoardDetailEach();
 }, [])
-
 
   // 페이지 이동 함수들
   const gotoHome = () => navigate('/');
@@ -42,14 +44,8 @@ useEffect(() => {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setImageChange(true);
-    /**const image= upload.current.files[0];
-         setImage(image);
-         const reader = new FileReader();
-         reader.readAsDataURL(image);
-         reader.onload = () => {
-          setImage_url(reader.result);
-        };**/
   };
+
 
 
   const [loading, setLoading] = useState(true);
