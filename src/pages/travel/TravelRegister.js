@@ -424,9 +424,17 @@ const TravelRegister = () => {
 
     };
     const findSubAreaIndex = (region, constituency) => {
-        const area = areas.find(area => area.name === region);
-        if (!area) return 0;
-        return area.subArea.findIndex(subArea => subArea === constituency);
+        let index = 0;
+        for (const area of areas) {
+            if (area.name === region) {
+                const subAreaIndex = area.subArea.indexOf(constituency);
+                if (subAreaIndex !== -1) {
+                    return index + subAreaIndex;
+                }
+            }
+            index += area.subArea.length;
+        }
+        return 0;
     };
     var constituency_id = parseInt(findSubAreaIndex(selectedRegion, selectedConstituency)) + 1;
     const [starCount, setStarcount] = useState(0);
