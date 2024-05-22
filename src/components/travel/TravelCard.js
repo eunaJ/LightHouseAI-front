@@ -1,7 +1,7 @@
 import "./TravelCard.css";
 import lighthouseaiLogo from '../../assets/img/lighthouseai_logo.png';
 
-const TravelCard = ({ id, title, writer, expense, star, image_url }) => {
+const TravelCard = ({ id, title, expense, star, image_url }) => {
     return (
         <div className="travelcard-container" key={id}>
             <div className="travelcard">
