@@ -8,6 +8,7 @@ import BoardDetailEach from "../../components/BoardEach/BoardDetailEach";
 import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png";
 
 const BoardReviewUpdate = () => {
+
     const navigate = useNavigate();
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
@@ -16,6 +17,7 @@ const BoardReviewUpdate = () => {
 
     const [reviewList, setReviewList] = useState([]);
     const [content, setContent] = useState('');
+
 
     
     const getBoardDetailEach = async () => {
@@ -84,17 +86,16 @@ const BoardReviewUpdate = () => {
     }, []);
 
 
-      const onChange = (event) => {
-          const { value, name } = event.target;
-          if (name === 'content') {
-              setReview(value);
-              console.log(value); // 입력한 값이 올바르게 출력되는지 확인
-          }
-      };
       
-      const UpdateReview = async () => {
-        api.put(`http://localhost:8080/api/v1/reviews/${id}`,{
-              content: review,
+    const onChange = (event) => {
+        const { value, name } = event.target;
+        if (name === 'content') setContent(value);
+            //console.log(value); // 입력한 값이 올바르게 출력되는지 확인
+    };
+      
+      const UpdateReview = async (id,boardid) => {
+        api.put(`http://localhost:8080/api/v1/reviews/${boardid}`,{
+              content: content,
           headers: {
               "Content-Type": "application/json",
           },
@@ -103,15 +104,16 @@ const BoardReviewUpdate = () => {
           console.log(res);
           if (!res.status === 200) throw new Error('서버 오류 발생');
           alert('댓글 수정에 성공하였습니다.');
-          setContent(" ")
+
           getReviewList();
          //navigate('/boards/'+id)
       })
       .catch (e => {
         //console.error("댓글 작성 실패", error);
-        alert('댓글 등록에 실패하였습니다.');
+        alert('수정 등록에 실패하였습니다.');
         getReviewList();
       })
+
       const getBoardDetailReview =  async () => {
         console.log(id);
         const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}/reviews`);
@@ -165,9 +167,10 @@ const BoardReviewUpdate = () => {
                                 name="content"
                                 type="text"
                                 placeholder="댓글을 작성하세요"
-                                onChange={(e) => setReview(e.target.value)}
+                                value={content}
+                                onChange={onChange}
                                 />
-                             <button onClick={()=>UpdateReview(review.id, id)}>댓글 수정</button>
+                             <button onClick={()=>UpdateReview(id,review.id)}>댓글 수정</button>
                           <table>
                         <tbody> 
                         <div style={{marginTop: "20%"}}></div>  

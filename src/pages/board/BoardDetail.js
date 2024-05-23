@@ -90,7 +90,7 @@ const BoardDetail = () => {
 
     const deleteBoard = async () => {
         if (window.confirm('게시글을 삭제하시겠습니까?')) {
-          await api.delete(`http://localhost:8080/api/v1/boards/${reviewList}`)
+          await api.delete(`http://localhost:8080/api/v1/boards/${id}`)
           .then(() => {
             alert('삭제되었습니다.');
             navigate('/board');

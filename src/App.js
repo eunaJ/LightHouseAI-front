@@ -47,6 +47,7 @@ function App() {
 
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
           <Route path="/mytravel" element={<MyTravel/>}></Route>
+          <Route path="/myboard" element={<MyTravel/>}></Route>
           <Route path="/travel/update/:id" element={<TravelUpdate/>}></Route>
         </Route>
       </Routes>
