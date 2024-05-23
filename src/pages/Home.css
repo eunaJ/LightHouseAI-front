@@ -38,6 +38,7 @@
     height: 35px;
     background-color: white;
     border-width: 1px;
+    border-radius: 15px;
 }
 
 .home-right{
