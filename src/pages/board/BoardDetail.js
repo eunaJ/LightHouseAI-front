@@ -197,6 +197,15 @@ const BoardDetail = () => {
         getBoardDetailEach();
     }, [id])*/
 
+    useEffect(() => {
+        getBoardDetailEach();
+    }, []);
+
+    
+   /*useEffect(() => {
+        getBoardDetailEach();
+    }, [id])*/
+
    /*
     useEffect(() => {
         getBoardDetailEach();
@@ -260,6 +269,24 @@ const BoardDetail = () => {
      
 */
 
+    const handleLike = async () => {
+        try {
+            if (liked) {
+                // 좋아요 취소 요청
+                await axios.delete(`http://localhost:8080/api/v1/boards/${id}/like`);
+                setLikesCount(prev => prev - 1);
+            } else {
+                // 좋아요 추가 요청
+                await axios.post(`http://localhost:8080/api/v1/boards/${id}/like`);
+                setLikesCount(prev => prev + 1);
+            }
+            setLiked(!liked);
+        } catch (error) {
+            console.error(error);
+        }
+    }; 
+
+
     return (
         <div>
             {loading ? (
@@ -293,7 +320,8 @@ const BoardDetail = () => {
                             <button onClick={moveToUpdate} className = "updateButton" style={{ marginRight:"2%" }}>수정</button>
                             <button onClick={deleteBoard} className = "deleteButton" style={{ marginRight:"2%" }}>삭제</button>
                             <button onClick={moveToList} className = "listButton" style={{ marginRight:"50%" }}>목록</button> 
-                            <HeartButton like={like} onClick={handleLike} style={{ marginTop: "30%" }}/> {likesCount}
+                            <HeartButton like={like} onClick={handleLike}/> 
+                            <span>{likesCount}</span>
                         </div>
                         </div>
 
