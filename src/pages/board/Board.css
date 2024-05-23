@@ -7,19 +7,67 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
-
 }
 
-.boardwrite{
- 
-
-}
-
-.blue-text {
-    color: blue;
+.updateButton, .deleteButton, .listButton {
+    background-color: #1a1544;
+    border: 1.2px solid  #694ab0;
+    color: white;
+    margin-right: 2%;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50px; 
+    height: 25px;
+    font-size: 13px;
+    font-weight: 600
   }
 
+.reviewButton{
+    background-color: #a5bbd2;
+    border: 2.2px solid  #c6c6d7;
+    color: rgb(9, 8, 8);
+    border-radius: 5px;
+    cursor: pointer;
+    width: 35px; 
+    height: 25px;
+    font-size: 10.5px;
+}
+
+
+.reviewUpButton{
+    background-color: #b6d860;
+    border: 1.2px solid  #c6c6d7;
+    color: rgb(9, 8, 8);
+    border-radius: 5px;
+    cursor: pointer;
+    width: 60px; 
+    height: 25px;
+    font-size: 12px;
+    margin-right: 20px;
+}
+
+.BoardUpdateButton{
+    background-color: #1a1544;
+    border: 1.2px solid  #694ab0;
+    color: white;
+    margin-right: 2%;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 25px;
+    font-size: 13px;
+    font-weight: 600
+}
+.BoardUpdateDeleteButton{
+    background-color: #e797a0;
+    border: 1.2px solid  #d6adc2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 25px;
+    font-size: 13px;
+    font-weight: 600
+
+}
 
 .board-left-upper{
     padding-left: 30%;
@@ -40,7 +88,7 @@
 
 .board-category{
     margin-top: 2vh;
-    margin-left: 1vw;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,8 +101,8 @@
     height: 35px;
     background-color: white;
     border-width: 1px;
+    border-radius: 15px;
 }
-
 .board-myboard, .board-mylike, .board-mypage, .board-myinfo{
     border-top: none;
 }

@@ -39,7 +39,7 @@ useEffect(() => {
   const gotoMyBoard = () => navigate('/myboard');
   const gotoMyPage = () => navigate('/mypage');
   const gotoMyTravelContent = () => navigate('/mytravelcontent');
-  const backToList = () => navigate('/board');
+  const backToList = () => navigate('/boards/'+id);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -95,7 +95,7 @@ useEffect(() => {
       .then(res => {
         console.log(res);
         alert('게시글이 성공적으로 수정되었습니다.');
-        navigate('/board')
+        navigate('/boards'+id)
        if (!res.status === 200) throw new Error('서버 오류 발생');
       })
       .catch(e => {
@@ -108,54 +108,59 @@ useEffect(() => {
   return (
     <div>
       <div className='board'>
-        <div className='board-left'>
-          <div className="board-left-upper">
-            <div className='board-logo'>
-              <img src={lighthouseaiLogo} alt="로고" height={"60px"} onClick={gotoHome}></img>
-            </div>
-            <div className='board-category'>
-              <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-              {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-              {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
-              {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
-            </div>
-          </div>
-        </div>
-      </div>
+                    <div className='board-left'>
+                        <div className="board-left-upper">
+                            <div className='board-logo'>
+                                <img src={lighthouseaiLogo} alt="로고" height={"60px"} id='board-logo' onClick={gotoHome}></img>
+                            </div>
+                            <div className='board-category'>
+                                <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+                                {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
+                                {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
+                                {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{ marginLeft: "10%" }}>
+            <div style={{ marginTop: "25%" }}></div>
+
       <form onSubmit={handleSubmit}>
-        <div className='board'>
+        <div>
         <input
           name="title"
           type="text"
           placeholder="제목을 입력해주세요"
           value={title}
           onChange={onChange}
-          rows="10"
-          cols="50"
+          style={{ width: '200px', height: '20px' }} 
         />
         </div>
         <div>
+        <div style={{ marginTop: "2%" }}></div>
         <textarea
-          name="content"
-          placeholder="내용을 입력해주세요"
-          value={content}
-          onChange={onChange}
-          rows="10"
-          cols="50"
-        />
+             name="content"
+             placeholder="내용을 입력해주세요"
+             value={content}
+             onChange={onChange}
+             rows="10"
+              cols="50"
+              wrap="hard" 
+             style={{ width: '400px', height: '180px', overflow: 'auto' }} // overflow 속성을 auto로 설정
+            />
         </div>
         <label>파일:</label>
         <input
+          className = "boardimg-input"
           type="file"
           accept=".png, .jpeg, .jpg"
           ref={upload}
           onChange={handleFileChange}
         />
-        
-         
-<button type="submit">게시글 수정</button>
-        <button onClick={backToList}>취소</button>
+        <button type="submit" className='BoardUpdateButton'>게시글 수정</button>
+        <button onClick={backToList} className='BoardUpdateDeleteButton'>취소</button>
       </form>
+    </div>
+    </div>
     </div>
   );
 };

@@ -35,6 +35,7 @@ function App() {
         <Route path="/board" element={<Board/>}></Route>
         <Route path="/boards/:id" element={<BoardDetail/>}></Route>  
         <Route path="/travel/:id" element={<TravelDetail/>}></Route>
+        
 
         {/* 로그인 후 가능 */}
           <Route element={<PrivateRoute />}>

@@ -6,12 +6,19 @@ import "./Board.css";
 import axios from 'axios';
 import BoardDetailEach from "../../components/BoardEach/BoardDetailEach";
 import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png";
+import HeartButton from '../../components/BoardEach/BoardHeart';
 
 const BoardDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams(); //boardId
     const [loading, setLoading] = useState(true);
     const [board, setBoard] = useState({});
+    const [liked, setLiked] = useState(false)
+    const [likesCount, setLikesCount] = useState(0);
+    let [like, setLike] = useState(0)
+
+
+
 
     const [reviewList, setReviewList] = useState([]);
     const [content, setContent] = useState('');
@@ -24,18 +31,15 @@ const BoardDetail = () => {
         isReviewUpdate: false
     });
 
-
-
     const getBoardDetailEach = async () => {
         console.log(id);
         const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
         setBoard(resp.data);
         setLoading(false);
+        setLiked(resp.data.liked)
+        setBoard(resp.data);
+        setLoading(false);
     };
-
-    useEffect(() => {
-        getBoardDetailEach();
-    }, [])
 
 
     const moveToUpdate = () => {
@@ -142,6 +146,7 @@ const BoardDetail = () => {
         }
     };
 
+
     const [isEditing, setIsEditing] = useState({});
     const [editedContent, setEditedContent] = useState({});
     const handleReviewChange = (e, index) => {
@@ -188,6 +193,73 @@ const BoardDetail = () => {
         }));
     };
 
+     /*useEffect(() => {
+        getBoardDetailEach();
+    }, [id])*/
+
+   /*
+    useEffect(() => {
+        getBoardDetailEach();
+    }, []);
+
+    
+    useEffect(() => {
+        // 보드 디테일 정보와 좋아요 상태를 가져옵니다.
+        const fetchBoardAndLikes = async () => {
+            try {
+                const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
+                setLiked(resp.data.liked);
+                setLikesCount(resp.data.likesCount);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchBoardAndLikes();
+    }, [id]);
+
+    const handleLike = async () => {
+        try {
+            if (liked) {
+                // 좋아요 취소 요청
+                await axios.delete(`http://localhost:8080/api/v1/boards/${id}/like`);
+                setLikesCount(prev => prev - 1);
+            } else {
+                // 좋아요 추가 요청
+                await axios.post(`http://localhost:8080/api/v1/boards/${id}/like`);
+                setLikesCount(prev => prev + 1);
+            }
+            setLiked(!liked);
+        } catch (error) {
+            console.error(error);
+        }
+    }; 
+*/
+   /*  const postLike = async (e) => {
+        api.post(`http://localhost:8080/api/v1/boards/${id}/likes`, {
+            boardId: boardId,
+            UserId: UerId,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(res => {
+                if (!res.status === 200) throw new Error('서버 오류 발생');
+                else if(like.userid =userid) 
+                alert('좋아요 등록에 성공하였습니다.');
+                getLikeList();
+            })
+            .catch(e => {
+                console.error("좋아요 등록 실패", e);
+                alert(' 좋아요 추가에 실패하였습니다.');
+                getReviewList();
+            })
+    }   
+
+     
+*/
+
     return (
         <div>
             {loading ? (
@@ -216,10 +288,13 @@ const BoardDetail = () => {
                             image_url={board.image_url}
                         />
                         <div style={{ marginLeft: "20%" }}>
-                            <             div style={{ marginTop: "3%" }}></div>
-                            <button onClick={moveToUpdate}>수정</button>
-                            <button onClick={deleteBoard}>삭제</button>
-                            <button onClick={moveToList}>목록</button>
+                            <div style={{ marginTop: "3%" }}></div>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                            <button onClick={moveToUpdate} className = "updateButton" style={{ marginRight:"2%" }}>수정</button>
+                            <button onClick={deleteBoard} className = "deleteButton" style={{ marginRight:"2%" }}>삭제</button>
+                            <button onClick={moveToList} className = "listButton" style={{ marginRight:"50%" }}>목록</button> 
+                            <HeartButton like={like} onClick={handleLike} style={{ marginTop: "30%" }}/> {likesCount}
+                        </div>
                         </div>
 
                         <div style={{ marginLeft: "20%", width: '90%' }}>
@@ -231,12 +306,12 @@ const BoardDetail = () => {
                                 placeholder="댓글을 작성하세요"
                                 value={content}
                                 onChange={onChange}
-                            //onChange={(e) => setReview(e.target.value)}
+                                style={{ width: '265px', height: '20px' }} 
                             />
-                            <button onClick={() => postReview()}>댓글 작성</button>
-                            <table>
+
+                            <button onClick={() => postReview()} className = "reviewUpButton" style={{marginLeft: "7px"}}> 댓글 작성</button>
+                            <table  style={{ marginTop: "6%" , width: '100%',}}>
                                 <tbody>
-                                    <div style={{ marginTop: "20%" }}></div>
                                     {reviewList.slice().reverse().map((review, index) => (
                                         <tr key={review.id}>
                                             <td style={{ listStyleType: 'none', paddingBottom: '1px', height: '1px' }}>
@@ -247,20 +322,25 @@ const BoardDetail = () => {
                                                             type="text"
                                                             value={editedContent[index] || review.content}
                                                             onChange={(e) => handleReviewChange(e, index)}
-                                                            style={{ textAlign: 'left', fontSize: '15px', width: '100%', height: '10px' }}
+                                                            style={{ textAlign: 'left', fontSize: '15px', height: '10px' }}
                                                         />
                                                         <button onClick={() => updateReview(review.id, index)}>등록</button>
                                                     </div>
                                                 ) : (
                                                     <>
-                                                        <tr style={{ textAlign: 'left', fontSize: '10px' }}>{review.writer}</tr>
-                                                        <tr style={{ textAlign: 'left', fontSize: '15px', width: '100%', height: '10px' }}>{review.content}</tr>
-                                                        {review.writer === user && (
-                                                            <div style={{ paddingLeft: "40%" }}>
-                                                                <button onClick={() => handleIsReviewUpdate(review.id)}>수정</button>
-                                                                <button onClick={() => deleteReview(review.id)}>삭제</button>
-                                                            </div>
-                                                        )}
+                                                        <tr style={{ textAlign: 'left', fontSize: '13px' }}>{review.writer}</tr>
+                                                        <tr style={{ display: 'flex', alignItems: 'center', fontSize: '20px'}}>
+  <                                                     td style={{ flex: 1, textAlign: 'left' }}>{review.content}</td>
+                                                                     {review.writer === user && (
+                                                         <td>
+                                                         <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+                                                         <button onClick={() => handleIsReviewUpdate(review.id)} className = "reviewButton">수정</button>
+                                                         <button onClick={() => deleteReview(review.id)} className = "reviewButton" style={{marginTop: "8%"}}>삭제</button>
+                                                         </div>
+                                                         </td>
+                                                         )}
+                                                        </tr>
+
                                                     </>
                                                 )}
                                                 <hr style={{ color: "lightGray", width: '100%' }} />

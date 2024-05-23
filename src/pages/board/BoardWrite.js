@@ -83,20 +83,21 @@ const BoardWrite = () => {
   return (
     <div>
       <div className='board'>
-        <div className='board-left'>
-          <div className="board-left-upper">
-            <div className='board-logo'>
-              <img src={lighthouseaiLogo} alt="로고" height={"60px"} onClick={gotoHome}></img>
-            </div>
-            <div className='board-category'>
-              <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-              {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-              {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
-              {isLogin && <button className="home-myTcontent" onClick={gotoMyTravelContent}>내 방문지</button>}
-            </div>
-          </div>
-        </div>
-      </div>
+                    <div className='board-left'>
+                        <div className="board-left-upper">
+                            <div className='board-logo'>
+                                <img src={lighthouseaiLogo} alt="로고" height={"60px"} id='board-logo' onClick={gotoHome}></img>
+                            </div>
+                            <div className='board-category'>
+                                <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+                                {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
+                                {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
+                                {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{ marginLeft: "10%" }}>
+            <div style={{ marginTop: "25%" }}></div>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -106,19 +107,21 @@ const BoardWrite = () => {
           placeholder="제목을 입력해주세요"
           value={title}
           onChange={onChange}
-          rows="10"
-          cols="50"
+          style={{ width: '200px', height: '20px' }} 
         />
         </div>
         <div>
+        <div style={{ marginTop: "2%" }}></div>
         <textarea
-          name="content"
-          placeholder="내용을 입력해주세요"
-          value={content}
-          onChange={onChange}
-          rows="10"
-          cols="50"
-        />
+             name="content"
+             placeholder="내용을 입력해주세요"
+             value={content}
+             onChange={onChange}
+             rows="10"
+              cols="50"
+              wrap="hard" // 이 부분이 추가되었습니다.
+             style={{ width: '400px', height: '180px', overflow: 'auto' }} // overflow 속성을 auto로 설정
+            />
         </div>
         <label>파일:</label>
         <input
@@ -129,10 +132,14 @@ const BoardWrite = () => {
           onChange={handleFileChange}
           
         />
-        <button type="submit">게시글 등록</button>
-        <button onClick={backToList}>취소</button>
+        <button type="submit" className='BoardUpdateButton'>게시글 등록</button>
+        <button onClick={backToList} className='BoardUpdateDeleteButton'>취소</button>
       </form>
     </div>
+    </div>
+    </div>
+
+
   );
 };
 

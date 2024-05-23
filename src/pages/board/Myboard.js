@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from "../../components/RefreshApi";
 import { CiSearch } from "react-icons/ci";
 import "../user/MyTravel.css"
+import "./Board.css";
 
 const MyBoard = () => {
   const navigate = useNavigate();
@@ -87,11 +88,11 @@ const MyBoard = () => {
           </div>
           {!isLogin && <button className="mytravel-login" onClick={gotoLogin}>로그인</button>}
           {isLogin && <button className="mytravel-logout" onClick={handleLogout}>로그아웃</button>}
-          <div className='mytravel-category'>
-            <button className="mytravel-board" onClick={gotoBoard}>자유게시판</button>
-            {isLogin && <button className="mytravel-myboard" onClick={gotoMyBoard}>내 게시물</button>}
-            {isLogin && <button className="mytravel-mypage" onClick={gotoMyPage}>내 페이지</button>}
-            {isLogin && <button className="mytravel-mytravel" onClick={gotoMyTravel}>내 여행지</button>}
+          <div className='board-category'>
+          <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+                        {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
           </div>
         </div>
       </div>
