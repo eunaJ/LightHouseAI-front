@@ -96,7 +96,7 @@ const MyTravel = () => {
               <tr>
                 {myTravelList.slice().reverse().map((mytravel, index) => (
                   <Link key={mytravel.id} to={`/travel/${mytravel.id}`} style={{ textDecoration: "none" }}>
-                    <li style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
+                    <li style={{ listStyleType: 'none', paddingTop: '5px', height: '35px' }}>
                       <table>
                         <tr>
                           <td style={{ textAlign: 'center', width: '50px' }}>{myTravelList.length - index}</td>
@@ -104,7 +104,7 @@ const MyTravel = () => {
                         </tr>
                       </table>
                     </li>
-                    <hr style={{ color: "lightGray" }} />
+                    <hr style={{ color: "lightGray", margin: '0' }} />
                   </Link>
                 ))}
               </tr>

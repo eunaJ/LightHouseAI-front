@@ -13,15 +13,15 @@ const TravelCard = ({ id, title, expense, star, image_url }) => {
                     )}
                 </div>
                 <hr style={{ color: "black", height: "0.1px", marginTop: "0.1px" }} />
-                {title ? (<h3 className="travelcard-title" style={{marginBottom: "0"}}>{title}</h3>) : (<h3> </h3>)}
+                {title ? (<h3 className="travelcard-title" style={{ marginBottom: "0" }}>{title}</h3>) : (<h3> </h3>)}
                 {star !== 0 && (
-                        <p style={{ margin: "0", marginLeft:"5px" }}>
-                            {[...Array(star)].map((_, index) => (
-                                <span key={index}>★</span>
-                            ))}
-                        </p>
-                    )}
-                    {expense !== 0 ? <p style={{ margin: "0", marginLeft:"5px" }}>여행 경비 {expense}원</p> : null}
+                    <p style={{ margin: "0", marginLeft: "5px" }}>
+                        {[...Array(star)].map((_, index) => (
+                            <span key={index}>★</span>
+                        ))}
+                    </p>
+                )}
+                {expense !== 0 ? <p style={{ margin: "5px", marginLeft: "5px" }}>여행 경비 {expense}원</p> : null}
             </div>
         </div>
     );
