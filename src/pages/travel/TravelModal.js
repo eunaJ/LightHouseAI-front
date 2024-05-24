@@ -1,15 +1,43 @@
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import ReactModal from "react-modal";
-import api from "../../components/RefreshApi";
 import axios from "axios";
 import TravelModalCard from "./TravelModalCard";
 import "./TravelModal.css";
 import { areas } from "../../components/travel/Areas";
 import DaumPostcode from 'react-daum-postcode';
+import StarbucksList from "./StarBuckList";
 
 function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index }) {
     const [searched, setSearched] = useState([]);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [newSpot, setNewSpot] = useState({
+        title: '',
+        location: '',
+        opentime: '',
+        closetime: '',
+        constituency_name: ''
+    });
+    const [selectedRegion, setSelectedRegion] = useState('');
+    const [selectedConstituency, setSelectedConstituency] = useState('');
+
+    const fetchSearchResults = async (title) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/v1/search?query=${selectedConstituency}${title}`);
+            setData(response.data);
+            console.log({ selectedConstituency }+{ title });
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (newSpot.title) {
+            fetchSearchResults(newSpot.title);
+        }
+    }, [newSpot.title, selectedConstituency]);
+
     const handleSearch = (e) => {
         const searchText = e.target.value;
         setSearch(searchText);
@@ -45,7 +73,7 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
                 setSearched(result);
             }
         }
-    }
+    };
 
     const [search, setSearch] = useState({});
     const [isSearching, setIsSearching] = useState(false);
@@ -136,15 +164,9 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
         onOtherServiceSpotAdd(newSpot, spotImg, spotImgUrl, content, index);
     }
 
-    const [newSpot, setNewSpot] = useState({
-        title: '',
-        location: '',
-        opentime: '',
-        closetime: '',
-        constituency_name: ''
-    });
     const [isNewSpot, setIsNewSpot] = useState(false);
     const [showPostcode, setShowPostcode] = useState(false); // 주소 검색 모달 상태
+    const [TitleSearch, setTitleSearch] = useState(false); // 제목 입력
 
     const handleNewSpot = async (e) => {
         e.preventDefault();
@@ -158,31 +180,31 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
         try {
             let res;
             if (type === "카페") {
-                res = await api.post('http://localhost:8080/api/v1/cafes/create', newSpotData, {
+                res = await axios.post('http://localhost:8080/api/v1/cafes/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
             } else if (type === "음식점") {
-                res = await api.post('http://localhost:8080/api/v1/restaurants/create', newSpotData, {
+                res = await axios.post('http://localhost:8080/api/v1/restaurants/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
             } else if (type === "쇼핑몰") {
-                res = await api.post('http://localhost:8080/api/v1/shoppingmalls/create', newSpotData, {
+                res = await axios.post('http://localhost:8080/api/v1/shoppingmalls/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
             } else if (type === "관광지") {
-                res = await api.post('http://localhost:8080/api/v1/tourLists/create', newSpotData, {
+                res = await axios.post('http://localhost:8080/api/v1/tourLists/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
                 })
             } else if (type === "기타서비스") {
-                res = await api.post('http://localhost:8080/api/v1/otherServices/create', newSpotData, {
+                res = await axios.post('http://localhost:8080/api/v1/otherServices/create', newSpotData, {
                     headers: {
                         'Authorization': localStorage.getItem('accessToken'),
                     },
@@ -199,6 +221,10 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
         }
     }
 
+    const handleClick = (index) => {
+        console.log(`Clicked item index: ${index}`);
+    };
+
     const onCompletePost = (data) => {
         setShowPostcode(false);
         setNewSpot({ ...newSpot, location: data.address });
@@ -209,10 +235,6 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
             setSelectedConstituency(addressParts[1]);
         }
     };
-
-    const [selectedRegion, setSelectedRegion] = useState('');
-    const [selectedConstituency, setSelectedConstituency] = useState('');
-    const subAreas = areas.find((area) => area.name === selectedRegion)?.subArea || [];
 
     const handleRegionChange = (e) => {
         setSelectedRegion(e.target.value);
@@ -228,7 +250,7 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
         setSearched([]);
         setIsNewSpot(false);
         onClose();
-    }
+    };
 
     return (
         <ReactModal
@@ -278,6 +300,7 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
                                                 <input type="text" className="modal-newspotadd-title" placeholder="이름" value={newSpot.title}
                                                     onChange={(e) => setNewSpot({ ...newSpot, title: e.target.value })} />
                                             </label>
+                                            <button type="button" onClick={() => setTitleSearch(true)}>주소 검색</button>
                                         </div>
                                         <div className="modal-newspotadd-form-input">
                                             <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;
@@ -286,10 +309,8 @@ function TravelModal({constituency_id, type, isOpen, onClose, onCafeSpotAdd, onR
                                                 <button type="button" onClick={() => setShowPostcode(true)}>주소 검색</button>
                                                 {showPostcode && (
                                                     <div>
-                                                        <DaumPostcode
-                                                            onComplete={onCompletePost}
-                                                            style={{ width: '100%', height: '400px' }}
-                                                        />
+                                                        <h1>스타벅스 매장 목록</h1>
+                                                        <StarbucksList data={data} handleClick={handleClick} />
                                                         <button onClick={() => setShowPostcode(false)}>취소</button>
                                                     </div>
                                                 )}
