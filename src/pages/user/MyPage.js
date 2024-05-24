@@ -36,14 +36,6 @@ const MyPage = () => {
     const gotoMyBoard = () => {
         navigate('/myboard');
     }
-
-    const gotoMyReview = () => {
-        navigate('/myreview');
-    }
-
-    const gotoMyLike = () => {
-        navigate('/like');
-    }
     
     const gotoMyTravel = () => {
         navigate('/mytravel');
@@ -105,8 +97,6 @@ const MyPage = () => {
                     <button id="travelBt" onClick={gotoTravel}>여행지 조회</button>
                     <button id="travelRegisterBt" onClick={gotoTravelRegister}>여행지 등록</button>
                     <button id="myBoardBt" onClick={gotoMyBoard}>내 게시물</button>
-                    <button id="myReviewBt" onClick={gotoMyReview}>내 댓글</button>
-                    <button id="myLikeBt" onClick={gotoMyLike}>내 좋아요</button>
                     <button id="myTContentBt" onClick={gotoMyTravel}>내 여행지</button>
                 </div>
             </div>
