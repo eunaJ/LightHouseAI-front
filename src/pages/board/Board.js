@@ -144,12 +144,7 @@ const Board = () => {
             </div>
             <div className="board-right">
                 <div className='board-right-upper'>
-                    <div className='board-search'>
-                        <input type="text" name="sv" className="board-search-input" onChange={onChange} placeholder="   검색해주세요" />
-                        <MdClear className="board-search-clear-icon" onClick={handleSearchClear} />
-                        <CiSearch className="board-search-icon" />
 
-                    </div>
                 </div>
                 <div className='board-right-center'>
                     <table className="board-bdlist">
