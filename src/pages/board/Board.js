@@ -167,7 +167,7 @@ const Board = () => {
                         </thread>
                         <tbody className="board-notice">
                         <tr>
-                        {boardList.slice().reverse().map((board, index) => (
+                        {boardList.map((board, index) => (
                         <Link key={board.id} to={`/boards/${board.id}`} style={{ textDecoration: "none" }}>
                         <li style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
                         <td style={{ textAlign: 'center', width: '50px' }}>{boardList.length - index}</td>
