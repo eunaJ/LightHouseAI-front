@@ -19,6 +19,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    flex-grow: 1;
+    overflow-y: auto; /* 세로 스크롤 활성화 */
 }
 
 .recommand-logo img {
@@ -28,10 +30,13 @@
 
 .messages-container {
     width: 100%;
-    margin-top: 20px;
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+    overflow-y: auto; /* 세로 스크롤 활성화 */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 10px;
+    box-sizing: border-box; /* 패딩 포함 박스 크기 설정 */
 }
 
 .message-bubble {
@@ -39,16 +44,13 @@
     color: white;
     padding: 10px;
     border-radius: 10px;
-    margin: 5px;
+    margin: 5px 10px;
     max-width: 80%;
     word-wrap: break-word;
     align-self: flex-start;
 }
 
 .chat-input-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     display: flex;
     padding: 10px;
@@ -107,4 +109,12 @@
 
 .details-content p {
     word-wrap: break-word; /* 텍스트가 컨테이너를 넘지 않도록 */
+}
+
+.details-content div {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #4fc3f7; /* 경계선 추가 */
+    border-radius: 5px; /* 경계선 모서리 둥글게 */
+    background-color: #ffffff; /* 아이템 배경색 */
 }

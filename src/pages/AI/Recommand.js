@@ -101,6 +101,7 @@ const Recommand = () => {
                         <h3>Cafes</h3>
                         {selectedItemDetails.cafe.map((cafe, index) => (
                             <div key={index}>
+                                <p>Name : {cafe.title}</p>
                                 <p>Location: {cafe.location}</p>
                                 <p>Menu: {cafe.menu}</p>
                                 <p>Price: {cafe.price}</p>
@@ -109,6 +110,7 @@ const Recommand = () => {
                         <h3>Restaurants</h3>
                         {selectedItemDetails.restaurant.map((restaurant, index) => (
                             <div key={index}>
+                                <p>Name : {restaurant.title}</p>
                                 <p>Location: {restaurant.location}</p>
                                 <p>Menu: {restaurant.menu}</p>
                                 <p>Price: {restaurant.price}</p>
@@ -117,6 +119,7 @@ const Recommand = () => {
                         <h3>Shopping</h3>
                         {selectedItemDetails.shopping.map((shopping, index) => (
                             <div key={index}>
+                                <p>Name : {shopping.title}</p>
                                 <p>Location: {shopping.location}</p>
                                 <p>Price: {shopping.price}</p>
                             </div>
@@ -124,6 +127,7 @@ const Recommand = () => {
                         <h3>Tourist</h3>
                         {selectedItemDetails.tourist.map((tourist, index) => (
                             <div key={index}>
+                                <p>Name : {tourist.title}</p>
                                 <p>Location: {tourist.location}</p>
                                 <p>Price: {tourist.price}</p>
                             </div>
@@ -131,6 +135,7 @@ const Recommand = () => {
                         <h3>Other</h3>
                         {selectedItemDetails.other.map((other, index) => (
                             <div key={index}>
+                                <p>Name : {other.title}</p>
                                 <p>Location: {other.location}</p>
                                 <p>Price: {other.price}</p>
                             </div>
