@@ -1,51 +1,110 @@
-.recommand{
-    padding: 0% 15% 0 15%;
+.recommand {
     display: flex;
-    flex-direction: row;
+    height: 100vh;
+    background-color: #e0f7fa; /* 하늘색 배경 */
 }
-.recommand::after{
+
+.recommand-left {
+    width: 20%;
+    background-color: #b3e5fc; /* 연한 하늘색 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.recommand-left-upper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 100%;
-    content: "";
-    background: url("../../assets/img/background_img.png") no-repeat;
+}
+
+.recommand-logo img {
+    height: 60px;
+    cursor: pointer;
+}
+
+.messages-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.message-bubble {
+    background-color: #4fc3f7; /* 진한 하늘색 */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    max-width: 80%;
+    word-wrap: break-word;
+    align-self: flex-start;
+}
+
+.chat-input-container {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    z-index: -1;
-    opacity: 0.3;
-    background-size: cover;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    background-color: #b3e5fc; /* 연한 하늘색 */
+    border-top: 1px solid #4fc3f7;
+    box-sizing: border-box;
 }
 
-.recommand-left-upper{
-    padding-left: 30%;
-}
-.recommand-right{
-    margin-top: 2vh;
-    margin-left: 5vw;
-}   
-
-.recommand_logo{
-    width: 150%;
-    height: 10vh;
+.chat-input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #4fc3f7;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #e1f5fe; /* 아주 연한 하늘색 */
 }
 
-.query{
-    position : absolute;
-    bottom: 0%;
-    width :100%;
+.chat-input-container button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #4fc3f7; /* 진한 하늘색 */
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.box-container{
-    position: absolute;
-    height : 100%;
-    left : 0;
-    top: 0;
-    width : 400px;
-    background-color: white;
+.card-container {
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #e0f7fa; /* 하늘색 배경 */
 }
 
-textarea{
-    width : 396px;
-    border : none;
-    resize: none;
+.details-container {
+    width: 20%;
+    padding: 20px;
+    background-color: #b3e5fc; /* 연한 하늘색 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid #4fc3f7;
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+}
+
+.details-container img {
+    max-width: 100%; /* 이미지가 컨테이너를 넘지 않도록 */
+    height: auto;
+}
+
+.details-content {
+    width: 100%; /* 내용이 컨테이너를 넘지 않도록 */
+}
+
+.details-content p {
+    word-wrap: break-word; /* 텍스트가 컨테이너를 넘지 않도록 */
 }
