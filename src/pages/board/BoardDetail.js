@@ -232,7 +232,7 @@ const BoardDetail = () => {
                             </div>
                             <div className='board-category'>
                                 <button className="board-board" onClick={gotoBoard}>자유게시판</button>
-                        <button className="board-recommand" onClick={gotoRecommand}>AI 추천</button>
+                                <button className="board-recommand" onClick={gotoRecommand}>AI 추천</button>
                                 {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
                                 {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
                                 {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}
@@ -250,8 +250,8 @@ const BoardDetail = () => {
                         <div style={{ marginLeft: "20%" }}>
                             <div style={{ marginTop: "3%" }}></div>
                             <div style={{ display: "flex", alignItems: "center" }}>
-                                <button onClick={moveToUpdate} className="updateButton" style={{ marginRight: "2%" }}>수정</button>
-                                <button onClick={deleteBoard} className="deleteButton" style={{ marginRight: "2%" }}>삭제</button>
+                                {board.nickname === user && <button onClick={moveToUpdate} className="updateButton" style={{ marginRight: "2%" }}>수정</button>}
+                                {board.nickname === user && <button onClick={deleteBoard} className="deleteButton" style={{ marginRight: "2%" }}>삭제</button>}
                                 <button onClick={moveToList} className="listButton" style={{ marginRight: "50%" }}>목록</button>
                                 <HeartButton like={liked} onClick={handleLike} />
                                 <span>{likesCount}</span>
@@ -260,15 +260,19 @@ const BoardDetail = () => {
                         <div style={{ marginLeft: "20%", width: '90%' }}>
                             <div style={{ marginTop: "10%", width: '100%' }}></div>
                             <hr />
-                            <input
-                                name="content"
-                                type="text"
-                                placeholder="댓글을 작성하세요"
-                                value={content}
-                                onChange={onChange}
-                                style={{ width: '265px', height: '20px' }}
-                            />
-                            <button onClick={() => postReview()} className="reviewUpButton" style={{ marginLeft: "7px" }}> 댓글 작성</button>
+                            {isLogin &&
+                                <div>
+                                    <input
+                                        name="content"
+                                        type="text"
+                                        placeholder="댓글을 작성하세요"
+                                        value={content}
+                                        onChange={onChange}
+                                        style={{ width: '265px', height: '20px' }}
+                                    />
+                                    <button onClick={() => postReview()} className="reviewUpButton" style={{ marginLeft: "7px" }}> 댓글 작성</button>
+                                </div>
+                            }
                             <table style={{ marginTop: "6%", width: '100%', }}>
                                 <tbody>
                                     {reviewList.slice().reverse().map((review, index) => (
