@@ -131,10 +131,8 @@ const BoardUpdate = () => {
                 placeholder="내용을 입력해주세요"
                 value={content}
                 onChange={onChange}
-                rows="10"
-                cols="50"
                 wrap="hard"
-                style={{ width: '400px', height: '180px', overflow: 'auto' }} // overflow 속성을 auto로 설정
+                style={{ width: '30vw', height: '50vh', overflow: 'auto', resize: 'none' }}
               />
             </div>
             <label>파일:</label>

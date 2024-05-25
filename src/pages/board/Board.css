@@ -15,11 +15,11 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    width: 100px; 
-    height: 25px;
+    width: 9vw; 
+    height: 3.5vh;
     font-size: 13px;
     font-weight: 600
-  }
+}
 
 .reviewButton{
     background-color: #a5bbd2;
@@ -27,11 +27,21 @@
     color: rgb(9, 8, 8);
     border-radius: 5px;
     cursor: pointer;
-    width: 35px; 
-    height: 25px;
+    width: 9vw; 
+    height: 3.5vh;
     font-size: 10.5px;
 }
 
+.reviewTwoButton{
+    background-color: #a5bbd2;
+    border: 2.2px solid  #c6c6d7;
+    color: rgb(9, 8, 8);
+    border-radius: 5px;
+    cursor: pointer;
+    width: 5vw; 
+    height: 3.5vh;
+    font-size: 10.5px;
+}
 
 .reviewUpButton{
     background-color: #b6d860;
@@ -39,10 +49,9 @@
     color: rgb(9, 8, 8);
     border-radius: 5px;
     cursor: pointer;
-    width: 60px; 
-    height: 25px;
+    width: 6 vw; 
+    height: 3.5vh;
     font-size: 12px;
-
 }
 
 .BoardUpdateButton{
@@ -52,7 +61,7 @@
     margin-right: 2%;
     border-radius: 5px;
     cursor: pointer;
-    height: 25px;
+    height: 1.5vw;
     font-size: 13px;
     font-weight: 600
 }
@@ -62,10 +71,9 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    height: 25px;
+    height: 1.5vw;
     font-size: 13px;
     font-weight: 600
-
 }
 
 .board-left-upper{
@@ -93,12 +101,11 @@
     justify-content: center;
 }
 
-
-
 .board-board, .board-myboard, .board-mypage, .board-myTcontent{
     width: 100px;
     height: 35px;
     background-color: white;
+    cursor: pointer;
     border-width: 1px;
     border-radius: 15px;
 }
@@ -115,7 +122,6 @@
     margin-left: 5vw;
     width: 49vw;
 }
-
 
 .board-search{
     width: 45vw;
@@ -156,7 +162,6 @@
     padding-left: 10%;
     text-align: left;
 }
-
 
 .boardList{
     margin-top: 5vh;
