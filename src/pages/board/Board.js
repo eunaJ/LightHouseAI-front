@@ -72,6 +72,7 @@ const Board = () => {
                 params: { page: page }
             });
             setBoardList(res.data);
+            console.log(res.data.length);
             if (res.data.length < 10) {
                 setHasMore(false);
             } else {

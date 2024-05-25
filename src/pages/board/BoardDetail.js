@@ -65,11 +65,8 @@ const BoardDetail = () => {
     const gotoMyTravel = () => {
         navigate('/mytravel');
     }
-    const backToList = () => {
-        navigate('/board');
-    }
-    const backToBoardDetail = () => {
-        navigate('/boards/' + id);
+    const gotoRecommand = () => {
+        navigate('/recommand');
     }
 
     const getReviewList = async () => {
@@ -235,6 +232,7 @@ const BoardDetail = () => {
                             </div>
                             <div className='board-category'>
                                 <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+                        <button className="board-recommand" onClick={gotoRecommand}>AI 추천</button>
                                 {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
                                 {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
                                 {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}

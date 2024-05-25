@@ -90,6 +90,7 @@ const Home = () => {
                 params: { page: page }
             });
             setTravelList(res.data);
+            console.log(res.data.length);
             if (res.data.length < 9) {
                 setHasMore(false);
             } else {
@@ -107,7 +108,6 @@ const Home = () => {
     useEffect(() => {
         getAllTravelList();
     }, [])
-
 
     const searched = allTravel.filter((item) =>
         item.title.includes(search)

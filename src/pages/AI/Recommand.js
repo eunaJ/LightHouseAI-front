@@ -94,11 +94,15 @@ const Recommand = () => {
                 {selectedItemDetails && (
                     <div className="details-content">
                         <h2>{selectedItemDetails.travel[0].title}</h2>
-                        <img src={selectedItemDetails.travel[0].image_url || lighthouseaiLogo} alt={selectedItemDetails.travel[0].title} />
+                        {selectedItemDetails.travel[0].image_url && ['.png', '.jpeg', '.jpg'].some(ext => selectedItemDetails.travel[0].image_url.includes(ext)) ? (
+                            <img src={selectedItemDetails.travel[0].image_url} alt={selectedItemDetails.travel[0].title} style={{ width: "100%", maxHeight: "100%" }} />
+                        ) : (
+                            <img src={lighthouseaiLogo} alt="기본 이미지" style={{ width: "100%", maxHeight: "100%" }} />
+                        )}
                         <p>Serving: {selectedItemDetails.travel[0].serving}</p>
                         <p>Travel Expense: {selectedItemDetails.travel[0].travel_expense}</p>
                         <p>Star: {selectedItemDetails.travel[0].star}</p>
-                        <h3>Cafes</h3>
+                        <h3>카페</h3>
                         {selectedItemDetails.cafe.map((cafe, index) => (
                             <div key={index}>
                                 <p>Name : {cafe.title}</p>
@@ -107,7 +111,7 @@ const Recommand = () => {
                                 <p>Price: {cafe.price}</p>
                             </div>
                         ))}
-                        <h3>Restaurants</h3>
+                        <h3>음식점</h3>
                         {selectedItemDetails.restaurant.map((restaurant, index) => (
                             <div key={index}>
                                 <p>Name : {restaurant.title}</p>
@@ -116,7 +120,7 @@ const Recommand = () => {
                                 <p>Price: {restaurant.price}</p>
                             </div>
                         ))}
-                        <h3>Shopping</h3>
+                        <h3>쇼핑몰</h3>
                         {selectedItemDetails.shopping.map((shopping, index) => (
                             <div key={index}>
                                 <p>Name : {shopping.title}</p>
@@ -124,7 +128,7 @@ const Recommand = () => {
                                 <p>Price: {shopping.price}</p>
                             </div>
                         ))}
-                        <h3>Tourist</h3>
+                        <h3>관광지</h3>
                         {selectedItemDetails.tourist.map((tourist, index) => (
                             <div key={index}>
                                 <p>Name : {tourist.title}</p>
@@ -132,7 +136,7 @@ const Recommand = () => {
                                 <p>Price: {tourist.price}</p>
                             </div>
                         ))}
-                        <h3>Other</h3>
+                        <h3>기타서비스</h3>
                         {selectedItemDetails.other.map((other, index) => (
                             <div key={index}>
                                 <p>Name : {other.title}</p>
