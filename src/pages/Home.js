@@ -140,7 +140,7 @@ const Home = () => {
                     {!isSearching ? (
                         travelList.map((travel) => (
                             <Link key={travel.id} to={`/travel/${travel.id}`} style={{ textDecoration: "none" }}>
-                                <TravelCard key={travel.id} title={travel.title} writer={travel.writer} expense={travel.travel_expense} star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
+                                <TravelCard key={travel.id} title={travel.title} expense={travel.travel_expense} star={travel.star} image_url={travel.image_url} style={{ color: "black", textDecoration: "none", visited: "pink" }} />
                             </Link>
                         ))
                     ) : (

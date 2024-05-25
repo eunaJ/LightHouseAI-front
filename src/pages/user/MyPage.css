@@ -60,13 +60,13 @@
 }
 
 #hrMyPage{
-    width: 65%;
+    width: 60%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-#travelBt, #travelRegisterBt, #myBoardBt, #myReviewBt, #myLikeBt, #myTContentBt{
+#travelBt, #travelRegisterBt, #myBoardBt, #myTContentBt{
     margin-top: 10px;
     border-color: black;
     border-width: 1px;
