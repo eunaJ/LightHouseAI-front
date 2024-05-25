@@ -62,13 +62,13 @@ const Board = () => {
         navigate('/mytravel');
     }
 
-    const getBoardList = async () => {
+    const getBoardList = async (page) => {
         try {
             const res = await axios.get('http://localhost:8080/api/v1/boards', {
                 params: { page: page }
             });
             setBoardList(res.data);
-            if (res.data.length < 10) {
+            if (res.data.length <= 10) {
                 setHasMore(false);
             } else {
                 setHasMore(true);
@@ -88,8 +88,8 @@ const Board = () => {
     };
 
     useEffect(() => {
-        getBoardList();
-    }, []);
+        getBoardList(page);
+    }, [page]);
 
     const isLogin = !!localStorage.getItem("accessToken");
 
@@ -137,7 +137,7 @@ const Board = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />
+                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} style={{ width: '4vw', height: '4vh' ,marginLeft: '35vw'}}/>
                     <div className="board-pagenation"></div>
                     {pageList.map((page, index) => (
                         <button key={index} onClick={onClickPage} value={page} id="pageListBtn">
