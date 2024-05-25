@@ -80,7 +80,7 @@ const MyBoard = () => {
             <button className="board-recommand" onClick={gotoRecommand}>AI 추천</button>
             {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
             {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
-            {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}
+            {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 여행지</button>}
           </div>
         </div>
       </div>

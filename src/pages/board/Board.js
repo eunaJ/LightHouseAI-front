@@ -11,7 +11,6 @@ const Board = () => {
     const navigate = useNavigate();
 
     const [boardList, setBoardList] = useState([]);
-    const [board, setBoard] = useState([])
     const [pageList, setPageList] = useState([]);
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
@@ -72,7 +71,6 @@ const Board = () => {
                 params: { page: page }
             });
             setBoardList(res.data);
-            console.log(res.data.length);
             if (res.data.length < 10) {
                 setHasMore(false);
             } else {
@@ -112,7 +110,7 @@ const Board = () => {
                         <button className="board-recommand" onClick={gotoRecommand}>AI 추천</button>
                         {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
                         {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
-                        {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 여행지</button>}
                     </div>
                 </div>
             </div>
@@ -143,7 +141,7 @@ const Board = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} style={{ width: '4vw', height: '4vh', marginLeft: '35vw' }} />
+                    {isLogin && <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} style={{ width: '4vw', height: '4vh', marginLeft: '35vw' }} />}
                     <div className="board-pagenation"></div>
                     {pageList.map((page, index) => (
                         <button key={index} onClick={onClickPage} value={page} id="pageListBtn">
