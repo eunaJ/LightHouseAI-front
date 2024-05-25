@@ -175,7 +175,7 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
             "closetime": newSpot.closetime,
             "constituency_name": selectedConstituency,
             "constituency_id": constituency_id,
-            "item_id": index
+            "item_id": newSpot.item_id
         };
         try {
             let res;
