@@ -62,8 +62,8 @@ const BoardDetail = () => {
         navigate('/mypage');
     }
 
-    const gotoMyTravelContent = () => {
-        navigate('/mytravelcontent');
+    const gotoMyTravel = () => {
+        navigate('/mytravel');
     }
     const backToList = () => {
         navigate('/board');
@@ -206,48 +206,6 @@ const BoardDetail = () => {
         getIsLike();
     }, []);
 
-    /*
-     
-     useEffect(() => {
-         // 보드 디테일 정보와 좋아요 상태를 가져옵니다.
-         const fetchBoardAndLikes = async () => {
-             try {
-                 const resp = await axios.get(`http://localhost:8080/api/v1/boards/${id}`);
-                 setLiked(resp.data.liked);
-                 setLikesCount(resp.data.likesCount);
-                 setLoading(false);
-             } catch (error) {
-                 console.error(error);
-             }
-         };
- 
-         fetchBoardAndLikes();
-     }, [id]);
- */
-    /*  const postLike = async (e) => {
-         api.post(`http://localhost:8080/api/v1/boards/${id}/likes`, {
-             boardId: boardId,
-             UserId: UerId,
-             headers: {
-                 "Content-Type": "application/json",
-             },
-         })
-             .then(res => {
-                 if (!res.status === 200) throw new Error('서버 오류 발생');
-                 else if(like.userid =userid) 
-                 alert('좋아요 등록에 성공하였습니다.');
-                 getLikeList();
-             })
-             .catch(e => {
-                 console.error("좋아요 등록 실패", e);
-                 alert(' 좋아요 추가에 실패하였습니다.');
-                 getReviewList();
-             })
-     }   
- 
-      
- */
-
     const handleLike = async () => {
         try {
             if (liked) {
@@ -264,7 +222,6 @@ const BoardDetail = () => {
         }
     };
 
-
     return (
         <div>
             {loading ? (
@@ -280,7 +237,7 @@ const BoardDetail = () => {
                                 <button className="board-board" onClick={gotoBoard}>자유게시판</button>
                                 {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
                                 {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
-                                {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
+                                {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}
                             </div>
                         </div>
                     </div>
@@ -302,7 +259,6 @@ const BoardDetail = () => {
                                 <span>{likesCount}</span>
                             </div>
                         </div>
-
                         <div style={{ marginLeft: "20%", width: '90%' }}>
                             <div style={{ marginTop: "10%", width: '100%' }}></div>
                             <hr />
@@ -314,7 +270,6 @@ const BoardDetail = () => {
                                 onChange={onChange}
                                 style={{ width: '265px', height: '20px' }}
                             />
-
                             <button onClick={() => postReview()} className="reviewUpButton" style={{ marginLeft: "7px" }}> 댓글 작성</button>
                             <table style={{ marginTop: "6%", width: '100%', }}>
                                 <tbody>
@@ -346,7 +301,6 @@ const BoardDetail = () => {
                                                                 </td>
                                                             )}
                                                         </tr>
-
                                                     </>
                                                 )}
                                                 <hr style={{ color: "lightGray", width: '100%' }} />
@@ -364,4 +318,3 @@ const BoardDetail = () => {
 };
 
 export default BoardDetail;
-

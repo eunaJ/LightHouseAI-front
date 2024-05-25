@@ -53,7 +53,6 @@
     border-radius: 15px;
 }
 
-
 .board-board, .board-myboard, .board-mylike, .board-myreview, .board-mypage, .board-myinfo{
     width: 100px;
     height: 35px;
@@ -75,7 +74,6 @@
     margin-left: 5vw;
     width: 49vw;
 }
-
 
 .board-search{
     width: 45vw;
@@ -119,4 +117,3 @@
 .boardimg{
     max-width: 80%;
 }
-

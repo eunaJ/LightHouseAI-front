@@ -63,15 +63,11 @@ const MyBoard = () => {
   const getMyBoardlList = async () => {
     try {
       const res = await api.get('http://localhost:8080/api/v1/boards/user');
-      setMyBoardlList(res.data);
+      setMyBoardList(res.data);
     } catch (e) {
       console.error(e);
     }
   }
-  
-  const searched = myBoardlList.filter((item) =>
-    item.title.includes(search)
-  )
 
   useEffect(() => {
     getMyBoardlList();
@@ -92,17 +88,11 @@ const MyBoard = () => {
           <button className="board-board" onClick={gotoBoard}>자유게시판</button>
                         {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
                         {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
-                        {isLogin && <button className="board-board" onClick={gotoMyTravelContent}>내 방문지</button>}
+                        {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}
           </div>
         </div>
       </div>
       <div className="mytravel-right">
-        <div className='mytravel-right-upper'>
-          <div className='mytravel-search'>
-            <CiSearch className="mytravel-search-icon" />
-            <input type="search" name="sv" className="mytravel-search-input" onChange={onChange} placeholder="   검색해주세요" />
-          </div>
-        </div>
         <div className='mytravel-right-center'>
           <table className="mytravel-bdlist">
             <thread>
@@ -118,13 +108,13 @@ const MyBoard = () => {
             <hr />
             <tbody className="mytravel-notice">
               <tr>
-                {myBoardList.slice().reverse().map((myboard, index) => (
+                {myBoardlList.slice().reverse().map((myboard, index) => (
                   <Link key={myboard.id} to={`/board/${myboard.id}`} style={{ textDecoration: "none" }}>
                     <li style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
                       <table>
                         <tr>
-                          <td style={{ textAlign: 'center', width: '50px' }}>{myTravelList.length - index}</td>
-                          <td><span style={{ padding: '20px' }}>{mytravel.title}</span></td>
+                          <td style={{ textAlign: 'center', width: '50px' }}>{myBoardlList.length - index}</td>
+                          <td><span style={{ padding: '20px' }}>{myboard.title}</span></td>
                         </tr>
                       </table>
                     </li>
