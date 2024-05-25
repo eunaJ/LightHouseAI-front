@@ -2,24 +2,11 @@ import { useEffect, useState } from "react";
 import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png"
 import { Link, useNavigate } from 'react-router-dom';
 import api from "../../components/RefreshApi";
-import { CiSearch } from "react-icons/ci";
 import "../user/MyTravel.css"
 import "./Board.css";
 
 const MyBoard = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState({});
-  const [isSearching, setIsSearching] = useState(false);
-
-  const onChange = (e) => {
-    const searchText = e.target.value;
-    setSearch(searchText);
-    if (searchText.trim() === '') {
-      setIsSearching(false);
-    } else {
-      setIsSearching(true);
-    }
-  }
 
   const gotoHome = () => {
     navigate('/');
@@ -109,7 +96,7 @@ const MyBoard = () => {
             <tbody className="mytravel-notice">
               <tr>
                 {myBoardlList.slice().reverse().map((myboard, index) => (
-                  <Link key={myboard.id} to={`/board/${myboard.id}`} style={{ textDecoration: "none" }}>
+                  <Link key={myboard.id} to={`/boards/${myboard.id}`} style={{ textDecoration: "none" }}>
                     <li style={{ listStyleType: 'none', paddingBottom: '10px', height: '10px' }}>
                       <table>
                         <tr>

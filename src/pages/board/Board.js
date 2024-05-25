@@ -13,11 +13,8 @@ const Board = () => {
     const [boardList, setBoardList] = useState([]);
     const [board, setBoard] = useState([])
     const [pageList, setPageList] = useState([]);
-
-    const [curPage, setCurPage] = useState(0);
-    const [prevBlock, setPrevBlock] = useState(0);
-    const [nextBlock, setNextBlock] = useState(0);
-    const [lastPage, setLastPage] = useState(0);
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     const [search, setSearch] = useState({
         page: 1,
@@ -66,8 +63,19 @@ const Board = () => {
     }
 
     const getBoardList = async () => {
-        const res = await axios.get('http://localhost:8080/api/v1/boards');
-        setBoardList(res.data);
+        try {
+            const res = await axios.get('http://localhost:8080/api/v1/boards', {
+                params: { page: page }
+            });
+            setBoardList(res.data);
+            if (res.data.length < 10) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+        } catch (error) {
+            console.error('getBoardList 오류', error);
+        }
     }
 
     const onClickPage = (e) => {
@@ -82,7 +90,7 @@ const Board = () => {
     useEffect(() => {
         getBoardList();
     }, []);
-    
+
     const isLogin = !!localStorage.getItem("accessToken");
 
     return (
@@ -124,7 +132,6 @@ const Board = () => {
                                             <td><span style={{ padding: '20px' }}>{board.title}</span></td>
                                         </li>
                                         <hr style={{ color: "lightGray" }} />
-
                                     </Link>
                                 ))}
                             </tr>
@@ -132,23 +139,13 @@ const Board = () => {
                     </table>
                     <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />
                     <div className="board-pagenation"></div>
-                    <button onClick={onClickPage} value={1}>
-                        &lt;&lt;
-                    </button>
-                    <button onClick={onClickPage} value={prevBlock}>
-                        &lt;
-                    </button>
                     {pageList.map((page, index) => (
                         <button key={index} onClick={onClickPage} value={page} id="pageListBtn">
                             {page}
                         </button>
                     ))}
-                    <button onClick={onClickPage} value={nextBlock}>
-                        &gt;
-                    </button>
-                    <button onClick={onClickPage} value={lastPage}>
-                        &gt;&gt;
-                    </button>
+                    <button onClick={() => setPage(page - 1)} disabled={page === 0}>이전</button>
+                    <button onClick={() => setPage(page + 1)} disabled={!hasMore}>다음</button>
                 </div>
             </div>
         </div>

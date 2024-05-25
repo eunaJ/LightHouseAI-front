@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';// 페이지 이동을 위해 useNavigate 훅을 사용합
 import "./BoardWrite.css";
 import axios from 'axios';
-import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png"; // 로고 이미지를 임포트
+import lighthouseaiLogo from "../../assets/img/lighthouseai_logo.png";
 import api from '../../components/RefreshApi';
 
 const BoardUpdate = () => {
-  const isLogin = !!localStorage.getItem("accessToken"); // 로컬 스토리지에서 accessToken을 가져와 로그인 상태를 확인
-  const navigate = useNavigate(); // 페이지 이동을 위한 navigate 함수를 초기화
+  const isLogin = !!localStorage.getItem("accessToken");
+  const navigate = useNavigate();
   const [title, setTitle] = useState(''); // 제목 상태를 관리
   const [content, setContent] = useState(''); // 내용 상태를 관리
   const [file, setFile] = useState(''); // 파일 상태를 관리
@@ -46,7 +46,6 @@ const BoardUpdate = () => {
   };
 
   const [loading, setLoading] = useState(true);
-  const [board, setBoard] = useState({});
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -87,13 +86,12 @@ const BoardUpdate = () => {
     })
       .then(res => {
         alert('게시글이 성공적으로 수정되었습니다.');
-        navigate('/boards' + id)
+        navigate('/boards/' + id)
         if (!res.status === 200) throw new Error('서버 오류 발생');
       })
       .catch(e => {
         console.error('게시글 수정에 실패하였습니다.');
         alert('게시글 수정에 실패하였습니다.');
-
       })
   };
 
