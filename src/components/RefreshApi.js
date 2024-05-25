@@ -13,7 +13,6 @@ api.interceptors.request.use(
         if (accessToken) {
             config.headers.Authorization = `${accessToken}`;
         }
-        // const refreshToken = axios.defaults.headers.common;
         return config;
     },
     (error) => {
@@ -34,6 +33,25 @@ api.interceptors.response.use(
                 originalRequest.headers.Authorization = `${newAccessToken}`;
                 return api(originalRequest);
             }
+        } else if (error.response.status === 403 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                const userDetails = await axios.get('http://localhost:8080/api/v1/users/user', {
+                    headers: {
+                        Authorization: `${localStorage.getItem('accessToken')}`
+                    }
+                });
+            } catch (e) {
+                if (e.response.status === 401) {
+                    const newAccessToken = await getNewAccessToken();
+                    if (newAccessToken) {
+                        originalRequest.headers.Authorization = `${newAccessToken}`;
+                        return api(originalRequest);
+                    }
+                } else {
+                    return Promise.reject(error);
+                }
+            }
         }
         return Promise.reject(error);
     }
@@ -44,9 +62,9 @@ async function getNewAccessToken() {
         const refreshRes = await axios.post('http://localhost:8080/api/v1/users/refresh', {
         }, {
             headers: {
-                "Content-Type": "application/json",
-                "Set-Cookie": ""
-            }
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
         });
         const newAccessToken = refreshRes.headers.get('Access-Token');
         localStorage.setItem('accessToken', newAccessToken);

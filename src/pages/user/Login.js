@@ -13,7 +13,6 @@ const Login = () => {
         email: '',
         password: '',
     });
-    // const [cookie, setCookie, removeCookie] = useCookies([]);
 
     const gotoHome = () => {
         navigate('/');
@@ -47,7 +46,6 @@ const Login = () => {
 
     const loginProcess = (e) => {
         e.preventDefault();
-        // removeCookie("refreshToken");
         axios.post('http://localhost:8080/api/v1/users/login', {
             email: userInfo.email,
             password: userInfo.password,
@@ -58,21 +56,11 @@ const Login = () => {
         })
             .then(res => {
                 if (res.status === 200) {
-                    //res.config.headers
-                    // const token = res.data.token;
-                    // res.client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
                     let access = res.headers.get('Access-token');
-                    // console.log(res.headers);
-                    // console.log(document.cookie);
-                    let refresh = res.headers.get('Set-Cookie');
                     localStorage.setItem('accessToken', access);
                     axios.defaults.headers.common[
                         "Authorization"
                     ] = `Bearer ${access}`;
-                    axios.defaults.headers.common[
-                        "refreshToken"
-                    ] = `${refresh}`;
-                    console.log('로그인 성공');
                     navigate('/');
                 }
             })

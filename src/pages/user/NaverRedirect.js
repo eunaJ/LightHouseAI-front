@@ -5,7 +5,6 @@ import axios from "axios";
 export default function NaverRedirect() {
     const navigate = useNavigate();
     const code = new URL(window.location.href).searchParams.get("code");
-    // const [cookie, setCookie, removeCookie] = useCookies(["refreshToken"]);
 
     useEffect(() => {
         const naverLogin = async () => {
@@ -17,11 +16,10 @@ export default function NaverRedirect() {
                     }
                 });
                 let access = res.headers['access-token'];
-                // let refresh = res.headers['set-cookie'];
                 localStorage.setItem('accessToken', access);
                 navigate('/');
             } catch (error) {
-                console.log('네이버 로그인 에러:', error);
+                console.error('네이버 로그인 에러:', error);
                 alert('네이버 로그인에 실패했어요.');
             }
         }
