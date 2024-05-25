@@ -62,7 +62,7 @@ const Board = () => {
         navigate('/mytravel');
     }
 
-    const getBoardList = async () => {
+    const getBoardList = async (page) => {
         try {
             const res = await axios.get('http://localhost:8080/api/v1/boards', {
                 params: { page: page }
@@ -88,8 +88,8 @@ const Board = () => {
     };
 
     useEffect(() => {
-        getBoardList();
-    }, []);
+        getBoardList(page);
+    }, [page]);
 
     const isLogin = !!localStorage.getItem("accessToken");
 
