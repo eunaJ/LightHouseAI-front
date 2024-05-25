@@ -1,0 +1,63 @@
+.card {
+    border: 1px solid #4fc3f7; /* 진한 하늘색 */
+    border-radius: 8px;
+    margin: 10px;
+    width: 200px; /* 고정 너비 */
+    height: 280px; /* 고정 높이 (살짝 줄임) */
+    overflow: hidden;
+    text-align: center;
+    background-color: #e1f5fe; /* 아주 연한 하늘색 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 공간을 고르게 분배 */
+}
+
+.card-img {
+    width: 100%;
+    height: 140px; /* 고정 높이 (살짝 줄임) */
+    overflow: hidden; /* 이미지가 카드 영역을 넘지 않도록 숨기기 */
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지 크기에 맞게 조정 */
+}
+
+.card-star {
+    font-size: 20px;
+    color: #0288d1; /* 어두운 하늘색 */
+    padding: 5px 0;
+}
+
+.card-content {
+    padding: 10px;
+    flex: 1; /* 공간을 채우도록 설정 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 중앙 정렬 */
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0277bd; /* 어두운 하늘색 */
+    margin-bottom: 10px; /* 하단 여백 추가 */
+}
+
+.card-context {
+    font-size: 14px;
+    color: #01579b; /* 더 어두운 하늘색 */
+    margin-bottom: 10px; /* 하단 여백 추가 */
+}
+
+.card-content button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #4fc3f7; /* 진한 하늘색 */
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    align-self: center; /* 중앙 정렬 */
+}
