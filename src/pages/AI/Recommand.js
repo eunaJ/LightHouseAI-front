@@ -94,7 +94,7 @@ const Recommand = () => {
                 {selectedItemDetails && (
                     <div className="details-content">
                         <h2>{selectedItemDetails.travel[0].title}</h2>
-                        <img src={selectedItemDetails.travel[0].image_url} alt={selectedItemDetails.travel[0].title} />
+                        <img src={selectedItemDetails.travel[0].image_url || lighthouseaiLogo} alt={selectedItemDetails.travel[0].title} />
                         <p>Serving: {selectedItemDetails.travel[0].serving}</p>
                         <p>Travel Expense: {selectedItemDetails.travel[0].travel_expense}</p>
                         <p>Star: {selectedItemDetails.travel[0].star}</p>
