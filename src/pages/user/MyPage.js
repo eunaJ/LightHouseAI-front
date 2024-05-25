@@ -63,7 +63,7 @@ const MyPage = () => {
                     const data = res.data;
                     setUserInfo({
                         ...data,
-                        profile_img_url: data.profile_img_url === '' || data.profile_img_url === null || data.profile_img_url === '/static/media/initialProfileImg.b31adf0c9ab904bf0899.png' ? initProfileImg : data.profile_img_url // 추후 수정
+                        profile_img_url: data.profile_img_url === '' || data.profile_img_url === null || data.profile_img_url === '/static/media/initialProfileImg.b31adf0c9ab904bf0899.png' ? initProfileImg : data.profile_img_url 
                     });
                 }
             } catch (error) {
@@ -100,7 +100,6 @@ const MyPage = () => {
                     <button id="myTContentBt" onClick={gotoMyTravel}>내 여행지</button>
                 </div>
             </div>
-
         </div>
     );
 }

@@ -25,8 +25,6 @@ const TravelCard = ({ id, title, expense, star, image_url }) => {
             </div>
         </div>
     )
-
 };
-
 
 export default TravelCard;

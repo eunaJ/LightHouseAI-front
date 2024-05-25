@@ -159,7 +159,6 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
 
     const [isNewSpot, setIsNewSpot] = useState(false);
     const [showPostcode, setShowPostcode] = useState(false); // 주소 검색 모달 상태
-    const [TitleSearch, setTitleSearch] = useState(false); // 제목 입력
 
     const handleAddressSearch = async () => {
         await fetchSearchResults(newSpot.title);
@@ -229,20 +228,6 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
         setShowPostcode(false); // 주소 검색 모달 닫기
     };
 
-    const onCompletePost = (data) => {
-        setShowPostcode(false);
-        setNewSpot({ ...newSpot, location: data.address });
-
-        const addressParts = data.address.split(' ');
-        if (addressParts.length >= 2) {
-            setSelectedRegion(addressParts[0]);
-        }
-    };
-
-    const handleRegionChange = (e) => {
-        setSelectedRegion(e.target.value);
-    };
-
     const handleClear = (e) => {
         setIsSearching(false);
         setSearched([]);
@@ -268,19 +253,19 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
                         ))
                     ) : type === '음식점' ? (
                         restaurantList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onRestaurantSpotToModal={handleRestaurantSpotAdd} onClose={onClose}location={travel.location} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onRestaurantSpotToModal={handleRestaurantSpotAdd} onClose={onClose} location={travel.location} />
                         ))
                     ) : type === '쇼핑몰' ? (
                         shoppingmallList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onShoppingMallSpotToModal={handleShoppingMallSpotAdd} onClose={onClose} location={travel.location}/>
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onShoppingMallSpotToModal={handleShoppingMallSpotAdd} onClose={onClose} location={travel.location} />
                         ))
                     ) : type === '관광지' ? (
                         tourlistList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onTourListSpotToModal={handleTourListSpotAdd} onClose={onClose} location={travel.location}/>
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onTourListSpotToModal={handleTourListSpotAdd} onClose={onClose} location={travel.location} />
                         ))
                     ) : type === '기타서비스' ? (
                         otherserviceList.map((travel) => (
-                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onOtherServiceSpotToModal={handleOtherServiceSpotAdd} onClose={onClose} location={travel.location}/>
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onOtherServiceSpotToModal={handleOtherServiceSpotAdd} onClose={onClose} location={travel.location} />
                         ))
                     ) : null
                 ) : (
@@ -298,14 +283,14 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
                                                 <input type="text" className="modal-newspotadd-title" placeholder="이름" value={newSpot.title}
                                                     onChange={(e) => setNewSpot({ ...newSpot, title: e.target.value })} />
                                             </label>
-                                                <button type="button" onClick={handleAddressSearch}>주소 검색</button>
-                                                                            {showPostcode && (
-                                                    <div>
-                                                        <h1>매장 목록</h1>
-                                                        <StarbucksList data={data} handleClick={handleClick} />
-                                                        <button onClick={() => setShowPostcode(false)}>취소</button>
-                                                    </div>
-                                                )}
+                                            <button type="button" onClick={handleAddressSearch}>주소 검색</button>
+                                            {showPostcode && (
+                                                <div>
+                                                    <h1>매장 목록</h1>
+                                                    <StarbucksList data={data} handleClick={handleClick} />
+                                                    <button onClick={() => setShowPostcode(false)}>취소</button>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="modal-newspotadd-form-input">
                                             <label className="modal-newspotadd-form-label">위치 &nbsp;&nbsp;

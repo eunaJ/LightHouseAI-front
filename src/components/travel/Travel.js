@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Travel = ({ id, title, writer, image_url, serving, expense, star }) => {
+const Travel = ({ title, writer, image_url, serving, expense, star }) => {
   return (
     <div>
       <h2 style={{ marginTop: "0", marginBottom: "0", paddingLeft: "3%", height: "40px" }}>{title}</h2>

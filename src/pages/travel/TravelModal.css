@@ -54,6 +54,7 @@
 .modal-close{
     text-align: right;
 }
+
 .starbucks-list {
     display: flex;
     flex-direction: column;

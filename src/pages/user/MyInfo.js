@@ -52,7 +52,6 @@ const MyInfo = () => {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    console.log('정보 업데이트 성공');
                     alert('정보가 변경되었어요.');
                 }
             })
