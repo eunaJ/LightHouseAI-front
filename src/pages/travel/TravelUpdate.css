@@ -74,7 +74,7 @@
     height: 100px;
     overflow-y:scroll; 
     overflow-x:hidden; 
-    resize: none
+    resize: none;
 }
 
 .travelupdate-serving-div{

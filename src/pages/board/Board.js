@@ -137,7 +137,7 @@ const Board = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />
+                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} style={{ width: '4vw', height: '4vh' ,marginLeft: '35vw'}} />
                     <div className="board-pagenation"></div>
                     {pageList.map((page, index) => (
                         <button key={index} onClick={onClickPage} value={page} id="pageListBtn">

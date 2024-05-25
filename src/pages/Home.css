@@ -1,5 +1,5 @@
-.home{
-    padding: 2% 15% 0 15%; 
+.home {
+    padding: 2% 15% 0 15%;
     display: flex;
     flex-direction: row;
     background-image: url("../assets/img/background_img.png");
@@ -7,18 +7,20 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow: hidden;
+    cursor: pointer;
 }
 
-.home-left-upper{
+.home-left-upper {
     padding-left: 30%;
 }
 
-#home-logo{
+#home-logo {
     width: 150%;
     height: 10vh;
 }
 
-.home-login, .home-logout{
+.home-login,
+.home-logout {
     background-color: #4F89E1;
     color: white;
     border: transparent;
@@ -26,14 +28,17 @@
     height: 25px;
 }
 
-.home-category{
+.home-category {
     margin-top: 2vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.home-board, .home-myboard, .home-mypage, .home-mytravel{
+.home-board,
+.home-myboard,
+.home-mypage,
+.home-mytravel {
     width: 100px;
     height: 35px;
     background-color: white;
@@ -41,14 +46,14 @@
     border-radius: 15px;
 }
 
-.home-right{
+.home-right {
     padding-top: 2vh;
     margin-left: 5vw;
     width: 49vw;
     flex-direction: row;
 }
 
-.home-search{
+.home-search {
     width: 100%;
     height: 5.5vh;
     background-color: white;
@@ -57,24 +62,24 @@
     display: flex;
 }
 
-.home-search-input{
+.home-search-input {
     width: 100%;
     border: none;
     font-size: 15px;
     background-color: transparent;
 }
 
-.home-search-icon{
+.home-search-icon {
     padding-top: 1vh;
     width: 3vw;
     height: 4vh;
 }
 
-.home-right{
+.home-right {
     margin-left: 10%;
 }
 
-.home-right-content{
+.home-right-content {
     min-height: 75vh;
     padding-top: 3vh;
     padding-left: 10px;
@@ -84,17 +89,17 @@
     padding-bottom: 10px;
 }
 
-.home-right-bottom{
+.home-right-bottom {
     text-align: right;
     flex-direction: row;
 }
 
-.home-right-bottom-btn{
+.home-right-bottom-btn {
     text-align: right;
     margin-bottom: 5vh;
 }
 
-.home-travelRegisterBt{
+.home-travelRegisterBt {
     background-color: #4F89E1;
     color: white;
     border: none;

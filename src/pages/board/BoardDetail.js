@@ -295,8 +295,8 @@ const BoardDetail = () => {
                                                             {review.writer === user && (
                                                                 <td>
                                                                     <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
-                                                                        <button onClick={() => handleIsReviewUpdate(review.id)} className="reviewButton">수정</button>
-                                                                        <button onClick={() => deleteReview(review.id)} className="reviewButton" style={{ marginTop: "6px" }}>삭제</button>
+                                                                        <button onClick={() => handleIsReviewUpdate(review.id)} className="reviewTwoButton">수정</button>
+                                                                        <button onClick={() => deleteReview(review.id)} className="reviewTwoButton" style={{ marginTop: "6px" }}>삭제</button>
                                                                     </div>
                                                                 </td>
                                                             )}
