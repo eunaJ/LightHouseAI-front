@@ -87,7 +87,7 @@ const Home = () => {
                 params: { page: page }
             });
             setTravelList(res.data);
-            if (res.data.length <= 9) {
+            if (res.data.length < 9) {
                 setHasMore(false);
             } else {
                 setHasMore(true);
