@@ -10,12 +10,16 @@ import MyPage from './pages/user/MyPage';
 import MyInfo from './pages/user/MyInfo';
 import Board from './pages/board/Board';
 import Recommand from './pages/AI/Recommand';
+import BoardDetail from './pages/board/BoardDetail';
+import BoardWrite from './pages/board/BoardWrite';
+import BoardUpdate from './pages/board/BoardUpdate';
 import TravelRegister from './pages/travel/TravelRegister';
 import TravelDetail from './pages/travel/TravelDetail';
 import MyTravel from './pages/user/MyTravel';
 import TravelUpdate from './pages/travel/TravelUpdate';
+import MyBoard from './pages/board/Myboard';
 
-function App() {
+function App() { 
   return (
     <BrowserRouter>
       <Routes>
@@ -26,13 +30,19 @@ function App() {
         <Route path="/api/v1/users/naver/login/callback" element={<NaverRedirect />}></Route>
         <Route path="/board" element={<Board />}></Route>
         <Route path="/recommand" element={<Recommand/>}></Route>
+        <Route path="/board" element={<Board/>}></Route>
+        <Route path="/boards/:id" element={<BoardDetail/>}></Route>  
         <Route path="/travel/:id" element={<TravelDetail/>}></Route>
+        
         {/* 로그인 후 가능 */}
-        <Route element={<PrivateRoute />}>
+          <Route element={<PrivateRoute />}>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/myinfo" element={<MyInfo />}></Route>
+          <Route path="/boards/create" element={<BoardWrite />}></Route>
+          <Route path="board/update/:id" element={<BoardUpdate />}></Route>
           <Route path="/travelRegister" element={<TravelRegister/>}></Route>
           <Route path="/mytravel" element={<MyTravel/>}></Route>
+          <Route path="/myboard" element={<MyBoard/>}></Route>
           <Route path="/travel/update/:id" element={<TravelUpdate/>}></Route>
         </Route>
       </Routes>

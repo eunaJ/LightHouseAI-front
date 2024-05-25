@@ -74,13 +74,13 @@ const Home = () => {
 
     const [allTravel, setAllTravel] = useState([]);
 
-    const getAllTravelList = async() => {
-        try{
-        const res = await axios.get('http://localhost:8080/api/v1/travels/');
-        if(res.status === 200){
-            setAllTravel(res.data);
-        }
-        } catch(e){
+    const getAllTravelList = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/api/v1/travels/');
+            if (res.status === 200) {
+                setAllTravel(res.data);
+            }
+        } catch (e) {
             console.error(e);
         }
     }
@@ -105,11 +105,11 @@ const Home = () => {
         getTravelList(page);
     }, [page]);
 
-    useEffect(()=>{
+    useEffect(() => {
         getAllTravelList();
     }, [])
 
-    
+
     const searched = allTravel.filter((item) =>
         item.title.includes(search)
     )
