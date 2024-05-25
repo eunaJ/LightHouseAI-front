@@ -6,7 +6,6 @@ import { CiSearch } from "react-icons/ci";
 import TravelCard from "../components/travel/TravelCard";
 import api from "../components/RefreshApi";
 import axios from "axios";
-import { RiReservedFill } from "react-icons/ri";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -39,6 +38,10 @@ const Home = () => {
 
     const gotoBoard = () => {
         navigate('/board');
+    }
+
+    const gotoRecommand = () => {
+        navigate('/recommand');
     }
 
     const gotoMyBoard = () => {
@@ -87,6 +90,7 @@ const Home = () => {
                 params: { page: page }
             });
             setTravelList(res.data);
+            console.log(res.data.length);
             if (res.data.length < 9) {
                 setHasMore(false);
             } else {
@@ -105,7 +109,6 @@ const Home = () => {
         getAllTravelList();
     }, [])
 
-
     const searched = allTravel.filter((item) =>
         item.title.includes(search)
     )
@@ -123,6 +126,7 @@ const Home = () => {
                     {isLogin && <button className="home-logout" onClick={handleLogout}>로그아웃</button>}
                     <div className='home-category'>
                         <button className="home-board" onClick={gotoBoard}>자유게시판</button>
+                        <button className="home-recommand" onClick={gotoRecommand}>AI 추천</button>
                         {isLogin && <button className="home-myboard" onClick={gotoMyBoard}>내 게시물</button>}
                         {isLogin && <button className="home-mypage" onClick={gotoMyPage}>내 페이지</button>}
                         {isLogin && <button className="home-mytravel" onClick={gotoMyTravel}>내 여행지</button>}

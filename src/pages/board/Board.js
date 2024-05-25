@@ -62,12 +62,17 @@ const Board = () => {
         navigate('/mytravel');
     }
 
+    const gotoRecommand = () => {
+        navigate('/recommand');
+    }
+
     const getBoardList = async (page) => {
         try {
             const res = await axios.get('http://localhost:8080/api/v1/boards', {
                 params: { page: page }
             });
             setBoardList(res.data);
+            console.log(res.data.length);
             if (res.data.length < 10) {
                 setHasMore(false);
             } else {
@@ -104,6 +109,7 @@ const Board = () => {
                     {isLogin && <button className="board-logout" onClick={handleLogout}>로그아웃</button>}
                     <div className='board-category'>
                         <button className="board-board" onClick={gotoBoard}>자유게시판</button>
+                        <button className="board-recommand" onClick={gotoRecommand}>AI 추천</button>
                         {isLogin && <button className="board-board" onClick={gotoMyBoard}>내 게시물</button>}
                         {isLogin && <button className="board-board" onClick={gotoMyPage}>내 페이지</button>}
                         {isLogin && <button className="board-board" onClick={gotoMyTravel}>내 방문지</button>}
@@ -137,7 +143,7 @@ const Board = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} />
+                    <IoIosAddCircle id="board-addboard" onClick={gotoBoardWrite} style={{ width: '4vw', height: '4vh', marginLeft: '35vw' }} />
                     <div className="board-pagenation"></div>
                     {pageList.map((page, index) => (
                         <button key={index} onClick={onClickPage} value={page} id="pageListBtn">

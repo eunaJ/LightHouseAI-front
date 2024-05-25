@@ -44,6 +44,10 @@ const MyTravel = () => {
     navigate('/mytravel');
   }
 
+  const gotoRecommand = () => {
+    navigate('/recommand');
+  }
+
   const [myTravelList, setMyTravelList] = useState([]);
 
   const getMyTreavelList = async () => {
@@ -72,6 +76,7 @@ const MyTravel = () => {
           {isLogin && <button className="mytravel-logout" onClick={handleLogout}>로그아웃</button>}
           <div className='mytravel-category'>
             <button className="mytravel-board" onClick={gotoBoard}>자유게시판</button>
+            <button className="home-recommand" onClick={gotoRecommand}>AI 추천</button>
             {isLogin && <button className="mytravel-myboard" onClick={gotoMyBoard}>내 게시물</button>}
             {isLogin && <button className="mytravel-mypage" onClick={gotoMyPage}>내 페이지</button>}
             {isLogin && <button className="mytravel-mytravel" onClick={gotoMyTravel}>내 여행지</button>}
