@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./TravelModalCard.css";
 
-const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onCafeSpotToModal, onRestaurantSpotToModal, onShoppingMallSpotToModal, onTourListSpotToModal, onOtherServiceSpotToModal, onClose, menus, prices, contents, onUclose }) => {
+const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_name, region_name, onCafeSpotToModal, onRestaurantSpotToModal, onShoppingMallSpotToModal, onTourListSpotToModal, onOtherServiceSpotToModal, onClose, menus, prices, contents, location }) => {
     const upload = useRef();
     const [spotImg, setSpotImg] = useState('');
     const [spotImgUrl, setSpotImgUrl] = useState('');
@@ -21,7 +21,7 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
             price: price,
             opentime: opentime,
             closetime: closetime,
-            location: region_name + ' ' + constituency_name,
+            location: location,
             title: title,
             type: type
         }
@@ -53,7 +53,7 @@ const TravelModalCard = ({ id, type, title, opentime, closetime, constituency_na
             <div className="travelmodalcard">
                 <h3 className="travelmodalcard-title">{title}</h3>
                 <div className="travelmodalcard-body">
-                    <p>지역: {region_name} {constituency_name}</p>
+                    <p>지역: {location}</p>
                     <p>운영 시간: {opentime} ~ {closetime}</p>
                     <div className="travelmodalcard-inputmodal">
                         {type === "카페" || type === "음식점" ? (
