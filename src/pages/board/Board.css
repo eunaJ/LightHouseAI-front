@@ -2,18 +2,70 @@
     padding: 2% 15% 0 15%;
     display: flex;
     flex-direction: row;
-}
-.board::after{
-    width: 100%;
-    height: 100%;
-    content: "";
-    background: url("../../assets/img/background_img.png") no-repeat;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0.3;
+    min-height: 95.5vh;
+    background-image: url("../../assets/img/background_img._board.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.updateButton, .deleteButton, .listButton {
+    background-color: #1a1544;
+    border: 1.2px solid  #694ab0;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px; 
+    height: 25px;
+    font-size: 13px;
+    font-weight: 600
+  }
+
+.reviewButton{
+    background-color: #a5bbd2;
+    border: 2.2px solid  #c6c6d7;
+    color: rgb(9, 8, 8);
+    border-radius: 5px;
+    cursor: pointer;
+    width: 35px; 
+    height: 25px;
+    font-size: 10.5px;
+}
+
+
+.reviewUpButton{
+    background-color: #b6d860;
+    border: 1.2px solid  #c6c6d7;
+    color: rgb(9, 8, 8);
+    border-radius: 5px;
+    cursor: pointer;
+    width: 60px; 
+    height: 25px;
+    font-size: 12px;
+
+}
+
+.BoardUpdateButton{
+    background-color: #1a1544;
+    border: 1.2px solid  #694ab0;
+    color: white;
+    margin-right: 2%;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 25px;
+    font-size: 13px;
+    font-weight: 600
+}
+.BoardUpdateDeleteButton{
+    background-color: #e797a0;
+    border: 1.2px solid  #d6adc2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 25px;
+    font-size: 13px;
+    font-weight: 600
+
 }
 
 .board-left-upper{
@@ -35,18 +87,21 @@
 
 .board-category{
     margin-top: 2vh;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
+
 
 .board-board, .board-myboard, .board-mypage, .board-myTcontent{
     width: 100px;
     height: 35px;
     background-color: white;
     border-width: 1px;
+    border-radius: 15px;
 }
-
 .board-myboard, .board-mylike, .board-mypage, .board-myinfo{
     border-top: none;
 }
@@ -55,11 +110,12 @@
     border-bottom: none;
 }
 
-.board-right{
+.board-right {
     margin-top: 2vh;
     margin-left: 5vw;
     width: 49vw;
 }
+
 
 .board-search{
     width: 45vw;
@@ -93,4 +149,16 @@
     width: 35vw;
     padding-left: 1vw;
     text-align: left;
+}
+
+.board-bd-num{
+    width: 35vw;
+    padding-left: 10%;
+    text-align: left;
+}
+
+
+.boardList{
+    margin-top: 5vh;
+    margin-left: 5vw;
 }

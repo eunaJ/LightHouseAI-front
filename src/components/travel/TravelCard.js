@@ -24,7 +24,9 @@ const TravelCard = ({ id, title, expense, star, image_url }) => {
                 {expense !== 0 ? <p style={{ margin: "5px", marginLeft: "5px" }}>여행 경비 {expense}원</p> : null}
             </div>
         </div>
-    );
+    )
+
 };
+
 
 export default TravelCard;
