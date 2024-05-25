@@ -6,7 +6,6 @@ import { CiSearch } from "react-icons/ci";
 import TravelCard from "../components/travel/TravelCard";
 import api from "../components/RefreshApi";
 import axios from "axios";
-import { RiReservedFill } from "react-icons/ri";
 
 const Home = () => {
     const navigate = useNavigate();

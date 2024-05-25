@@ -1,4 +1,4 @@
-.board{
+.board {
     padding: 2% 15% 0 15%;
     display: flex;
     flex-direction: row;
@@ -9,54 +9,56 @@
     background-attachment: fixed;
 }
 
-.updateButton, .deleteButton, .listButton {
+.updateButton,
+.deleteButton,
+.listButton {
     background-color: #1a1544;
-    border: 1.2px solid  #694ab0;
+    border: 1.2px solid #694ab0;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    width: 9vw; 
+    width: 9vw;
     height: 3.5vh;
     font-size: 13px;
     font-weight: 600
 }
 
-.reviewButton{
+.reviewButton {
     background-color: #a5bbd2;
-    border: 2.2px solid  #c6c6d7;
+    border: 2.2px solid #c6c6d7;
     color: rgb(9, 8, 8);
     border-radius: 5px;
     cursor: pointer;
-    width: 9vw; 
+    width: 9vw;
     height: 3.5vh;
     font-size: 10.5px;
 }
 
-.reviewTwoButton{
+.reviewTwoButton {
     background-color: #a5bbd2;
-    border: 2.2px solid  #c6c6d7;
+    border: 2.2px solid #c6c6d7;
     color: rgb(9, 8, 8);
     border-radius: 5px;
     cursor: pointer;
-    width: 5vw; 
+    width: 5vw;
     height: 3.5vh;
     font-size: 10.5px;
 }
 
-.reviewUpButton{
+.reviewUpButton {
     background-color: #b6d860;
-    border: 1.2px solid  #c6c6d7;
+    border: 1.2px solid #c6c6d7;
     color: rgb(9, 8, 8);
     border-radius: 5px;
     cursor: pointer;
-    width: 6 vw; 
+    width: 6 vw;
     height: 3.5vh;
     font-size: 12px;
 }
 
-.BoardUpdateButton{
+.BoardUpdateButton {
     background-color: #1a1544;
-    border: 1.2px solid  #694ab0;
+    border: 1.2px solid #694ab0;
     color: white;
     margin-right: 2%;
     border-radius: 5px;
@@ -65,9 +67,10 @@
     font-size: 13px;
     font-weight: 600
 }
-.BoardUpdateDeleteButton{
+
+.BoardUpdateDeleteButton {
     background-color: #e797a0;
-    border: 1.2px solid  #d6adc2;
+    border: 1.2px solid #d6adc2;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -76,16 +79,17 @@
     font-weight: 600
 }
 
-.board-left-upper{
+.board-left-upper {
     padding-left: 30%;
 }
 
-#board-logo{
+#board-logo {
     width: 150%;
     height: 10vh;
 }
 
-.board-login, .board-logout{
+.board-login,
+.board-logout {
     background-color: #4F89E1;
     color: white;
     border: transparent;
@@ -93,7 +97,7 @@
     height: 25px;
 }
 
-.board-category{
+.board-category {
     margin-top: 2vh;
 
     display: flex;
@@ -101,7 +105,11 @@
     justify-content: center;
 }
 
-.board-board, .board-myboard, .board-mypage, .board-myTcontent{
+.board-board,
+.board-myboard,
+.board-mypage,
+.board-myTcontent,
+.board-recommand {
     width: 100px;
     height: 35px;
     background-color: white;
@@ -109,11 +117,15 @@
     border-width: 1px;
     border-radius: 15px;
 }
-.board-myboard, .board-mylike, .board-mypage, .board-myinfo{
+
+.board-myboard,
+.board-mylike,
+.board-mypage,
+.board-myinfo {
     border-top: none;
 }
 
-.board-mylike{
+.board-mylike {
     border-bottom: none;
 }
 
@@ -123,7 +135,7 @@
     width: 49vw;
 }
 
-.board-search{
+.board-search {
     width: 45vw;
     height: 6vh;
     background-color: white;
@@ -132,7 +144,7 @@
     display: flex;
 }
 
-.board-search-input{
+.board-search-input {
     padding-left: 3%;
     width: 80%;
     border: none;
@@ -140,30 +152,31 @@
     background-color: transparent;
 }
 
-.board-search-clear-icon, .board-search-icon{
+.board-search-clear-icon,
+.board-search-icon {
     padding-top: 0.9vh;
     width: 3vw;
     height: 4vh;
 }
 
-.board-bdlist{
+.board-bdlist {
     margin-top: 2vh;
     margin-left: 1vw;
 }
 
-.board-bd-title{
+.board-bd-title {
     width: 35vw;
     padding-left: 1vw;
     text-align: left;
 }
 
-.board-bd-num{
+.board-bd-num {
     width: 35vw;
     padding-left: 10%;
     text-align: left;
 }
 
-.boardList{
+.boardList {
     margin-top: 5vh;
     margin-left: 5vw;
 }
