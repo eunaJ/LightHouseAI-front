@@ -334,7 +334,7 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
                         </div>
                     ) : (
                         searched.map((travel, index) => (
-                            <TravelModalCard {...travel} />
+                            <TravelModalCard key={travel.id} type={type} title={travel.title} opentime={travel.opentime} closetime={travel.closetime} constituency_name={travel.constituency_name} region_name={travel.region_name} onItemSelect={travel.onItemSelect} onCafeSpotToModal={handleCafeSpotAdd} onRestaurantSpotToModal={handleRestaurantSpotAdd} onShoppingMallSpotToModal={handleShoppingMallSpotAdd} onTourListSpotToModal={handleTourListSpotAdd} onOtherServiceSpotToModal={handleOtherServiceSpotAdd} onClose={onClose} location={travel.location} />
                         ))
                     )
                 )}
