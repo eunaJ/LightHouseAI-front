@@ -103,7 +103,7 @@ const TravelDetail = () => {
                     <div className='traveldetail-card'>
                       <h3>{travelCafe[index].cafe_title}</h3>
                       {travelCafe[index].image_url && (
-                        <img src={travelCafe[index].image_url} alt="Spot Image" className='traveldetail-card-img' />
+                        <img src={travelCafe[index].image_url} alt="Spot Image" className='traveldetail-card-img' style={{width:'30%', height:'30%'}} />
                       )}
                       <p>위치: {travelCafe[index].location}</p>
                       <p>메뉴: {travelCafe[index].menu}</p>
