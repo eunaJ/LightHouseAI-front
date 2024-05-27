@@ -84,6 +84,7 @@ const MyTravel = () => {
         </div>
       </div>
       <div className="mytravel-right">
+        <h3>내 여행지</h3>
         <div className='mytravel-right-center'>
           <table className="mytravel-bdlist">
             <thread>
