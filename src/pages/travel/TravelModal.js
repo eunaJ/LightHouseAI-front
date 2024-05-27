@@ -7,6 +7,9 @@ import "./TravelModal.css";
 import DaumPostcode from 'react-daum-postcode';
 import StarbucksList from "./StarBuckList";
 
+// 백그라운드 이미지 경로
+import backgroundImage from '../../assets/img/background_img.png'; // 이미지 경로를 실제 이미지 경로로 대체하세요
+
 function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, onRestaurantSpotAdd, onShoppingMallSpotAdd, onTourListSpotAdd, onOtherServiceSpotAdd, index, selectedConstituency, location }) {
     const [searched, setSearched] = useState([]);
     const [data, setData] = useState([]);
@@ -120,13 +123,25 @@ function TravelModal({ constituency_id, type, isOpen, onClose, onCafeSpotAdd, on
     }, [type, isSearching, constituency_id]);
 
     const modalStyles = {
+        overlay: {
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
         content: {
             width: '40%',
             height: '80%',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)', // 중앙 정렬
-            padding: '30px'
+            padding: '30px',
+            background: 'rgba(255, 255, 255, 0.9)', // 약간의 투명도를 준 흰색 배경
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
         }
     };
 
