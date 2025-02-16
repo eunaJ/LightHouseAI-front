@@ -11,6 +11,8 @@
 > 개발 기간: 2024.03 ~ 2024.06
 >
 > 개발 인원: FE 4명
+>
+> [백엔드 Github](https://github.com/eunaJ/LightHouseAI)
 
 # ERD 구조
 ---
